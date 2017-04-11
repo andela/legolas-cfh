@@ -1,0 +1,9 @@
+{
+  "name": "legolas-cfh",
+  "description": "Environment and add-ons required to run an app on Heroku",
+  "scripts": {},
+  "env": {},
+  "formation": {},
+  "addons": [],
+  "buildpacks": []
+}
