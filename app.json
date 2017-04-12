@@ -1,6 +1,12 @@
 {
   "name": "legolas-cfh",
   "description": "Environment and add-ons required to run an app on Heroku",
+  "keywords": [
+    "angular.js",
+    "charity",
+    "game"
+  ],
+  "repository": "https://github.com/andela/legolas-cfh.git",
   "scripts": {},
   "env": {},
   "formation": {},
