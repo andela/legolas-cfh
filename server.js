@@ -5,11 +5,7 @@ var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
     logger = require('mean-logger'),
-    dotenv = require('dotenv'),
     io = require('socket.io');
-
-// Set Dotenv Config
-dotenv.config();
 
 /**
  * Main application entry file.
