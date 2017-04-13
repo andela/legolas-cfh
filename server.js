@@ -10,6 +10,7 @@ var express = require('express'),
 
 // Set Dotenv Config
 dotenv.config();
+
 /**
  * Main application entry file.
  * Please note that the order of loading is important.
