@@ -9,8 +9,8 @@
     "url": "https://github.com/cardsforhumanity/cardsforhumanity.git"
   },
   "engines": {
-    "node": "0.10.x",
-    "npm": "1.2.x"
+    "node": "6.10.2",
+    "npm": "3.10.10"
   },
   "scripts": {
     "start": "node node_modules/grunt-cli/bin/grunt",
@@ -33,7 +33,7 @@
     "grunt-cli": "~0.1.9",
     "jade": "~0.35.0",
     "mean-logger": "~0.0.1",
-    "mongoose": "~4.6.5",
+    "mongoose": "^4.9.4",
     "passport": "~0.1.17",
     "passport-facebook": "~2.0.0",
     "passport-github": "~0.1.5",
