@@ -390,7 +390,7 @@ footer {
     Charity section              
 -----------------------------------------*/
 #charity {
-    background: url('../images/video-bg.jpg') 50% 0 repeat-y fixed;
+    background: url('../img/video-bg.jpg') 50% 0 repeat-y fixed;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;
@@ -602,7 +602,7 @@ footer {
    Footer section              
 -----------------------------------------*/
 footer {
-    background: url('../images/footer-bg.jpg');
+    background: url('../img/footer-bg.jpg');
     background-size: cover;
     background-position: center center;
     padding-top: 8rem;
