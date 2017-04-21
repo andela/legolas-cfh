@@ -1,3 +1,71 @@
+<!--
+  ERROR MESSAGE MODAL POPUP
+-->
+<div class="modal fade" tabindex="-1" role="dialog" id="playerMinAlert">
+  <div class="modal-dialog playerLimitAlert">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="exampleModalLabel2" style="color:black">
+          The game requires a minimum of 3 players to be played!
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" id="playerMaxAlert">
+  <div class="modal-dialog playerLimitAlert">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="exampleModalLabel2" style="color:black">
+          The game can only be played by a maximum of 12 players!
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  USER SEARCH AND INVITE MODAL POPUP
+-->
+<div class="modal fade" tabindex="-1" role="dialog" id="findUser">
+  <div class="modal-dialog userSearch">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="availableUsers">Available Users</h4>
+      </div>
+      <div class="modal-body">
+        <p ng-show="noUser">No such user found</p>
+        <div ng-if="searchResult.length > 0" style="height: 120px; background-color: lightgray; text-align: left; overflow: scroll; border-radius: 2px 2px 4px 4px">
+          <table>
+            <tr>
+              <th>Name</th>
+              <th>Invite</th>
+            </tr>
+            <tr class="search-result" ng-repeat="result in searchResult">
+              <td>Name: {{ result.name }}</td>
+              <td>
+                <button class="btn btn-primary">
+                  Send Invite
+                </button>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <form ng-submit="findUsers()">
+          <input type="text" class="form-control" placeholder="Search for a user to invite" ng-model="inviteeSearch" />
+          <input type="submit" id="submit" value="Submit" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  THE REST OF THE GAME
+-->
 <div id="question-container-inner">
   <div class="card longBlack">
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
@@ -7,18 +75,28 @@
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">Finding Players</div>
       <div id="player-count-container">
-        <div id="player-count">{{game.players.length}} / 6 </div>
+        <div id="player-count">{{game.players.length}} / {{game.playerMaxLimit}} </div>
         <div id="the-word-players"> Players </div>
       </div>
       <div id="loading-container">
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
-      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
+
+      <!--
+        EDITTED BY MARANATHA
+        THIS CONTROLS THE DISPLAY OF THE "START GAME" BUTTON
+        REMOVING THE ng-show ATTIBUTE DISPLAYS IT. 
+        <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit"> 
+      -->
+      <button class="btn btn-primary" ng-click="findUserPopup()">Find Users</button>
+      {{ myname }}
+      <div id="start-game-container" ng-click="startGame()">
         <div id='start-game-button'>
-          Start Game</br>with {{game.players.length}} players
+          Start Game
         </div>
       </div>
     </div>
+
     <!-- Game Over Stuff -->
     <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">

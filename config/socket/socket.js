@@ -128,7 +128,7 @@ module.exports = function(io) {
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
-        game.sendNotification(player.username+' has joined the game!');
+        game.sendNotification(player.username+' has joined this new game!');
         if (game.players.length >= game.playerMaxLimit) {
           gamesNeedingPlayers.shift();
           game.prepareGame();

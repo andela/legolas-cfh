@@ -90,4 +90,7 @@ module.exports = function(app, passport, auth) {
     app.get('/play', index.play);
     app.get('/', index.render);
 
+    // EDITTED BY MARANATHA
+    // API routes for user search
+    app.get('/api/search/users/:inviteeSearch?',users.findUsers);
 };

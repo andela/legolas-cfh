@@ -1,5 +1,9 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+//  EDITTED BY MARANATHA
+//  MOVED THE FUNCTION TO A NEW LINE.
+//  ADD SOME $SCOPE VARIABLES
+.controller('GameController', ['$scope', 'game', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', 
+  function ($scope, game, $http, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -8,6 +12,8 @@ angular.module('mean.system')
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
+    $scope.showFindUsersButton = false;
+    $scope.inviteeSearch = '';
 
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
@@ -90,6 +96,9 @@ angular.module('mean.system')
     };
 
     $scope.isCustomGame = function() {
+      if (game.players.length < 3) {
+        // alert('Minimum of Three player allowed. There are currently ' + game.players.length + ' players. Please Wait A Little!!!');
+      }
       return !(/^\d+$/).test(game.gameID) && game.state === 'awaiting players';
     };
 
@@ -121,8 +130,41 @@ angular.module('mean.system')
     };
 
     $scope.startGame = function() {
-      game.startGame();
+      //  EDITTED BY MARANATHA
+      //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
+      //  ELSE DISPLAY A POPUP ERROR MESSAGE
+      if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
+        game.startGame();
+        $scope.showFindUsersButton = false;
+      } else if (game.players.length < game.playerMinLimit) {
+        $('#playerMinAlert').modal('show');
+      } else if (game.players.length > game.playerMaxLimit) {
+        $('#playerMaxAlert').modal('show');
+      }
     };
+
+    // FIND USERS
+    $scope.findUserPopup = () => {
+      $('#findUser').modal('show');
+    }
+
+    $scope.findUsers = () => {
+      // $('#findUser').modal('show');
+      // console.log('we have users');
+      $http.get(`/api/search/users/${$scope.inviteeSearch}`)
+        .then(function(response) {
+          if (response.data.length > 0) {
+            $scope.searchResult = response.data;
+            $scope.noUser = false;
+          } else {
+            $scope.searchResults = [];
+            $scope.noUser = 'No such user found';
+            console.log('No such user found');
+          }
+        }, function (data, status, headers, config) {
+          console.log(status);
+        });
+    }
 
     $scope.abandonGame = function() {
       game.leaveGame();

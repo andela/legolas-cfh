@@ -1,9 +1,9 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  User = mongoose.model('User');
-var avatars = require('./avatars').all();
+const mongoose = require('mongoose');
+const User = mongoose.model('User');
+const avatars = require('./avatars').all();
 
 /**
  * Auth callback
@@ -106,6 +106,20 @@ exports.create = function(req, res) {
     return res.redirect('/#!/signup?error=incomplete');
   }
 };
+/**
+ * GET LIST OF CURRENT USERS FROM THE DATABASE BASED ON NAME PARAMS
+ * RETURN JSON OBJECT OF USERS
+ */
+exports.findUsers = (req,res) => {
+  const query = req.params.inviteeSearch || '';
+  User.find({ name: new RegExp(query, 'i') }).limit(10)
+    .exec((err, result) => {
+      if (err) {
+        return res.json(err);
+      }
+      res.json(result);
+    });
+}
 
 /**
  * Assign avatar to user
