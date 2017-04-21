@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
 const avatars = require('./avatars').all();
 
-const secretKey = 'Andela2017';
+const secretKey = process.env.SECRET_KEY;
 
 /**
  * Auth callback
@@ -126,26 +126,26 @@ exports.createAPI = (req, res) => {
         user.provider = 'local';
         user.save((err) => {
           if (err) {
-            return res.json({ success: false, message: 'Signup Error' });
+            return res.status(500).json({ success: false, message: 'Signup Error' });
           }
           req.logIn(user, (err) => {
             if (err){
-              return res.json({ success: false, message: 'Login Error' });
+              return res.status(500).json({ success: false, message: 'Login Error' });
             } else {
               // Login is successful, set the token
               const token = jwt.sign({
                 id: user.id
               }, secretKey);
-              return res.json({ success: true, message: 'Signup successful', token });
+              return res.status(200).json({ success: true, message: 'Signup successful', token });
             }
           });
         });
       } else {
-        return res.json({ success: false, message: 'User exists' });
+        return res.status(401).json({ success: false, message: 'User exists' });
       }
     });
   } else {
-    return res.json({ success: false, message: 'Wrong Data' });
+    return res.status(401).json({ success: false, message: 'Wrong Data' });
   }
 };
 
