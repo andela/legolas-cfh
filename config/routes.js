@@ -13,7 +13,7 @@ module.exports = function (app, passport, auth) {
   app.post('/users/avatars', users.avatars);
 
      // create api routes for signin
-  app.post('/api/auth/Login', users.Signin);
+  app.post('/api/auth/login', users.Signin);
 
     // Donation Routes
   app.post('/donations', users.addDonation);

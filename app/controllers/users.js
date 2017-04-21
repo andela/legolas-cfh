@@ -7,7 +7,7 @@ const jwt = require('jsonwebtoken');
 const User = mongoose.model('User');
 const avatars = require('./avatars').all();
 
-const secretKey = 'Andela2017';
+const secretKey = process.env.SECRET_KEY;
 
 /**
  * Auth callback
@@ -195,24 +195,21 @@ exports.Signin = (req, res) => {
     User.findOne({ email: req.body.email }).exec((err, User) => {
       if (err) throw err;
       if (!User) {
-        res.json({ success: false, message: 'User email does not exists' });
+        res.status(401).json({ success: false, message: 'User email does not exists' });
       } else if (User) {
         const validPassword = User.authenticate(req.body.password);
         if (!validPassword) {
-          res.json({ success: false, message: 'invalid password' });
+          res.status(401).json({ success: false, message: 'invalid password' });
         } else {
           req.logIn(User, (err) => {
-            if (err) {
-              throw err;
-            }
-            //const token = jwt.sign(User, secretKey);
+            if (err) throw err;
           });
           const token = jwt.sign(User, secretKey);
-          res.json({ success: true, message: 'signin successfull', token });
+          res.status(200).json({ success: true, message: 'signin successfull', token });
         }
       }
     });
   } else {
-    res.json({ success: false, message: 'no email or password entered' });
+    res.status(401).json({ success: false, message: 'no email or password entered' });
   }
 };

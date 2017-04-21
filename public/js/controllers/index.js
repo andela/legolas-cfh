@@ -36,7 +36,7 @@ angular.module('mean.system')
       email: $scope.email,
       password: $scope.password
     };
-    $http.post('/api/auth/Login', user).then((response) => {
+    $http.post('/api/auth/login', user).then((response) => {
       if (response.data.success) {
         $window.localStorage.setItem('token', response.data.token);
         $location.path('/');
