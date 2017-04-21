@@ -1,7 +1,6 @@
 angular.module('mean.system')
 .controller('IndexController', ['$scope', '$location', '$window', '$http', 'Global', 'socket', 'game', 'AvatarService', function ($scope, $location, $window, $http, Global, socket, game, AvatarService) {
   $scope.global = Global;
-  $scope.global.signinErr = '';
 
   $scope.playAsGuest = function () {
     game.joinGame();
@@ -40,10 +39,9 @@ angular.module('mean.system')
     $http.post('/api/auth/Login', user).then((response) => {
       if (response.data.success) {
         $window.localStorage.setItem('token', response.data.token);
-        $scope.showOptions = false;
         $location.path('/');
       } else {
-        $scope.signinErr = response.data.message;
+        $scope.showError = () => 'invalid';
       }
     }, (err) => {
       $scope.showError();
