@@ -1,205 +1,209 @@
 
-<div ng-controller="IndexController">
+<div landing id="main-bod">
+	<div ng-controller="IndexController">
 <!-- =========================
      NAVIGATION LINKS     
 ============================== -->
-<div class="navbar navbar-fixed-top top-nav-collapse custom-navbar" role="navigation">
-	<div class="container">
+		<div class="navbar navbar-fixed-top top-nav-collapse custom-navbar" role="navigation">
+			<div class="container">
 
-		<!-- navbar header -->
-		<div class="navbar-header">
-			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-				<span class="icon icon-bar"></span>
-				<span class="icon icon-bar"></span>
-				<span class="icon icon-bar"></span>
-			</button>
-			<a href="#" class="navbar-brand">Cards for Humanity</a>
-		</div>
+				<!-- navbar header -->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand">Cards for Humanity</a>
+				</div>
 
-		<div class="collapse navbar-collapse">
+				<div class="collapse navbar-collapse">
 
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#" onClick="scroll(0,0)">Home</a></li>
-				<li><a href="#" onClick="scroll(0,732);">How to Play</a></li>
-				<li><a href="#" onClick="scroll(0,1311);">Leaderboard</a></li>
-				<li><a href="#" onClick="scroll(0,1891);">Charity</a></li>
-				<li><a href="#" onClick="scroll(0,2621);">Warning</a></li>
-			<!--<span ng-show="showOptions">-->
-				<li><a href="#!/signin">Login</a></li>
-				<li><a href="#!/signup">Signup</a></li>
-			<!--</span>-->
-			<!--<span ng-hide="showOptions">-->
-				<li><a href="/signout">Sign Out</a></li>
-			<!--</span>-->
-				<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
-			</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#" onClick="scroll(0,0)">Home</a></li>
+						<li><a href="#" onClick="scroll(0,732);">How to Play</a></li>
+						<li><a href="#" onClick="scroll(0,1311);">Leaderboard</a></li>
+						<li><a href="#" onClick="scroll(0,1891);">Charity</a></li>
+						<li><a href="#" onClick="scroll(0,2621);">Warning</a></li>
+						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
+						<li ng-show="showOptions"><a href="#!/signup">Signup</a></li>
+						<li ng-hide="showOptions"><a href="/signout">Sign Out</a></li>
+						<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
+					</ul>
 
-		</div>
+				</div>
 
-	</div>
-</div>
-
-
-<!-- =========================
-   HOME SECTION   
-============================== -->
-<section id="home" class="parallax-section" style="background-image: url('../img/home-bg-slider-img1.jpg')">
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-12 col-sm-12">
-				<!--Image size used: 1496 x 997-->
-				<h3 class="wow bounceIn" data-wow-delay="0.9s">A game for <strong>HORRIBLE PEOPLE</strong> trying to do <strong>GOOD</strong></h3>
-				<h1 class="wow fadeInUp" data-wow-delay="1.6s">Donate Now</h1>
-				<a href="/play" class="btn btn-lg btn-default smoothScroll wow fadeInUp" data-wow-delay="2.3s">Play As Guest</a>
-				<a href="#!/signup" class="btn btn-lg btn-white smoothScroll wow fadeInUp" data-wow-delay="2.3s">Sign Up</a>
 			</div>
-
 		</div>
-	</div>
-</section>
 
 
-<!-- =========================
-   HOW TO PLAY  
-============================== -->
-<section id="howtoplay" class="parallax-section">
-	<div class="container">
-		<div class="row">
+		<!-- =========================
+		HOME SECTION   
+		============================== -->
+		<section id="home" class="parallax-section" style="background-image: url('../img/home-bg-slider-img1.jpg')">
+			<div class="container">
+				<div class="row">
 
-			<div class="wow fadeInUp" data-wow-delay="0.6s">
-				<div class="text-center">
-					<h2>HOW TO PLAY (INSTRUCTIONS)</h2>
-					<p class="lead">1. Each player begins with, and will always have, 10 white answer cards.</p>
-					<br><br>
+					<div class="col-md-12 col-sm-12">
+						<!--Image size used: 1496 x 997-->
+						<h3 class="wow bounceIn" data-wow-delay="0.9s">A game for <strong>HORRIBLE PEOPLE</strong> trying to do <strong>GOOD</strong></h3>
+						<h1 class="wow fadeInUp" data-wow-delay="1.6s">Donate Now</h1>
+						<span ng-show="showOptions">
+							<a href="/play" class="btn btn-lg btn-default smoothScroll wow fadeInUp" data-wow-delay="2.3s">Play As Guest</a>
+							<a href="#!/signup" class="btn btn-lg btn-white smoothScroll wow fadeInUp" data-wow-delay="2.3s">Sign Up</a>
+						</span>
+						<span ng-hide="showOptions">
+							<a href="/play" class="btn btn-lg btn-default smoothScroll wow fadeInUp" data-wow-delay="2.3s">Play With Strangers</a>
+							<a href="/play?custom" class="btn btn-lg btn-default smoothScroll wow fadeInUp" data-wow-delay="2.3s">Play With Friends</a>
+						</span>
+					</div>
+
 				</div>
 			</div>
+		</section>
 
-			<div class="clearfix"></div>
 
-			<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.6s">
-				<div class="service-thumb">
-					<i class="fa fa-desktop"></i>
-					<p class="lead">2. For each round, one player is randomly chosen as the Card Czar.</p>
+		<!-- =========================
+		HOW TO PLAY  
+		============================== -->
+		<section id="howtoplay" class="parallax-section">
+			<div class="container">
+				<div class="row">
+
+					<div class="wow fadeInUp" data-wow-delay="0.6s">
+						<div class="text-center">
+							<h2>HOW TO PLAY (INSTRUCTIONS)</h2>
+							<p class="lead">1. Each player begins with, and will always have, 10 white answer cards.</p>
+							<br><br>
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.6s">
+						<div class="service-thumb">
+							<i class="fa fa-desktop"></i>
+							<p class="lead">2. For each round, one player is randomly chosen as the Card Czar.</p>
+						</div>
+					</div>
+
+					<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.9s">
+						<div class="service-thumb">
+							<i class="fa fa-users"></i>
+							<p class="lead">3. Everyone else answers the black question card by clicking on the answer card they want to use.</p>
+						</div>
+					</div>
+
+					<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="1s">
+						<div class="service-thumb">
+							<i class="fa fa-trophy"></i>
+							<p class="lead">4. The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</p>
+						</div>
+					</div>
+
 				</div>
 			</div>
+		</section>
 
-			<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="0.9s">
-				<div class="service-thumb">
-					<i class="fa fa-users"></i>
-					<p class="lead">3. Everyone else answers the black question card by clicking on the answer card they want to use.</p>
+
+
+		<!-- =========================
+		Leader Board 
+		============================== -->
+		<section id="leaderboard" class="parallax-section">
+			<div class="container">
+				<div class="row">
+
+					<div class="wow fadeInUp col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6" data-wow-delay="0.6s">
+						<div>
+							<h2 class="text-center">Leaderboard</h2>
+							<ol>
+								<li>The Boss Player <span>2800</span></li>
+								<li>Awesome Player <span>1800</span></li>
+								<li>Good Player <span>1540</span></li>
+								<li>Great Boy <span>1270</span></li>
+								<li>Nigga Ninja <span>990</span></li>
+								<li>Sweetness <span>980</span></li>
+							</ol>
+						</div>
+					</div>
+
 				</div>
 			</div>
+		</section>
 
-			<div class="wow fadeInUp col-md-4 col-sm-6" data-wow-delay="1s">
-				<div class="service-thumb">
-					<i class="fa fa-trophy"></i>
-					<p class="lead">4. The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</p>
+
+		<!-- =========================
+			Charity SECTION   
+		============================== -->
+		<section id="charity" class="parallax-section">
+			<div class="container">
+				<div class="row">
+
+					<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.6s">
+						<h2>Make a Donation</h2>
+						<p class="lead donation-text">We're quite sure you feel the same way, so we've integrated donation widgets (via crowdrise.com), along with some not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much better you are than them).
+						<br><br>
+						<strong>All donations go to the Make-a-Wish Foundation and benefit children in need.</strong>
+						<br>
+						</p>
+						<a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate primary">Donate Now</a>
+					</div>
+					<div class="wow fadeInUp col-md-offset-1 col-md-5 col-sm-10" data-wow-delay="1.9s">
+						<br><br>
+						<div class="embed-responsive embed-responsive-16by9">
+							<iframe src="https://www.youtube.com/embed/IaC25klxZyg" frameborder="0" allowfullscreen></iframe>
+						</div>
+					</div>
+
 				</div>
 			</div>
+		</section>
 
-		</div>
+		<!-- =========================
+			WARNING SECTION   
+		============================== -->
+		<section id="warning" class="parallax-section">
+			<div class="container">
+				<div class="row">
+
+					<div class="wow fadeInUp col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10" data-wow-delay="0.6s">
+						<div>
+							<h2 class="text-center text-red">Warning</h2>
+							<p class="lead text-center">This game contains offensive, profane, explicit content created by Cards Against Humanity and provided here, uncensored and complete, in digital form. <br> 
+							<strong class="text-primary">C'mon, it's just FYI... Join the Fun! </strong> </p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</section>
+
+
+		<!-- =========================
+			FOOTER SECTION   
+		============================== -->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1 col-md-offset-2 col-md-8">
+						<p class="small">This game is based on the Cards Against Humanity card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations go directly to charity, as managed by crowdrise.</p>
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="col-md-12 col-sm-12">
+
+						<p class="wow fadeInUp" data-wow-delay="0.6s">Copyright &copy; 2016 Andela Talent Accelerator | All Rights Reserved.</p>
+
+					</div>
+					
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- Back top -->
+		<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 	</div>
-</section>
-
-
-
-<!-- =========================
-   Leader Board 
-============================== -->
-<section id="leaderboard" class="parallax-section">
-	<div class="container">
-		<div class="row">
-
-			<div class="wow fadeInUp col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6" data-wow-delay="0.6s">
-				<div>
-					<h2 class="text-center">Leaderboard</h2>
-					<ol>
-						<li>The Boss Player <span>2800</span></li>
-						<li>Awesome Player <span>1800</span></li>
-						<li>Good Player <span>1540</span></li>
-						<li>Great Boy <span>1270</span></li>
-						<li>Nigga Ninja <span>990</span></li>
-						<li>Sweetness <span>980</span></li>
-					</ol>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</section>
-
-
-<!-- =========================
-    Charity SECTION   
-============================== -->
-<section id="charity" class="parallax-section">
-	<div class="container">
-		<div class="row">
-
-			<div class="wow fadeInUp col-md-6 col-sm-10" data-wow-delay="1.6s">
-				<h2>Make a Donation</h2>
-				<p class="lead donation-text">We're quite sure you feel the same way, so we've integrated donation widgets (via crowdrise.com), along with some not-so-subtle reminders throughout the game to give you the opportunity to donate. If you're signed in when you donate, we'll even upgrade your account and place a crown on your avatar's head (to remind other players how much better you are than them).
-				<br><br>
-				<strong>All donations go to the Make-a-Wish Foundation and benefit children in need.</strong>
-				<br>
-				</p>
-				<a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate primary">Donate Now</a>
-			</div>
-			<div class="wow fadeInUp col-md-offset-1 col-md-5 col-sm-10" data-wow-delay="1.9s">
-				<br><br>
-				<div class="embed-responsive embed-responsive-16by9">
-					<iframe src="https://www.youtube.com/embed/IaC25klxZyg" frameborder="0" allowfullscreen></iframe>
-				</div>
-			</div>
-
-		</div>
-	</div>
-</section>
-
-<!-- =========================
-    WARNING SECTION   
-============================== -->
-<section id="warning" class="parallax-section">
-	<div class="container">
-		<div class="row">
-
-			<div class="wow fadeInUp col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10" data-wow-delay="0.6s">
-				<div>
-					<h2 class="text-center text-red">Warning</h2>
-					<p class="lead text-center">This game contains offensive, profane, explicit content created by Cards Against Humanity and provided here, uncensored and complete, in digital form. <br> 
-					<strong class="text-primary">C'mon, it's just FYI... Join the Fun! </strong> </p>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-</section>
-
-
-<!-- =========================
-    FOOTER SECTION   
-============================== -->
-<footer>
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-10 col-sm-offset-1 col-md-offset-2 col-md-8">
-				<p class="small">This game is based on the Cards Against Humanity card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations go directly to charity, as managed by crowdrise.</p>
-			</div>
-		</div>
-		<div class="row">
-
-			<div class="col-md-12 col-sm-12">
-
-				<p class="wow fadeInUp" data-wow-delay="0.6s">Copyright &copy; 2016 Andela Talent Accelerator | All Rights Reserved.</p>
-
-			</div>
-			
-		</div>
-	</div>
-</footer>
-
-
-<!-- Back top -->
-<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
 </div>
