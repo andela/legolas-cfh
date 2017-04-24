@@ -111,6 +111,45 @@ exports.create = function (req, res) {
 };
 
 /**
+ * Create user API
+ */
+exports.createAPI = (req, res) => {
+  if (req.body.name && req.body.password && req.body.email) {
+    User.findOne({
+      email: req.body.email
+    }).exec((err, existingUser) => {
+      if (!existingUser) {
+        const user = new User(req.body);
+        // Switch the user's avatar index to an actual avatar url
+        user.avatar = avatars[user.avatar];
+        user.provider = 'local';
+        user.save((err) => {
+          if (err) {
+            return res.status(500).json({ success: false, message: 'Signup Error' });
+          }
+          req.logIn(user, (err) => {
+            if (err){
+              return res.status(500).json({ success: false, message: 'Login Error' });
+            } else {
+              // Login is successful, set the token
+              const token = jwt.sign({
+                id: user.id
+              }, secretKey);
+              return res.status(200).json({ success: true, message: 'Signup successful', token });
+            }
+          });
+        });
+      } else {
+        return res.status(401).json({ success: false, message: 'User exists' });
+      }
+    });
+  } else {
+    return res.status(401).json({ success: false, message: 'Wrong Data' });
+  }
+};
+
+
+/**
  * Assign avatar to user
  */
 exports.avatars = function (req, res) {
