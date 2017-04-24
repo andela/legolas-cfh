@@ -105,7 +105,7 @@ $(document).ready(function() {
        "../img/home-bg-slider-img2.jpg",
         ],  {duration: 2000, fade: 750});
     });
-  })
+  });
 
 
  /* Parallax section

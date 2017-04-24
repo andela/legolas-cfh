@@ -1,3 +1,5 @@
+
+<div ng-controller="IndexController">
 <!-- =========================
      NAVIGATION LINKS     
 ============================== -->
@@ -17,14 +19,14 @@
 		<div class="collapse navbar-collapse">
 
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#home" class="smoothScroll">Home</a></li>
-				<li><a href="#howtoplay" class="smoothScroll">How to Play</a></li>
-				<li><a href="#leaderboard" class="smoothScroll">Leaderboard</a></li>
-				<li><a href="#charity" class="smoothScroll">Charity</a></li>
-				<li><a href="#warning" class="smoothScroll">Warning</a></li>
+				<li><a href="#" onClick="scroll(0,0)">Home</a></li>
+				<li><a href="#" onClick="scroll(0,732);">How to Play</a></li>
+				<li><a href="#" onClick="scroll(0,1311);">Leaderboard</a></li>
+				<li><a href="#" onClick="scroll(0,1891);">Charity</a></li>
+				<li><a href="#" onClick="scroll(0,2621);">Warning</a></li>
 			<!--<span ng-show="showOptions">-->
-				<li><a href="#!/signin" class="smoothScroll">Login</a></li>
-				<li><a href="#!/signup" class="smoothScroll">Signup</a></li>
+				<li><a href="#!/signin">Login</a></li>
+				<li><a href="#!/signup">Signup</a></li>
 			<!--</span>-->
 			<!--<span ng-hide="showOptions">-->
 				<li><a href="/signout">Sign Out</a></li>
@@ -49,8 +51,8 @@
 				<!--Image size used: 1496 x 997-->
 				<h3 class="wow bounceIn" data-wow-delay="0.9s">A game for <strong>HORRIBLE PEOPLE</strong> trying to do <strong>GOOD</strong></h3>
 				<h1 class="wow fadeInUp" data-wow-delay="1.6s">Donate Now</h1>
-				<a href="#about" class="btn btn-lg btn-default smoothScroll wow fadeInUp" data-wow-delay="2.3s">Sign In</a>
-				<a href="#warning" class="btn btn-lg btn-white smoothScroll wow fadeInUp" data-wow-delay="2.3s">Sign Up</a>
+				<a href="/play" class="btn btn-lg btn-default smoothScroll wow fadeInUp" data-wow-delay="2.3s">Play As Guest</a>
+				<a href="#!/signup" class="btn btn-lg btn-white smoothScroll wow fadeInUp" data-wow-delay="2.3s">Sign Up</a>
 			</div>
 
 		</div>
@@ -111,7 +113,7 @@
 
 			<div class="wow fadeInUp col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6" data-wow-delay="0.6s">
 				<div>
-					<h2 class="text-center">Learder Board</h2>
+					<h2 class="text-center">Leaderboard</h2>
 					<ol>
 						<li>The Boss Player <span>2800</span></li>
 						<li>Awesome Player <span>1800</span></li>
@@ -200,3 +202,4 @@
 
 <!-- Back top -->
 <a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+</div>
