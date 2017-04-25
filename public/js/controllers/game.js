@@ -14,6 +14,7 @@ angular.module('mean.system')
     $scope.makeAWishFact = makeAWishFacts.pop();
     $scope.showFindUsersButton = false;
     $scope.inviteeSearch = '';
+    $scope.invitedUsersList = [];
 
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
@@ -138,8 +139,6 @@ angular.module('mean.system')
         $scope.showFindUsersButton = false;
       } else if (game.players.length < game.playerMinLimit) {
         $('#playerMinAlert').modal('show');
-      } else if (game.players.length > game.playerMaxLimit) {
-        $('#playerMaxAlert').modal('show');
       }
     };
 
@@ -149,8 +148,10 @@ angular.module('mean.system')
     }
 
     $scope.findUsers = () => {
-      // $('#findUser').modal('show');
-      // console.log('we have users');
+      // if (!sessionStorage.invitedUsers) {
+      //   sessionStorage.invitedUsers = JSON.stringify([]);
+      // }
+
       $http.get(`/api/search/users/${$scope.inviteeSearch}`)
         .then(function(response) {
           if (response.data.length > 0) {
@@ -164,6 +165,36 @@ angular.module('mean.system')
         }, function (data, status, headers, config) {
           console.log(status);
         });
+    }
+
+    $scope.sendInvite = (user, button) => {
+      const url = button.target.baseURI;
+      const gameOwner = game.players[0].username;
+      const data = {
+        url,
+        inviteeEmail: user.email,
+        inviteeID: user._id,
+        gameOwner
+      };
+      console.log(data);
+      if (!$scope.invitedUsersList.includes(`${data.inviteeID},${data.inviteeEmail}`)) {
+        $http({
+          method: 'POST',
+          url: '/api/invite/user',
+          headers: { 'Content-Type': 'application/json' },
+          data: data
+        })
+        .success(function(response) {
+          $scope.invitedUsersList.push(`${data.inviteeID},${data.inviteeEmail}`);
+          console.log('this.data', response);
+          console.log('$scope.invitedUsersList', $scope.invitedUsersList);
+        })
+        .error(function (error) {
+          $scope.message = 'Could not send invite';
+          console.log('error sent to game.js', error)
+        })
+        // console.log('data.invitee', data.inviteeID);
+      }
     }
 
     $scope.abandonGame = function() {

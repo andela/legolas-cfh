@@ -1,8 +1,10 @@
+require('dotenv').config({ silent: true });
 /**
  * Module dependencies.
  */
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const nodemailer = require('nodemailer');
 const avatars = require('./avatars').all();
 
 /**
@@ -110,6 +112,43 @@ exports.create = function(req, res) {
  * GET LIST OF CURRENT USERS FROM THE DATABASE BASED ON NAME PARAMS
  * RETURN JSON OBJECT OF USERS
  */
+exports.sendInvite = (req,res) => {
+  // console.log(req);
+  const gameLink = req.body.url;
+  const inviteeEmail = req.body.inviteeEmail;
+  const sender = req.body.gameOwner;
+  const link = `${gameLink}&email=${inviteeEmail}`;
+
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'andelalegolas@gmail.com',
+        pass: 'andelalegolas1'
+    },
+    debug: true
+  });
+
+  // const transporter = nodemailer.createTransport(process.env.EMAIL_SERVICES)
+
+  const mailOptions = {
+    from: '"Andela Legolas 👻" <andelalegolas@gmail.com>',
+    to: inviteeEmail,
+    subject: 'Invitation to join Game',
+    html: `<h3> Cards for Humanity </h3><br/>
+    You have been invited by <a>${sender}</a> to join a game in cards for humanity<br/>
+    click on this link <a href="${link}">here</a> OR <a href="${gameLink}">this</a> to join the game now.<br/>
+    <strong>Cards For Humanity</strong>`
+  };
+  
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log(error)
+      return res.status(500).json({ message: error})
+    }
+    return res.status(200).json({ message: 'Email sent successfully'})
+  })
+  // console.log(res);
+}
 exports.findUsers = (req,res) => {
   const query = req.params.inviteeSearch || '';
   User.find({ name: new RegExp(query, 'i') }).limit(10)
@@ -120,6 +159,13 @@ exports.findUsers = (req,res) => {
       res.json(result);
     });
 }
+
+// exports.sendInvite = (req, res) => {
+//   console.log(req);
+//   console.log(res);
+//   // let transporter = nodemailer.createTransport(transport[, defaults]);
+// }
+
 
 /**
  * Assign avatar to user

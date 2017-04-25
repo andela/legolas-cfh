@@ -99,6 +99,9 @@ module.exports = function(io) {
       });
     } else {
       // If the user isn't authenticated (guest)
+
+      // IF PLAYER_LENGTH IS GREATER THAN OR EQUAL TO PLAYER_MAX_LIMIT
+      // DISPLAY ERROR POPUP
       player.username = 'Guest';
       player.avatar = avatars[Math.floor(Math.random()*4)+12];
       getGame(player,socket,data.room,data.createPrivate);

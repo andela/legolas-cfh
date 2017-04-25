@@ -47,8 +47,8 @@
             <tr class="search-result" ng-repeat="result in searchResult">
               <td>Name: {{ result.name }}</td>
               <td>
-                <button class="btn btn-primary">
-                  Send Invite
+                <button class="btn btn-primary" ng-click="sendInvite(result, $event)" title="">
+                  Send Invite!
                 </button>
               </td>
             </tr>

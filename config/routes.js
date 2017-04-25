@@ -1,4 +1,5 @@
 var async = require('async');
+const middleware = require('./middlewares/authorization.js');
 
 module.exports = function(app, passport, auth) {
     //User Routes
@@ -93,4 +94,28 @@ module.exports = function(app, passport, auth) {
     // EDITTED BY MARANATHA
     // API routes for user search
     app.get('/api/search/users/:inviteeSearch?',users.findUsers);
+    
+    // API Endpoint for sending emails
+    // const invite = require('../app/controllers/invite');
+    // app.post('/api/invite/user',users.sendInvite);
+    // app.post('/api/invite/user', middleware.requiresLogin, (req) => {
+    //   const url = req.body.url;
+    //   const userEmail = req.body.invitee;
+    //   const gameOwner = req.body.gameOwner;
+
+    //   console.log(url);
+    //   console.log(userEmail);
+    //   console.log(gameOwner);
+
+    //   //sendMail(userEmail, url, gameOwner);
+    // });
+    app.post('/api/invite/user', users.sendInvite);
+    // console.log('users.sendInvite', users.sendInvite);
+
+    // app.post('/api/invite/user', function(req, res) {
+    //     console.log(req);
+    //     return res.status(200).json({
+    //         message: 'I was called'
+    //     })
+    // });
 };
