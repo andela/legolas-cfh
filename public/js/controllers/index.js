@@ -3,7 +3,7 @@ angular.module('mean.system')
   $scope.global = Global;
   $scope.global.signupErr = "";
 
-  $scope.playAsGuest = function() {
+  $scope.playAsGuest = function () {
     game.joinGame();
     $location.path('/app');
   };
@@ -18,8 +18,8 @@ angular.module('mean.system')
 
   $scope.avatars = [];
   AvatarService.getAvatars()
-    .then(function(data) {
-      $scope.avatars = data;
+      .then((data) => {
+        $scope.avatars = data;
     });
 
   if ($window.localStorage.getItem('token')) {
@@ -62,4 +62,32 @@ angular.module('mean.system')
     $window.localStorage.removeItem('token');
   };
 
+  if ($window.localStorage.getItem('token')) {
+    $scope.global.authenticated = true;
+  } else {
+    $scope.global.authenticated = false;
+  }
+
+  $scope.signout = () => {
+    $window.localStorage.removeItem('token');
+    $window.user = null;
+  };
+
+  $scope.login = () => {
+    const user = {
+      email: $scope.email,
+      password: $scope.password
+    };
+    $http.post('/api/auth/login', user).then((response) => {
+      if (response.data.success) {
+        $window.localStorage.setItem('token', response.data.token);
+        $location.path('/');
+      } else {
+        $scope.showError = () => 'invalid';
+      }
+    }, (err) => {
+      $scope.showError();
+      $scope.error = err;
+    });
+  };
 }]);
