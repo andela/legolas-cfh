@@ -8,11 +8,11 @@ const bower = require('gulp-bower');
 require('dotenv').config();
 
 gulp.task('nodemon', () => {
- nodemon({
-   script: 'server.js',
-   ext: 'js',
-   env: { NODE_ENV: 'development' }
- });
+  nodemon({
+    script: 'server.js',
+    ext: 'js',
+    env: { NODE_ENV: 'development' }
+  });
 });
 
 gulp.task('server', ['nodemon'], () => {
