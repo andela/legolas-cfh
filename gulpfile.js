@@ -25,7 +25,7 @@ gulp.task('server', ['nodemon'], () => {
 });
 
 gulp.task('test', () =>
- gulp.src('test/**/*.js', { read: false })
+ gulp.src('test/frontend/homepage.js', { read: false })
    .pipe(mocha({ reporter: 'nyan' }))
 );
 
