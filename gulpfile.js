@@ -19,7 +19,7 @@ gulp.task('nodemon', () => {
 gulp.task('server', ['nodemon'], () => {
   browser.init({
     proxy: `http://localhost:${process.env.PORT}`,
-    port: 5000,
+    port: 3000,
     files: ['public/**/*.*'],
     reloadOnRestart: true,
     open: false
