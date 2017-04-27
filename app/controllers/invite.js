@@ -1,7 +1,6 @@
 const nodemailer = require('nodemailer');
 // require('dotenv').config({ silent: true });
 
-
 exports.sendInvite = (req, res) => {
   // console.log(req);
   const gameLink = req.body.url;
