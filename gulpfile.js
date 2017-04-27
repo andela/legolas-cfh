@@ -11,6 +11,7 @@ gulp.task('nodemon', () => {
  nodemon({
    script: 'server.js',
    ext: 'js',
+   watch: ['app', 'config', 'server.js'],
    env: { NODE_ENV: 'development' }
  });
 });
@@ -18,9 +19,10 @@ gulp.task('nodemon', () => {
 gulp.task('server', ['nodemon'], () => {
   browser.init({
     proxy: `http://localhost:${process.env.PORT}`,
-    port: 3000,
+    port: 5000,
     files: ['public/**/*.*'],
-    reloadOnRestart: true
+    reloadOnRestart: true,
+    open: false
   });
 });
 

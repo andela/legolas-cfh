@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
+  .factory('game', ['$rootScope', 'socket', '$timeout', '$location', function ($rootScope, socket, $timeout, $location) {
 
   var game = {
     id: null, // This player's socket ID, so we know who this player is
@@ -175,6 +175,17 @@ angular.module('mean.system')
 
   socket.on('notification', function(data) {
     addToNotificationQueue(data.notification);
+  });
+
+  socket.on('gameStarted', (data) => {
+    $rootScope.alertMessage = data.message;
+    (new Promise((resolve) => {
+      resolve($location.path('/'));
+    })).then(() => {
+      $timeout(() => {
+        $('#game-alert').modal('show');
+      }, 1000);
+    });
   });
 
   game.joinGame = function(mode,room,createPrivate) {

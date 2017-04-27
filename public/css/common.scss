@@ -428,6 +428,17 @@ body{
     width:70%
 }
 
+#game-alert {
+    padding-top: 15%;
+}
+
+.invite-list {
+    background: lightgray;
+    border-radius: 2px 2px 4px 4px;
+    height: 120px;
+    overflow: scroll;
+    text-align: left;
+}
 
 #main-container{
     height: 100%;

@@ -149,7 +149,7 @@ exports.sendInvite = (req,res) => {
   })
   // console.log(res);
 }
-exports.findUsers = (req,res) => {
+exports.findUsers = (req, res) => {
   const query = req.params.inviteeSearch || '';
   User.find({ name: new RegExp(query, 'i') }).limit(10)
     .exec((err, result) => {

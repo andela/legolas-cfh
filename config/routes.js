@@ -93,7 +93,7 @@ module.exports = function(app, passport, auth) {
 
     // EDITTED BY MARANATHA
     // API routes for user search
-    app.get('/api/search/users/:inviteeSearch?',users.findUsers);
+    app.get('/api/search/users/:inviteeSearch?', users.findUsers);
     
     // API Endpoint for sending emails
     // const invite = require('../app/controllers/invite');

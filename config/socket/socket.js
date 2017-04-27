@@ -10,7 +10,7 @@ var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
 
 module.exports = function(io) {
 
-  var game;
+  // var game;
   var allGames = {};
   var allPlayers = {};
   var gamesNeedingPlayers = [];
@@ -108,13 +108,13 @@ module.exports = function(io) {
     }
   };
 
-  var getGame = function(player,socket,requestedGameId,createPrivate) {
+  const getGame = (player, socket, requestedGameId, createPrivate) => {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
-    console.log(socket.id,'is requesting room',requestedGameId);
+    console.log(socket.id, 'is requesting room', requestedGameId);
     if (requestedGameId.length && allGames[requestedGameId]) {
-      console.log('Room',requestedGameId,'is valid');
-      var game = allGames[requestedGameId];
+      console.log('Room', requestedGameId, 'is valid');
+      const game = allGames[requestedGameId];
       // Ensure that the same socket doesn't try to join the same game
       // This can happen because we rewrite the browser's URL to reflect
       // the new game ID, causing the view to reload.
@@ -123,7 +123,7 @@ module.exports = function(io) {
       if (game.state === 'awaiting players' && (!game.players.length ||
         game.players[0].socket.id !== socket.id)) {
         // Put player into the requested game
-        console.log('Allowing player to join',requestedGameId);
+        console.log('Allowing player to join', requestedGameId);
         allPlayers[socket.id] = true;
         game.players.push(player);
         socket.join(game.gameID);
@@ -131,17 +131,18 @@ module.exports = function(io) {
         game.assignPlayerColors();
         game.assignGuestNames();
         game.sendUpdate();
-        game.sendNotification(player.username+' has joined this new game!');
+        game.sendNotification(`${player.username} has joined this new game!`);
         if (game.players.length >= game.playerMaxLimit) {
           gamesNeedingPlayers.shift();
           game.prepareGame();
         }
       } else {
         // TODO: Send an error message back to this user saying the game has already started
+        io.to(player.socket.id).emit('gameStarted', { message: 'This game has already started.' });
       }
     } else {
       // Put players into the general queue
-      console.log('Redirecting player',socket.id,'to general queue');
+      console.log('Redirecting player', socket.id, 'to general queue');
       if (createPrivate) {
         createGameWithFriends(player,socket);
       } else {

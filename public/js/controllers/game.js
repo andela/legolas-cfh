@@ -2,8 +2,8 @@ angular.module('mean.system')
 //  EDITTED BY MARANATHA
 //  MOVED THE FUNCTION TO A NEW LINE.
 //  ADD SOME $SCOPE VARIABLES
-.controller('GameController', ['$scope', 'game', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', 
-  function ($scope, game, $http, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', '$rootScope', 'game', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
+  function ($scope, $rootScope, game, $http, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -138,7 +138,8 @@ angular.module('mean.system')
         game.startGame();
         $scope.showFindUsersButton = false;
       } else if (game.players.length < game.playerMinLimit) {
-        $('#playerMinAlert').modal('show');
+        $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
+        $('#game-alert').modal('show');
       }
     };
 
@@ -153,54 +154,65 @@ angular.module('mean.system')
       // }
 
       $http.get(`/api/search/users/${$scope.inviteeSearch}`)
-        .then(function(response) {
+        .then((response) => {
           if (response.data.length > 0) {
             $scope.searchResult = response.data;
             $scope.noUser = false;
           } else {
-            $scope.searchResults = [];
+            $scope.searchResult = [];
             $scope.noUser = 'No such user found';
             console.log('No such user found');
           }
         }, function (data, status, headers, config) {
           console.log(status);
         });
-    }
+    };
 
-    $scope.sendInvite = (user, button) => {
-      const url = button.target.baseURI;
-      const gameOwner = game.players[0].username;
-      const data = {
-        url,
-        inviteeEmail: user.email,
-        inviteeID: user._id,
-        gameOwner
-      };
-      console.log(data);
-      if (!$scope.invitedUsersList.includes(`${data.inviteeID},${data.inviteeEmail}`)) {
+    $scope.sendInvite = (user) => {
+      if (!$scope.hasBeenInvited(`${user.name}, ${user.email}`)) {
+        $(`#${$scope.getValidId(user.email)}`).prop('disabled', true);
+        $(`#${$scope.getValidId(user.email)}`).html('Sending...');
+        const data = {
+          url: document.URL,
+          inviteeEmail: user.email,
+          gameOwner: game.players[0].username
+        };
+        console.log(data);
         $http({
           method: 'POST',
           url: '/api/invite/user',
           headers: { 'Content-Type': 'application/json' },
-          data: data
+          data
         })
-        .success(function(response) {
-          $scope.invitedUsersList.push(`${data.inviteeID},${data.inviteeEmail}`);
+        .success((response) => {
+          if (!$scope.inviteStatus) {
+            $scope.inviteStatus = {};
+          }
+          $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
+          // document.getElementById(data.inviteeEmail).disabled = true;
+          // document.getElementById(`emailsent?${data.inviteeEmail}`).disabled = true;
+          $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
           console.log('this.data', response);
           console.log('$scope.invitedUsersList', $scope.invitedUsersList);
         })
-        .error(function (error) {
-          $scope.message = 'Could not send invite';
-          console.log('error sent to game.js', error)
-        })
+        .error((error) => {
+          $scope.inviteStatus[user.email] = 'Could not send invite';
+          console.log('error sent to game.js', error);
+          $(`#${$scope.getValidId(user.email)}`).prop('disabled', false);
+          $(`#${$scope.getValidId(user.email)}`).html('Send Invite');
+        });
         // console.log('data.invitee', data.inviteeID);
       }
-    }
+    };
 
+    $scope.hasBeenInvited = nameAndEmail => ($scope.invitedUsersList.includes(nameAndEmail));
+  
     $scope.abandonGame = function() {
       game.leaveGame();
       $location.path('/');
     };
+
+    $scope.getValidId = str => (str.replace(/[^\w-]/g, '-'));
 
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
