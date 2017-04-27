@@ -58,12 +58,6 @@
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
 
-      <!--
-        EDITTED BY MARANATHA
-        THIS CONTROLS THE DISPLAY OF THE "START GAME" BUTTON
-        REMOVING THE ng-show ATTIBUTE DISPLAYS IT. 
-        <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit"> 
-      -->
       <button class="btn btn-primary" ng-click="findUserPopup()">Find Users</button>
       {{ myname }}
       <div id="start-game-container" ng-click="startGame()">
