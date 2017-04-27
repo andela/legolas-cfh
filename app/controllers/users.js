@@ -117,7 +117,6 @@ exports.create = function (req, res) {
  * RETURN JSON OBJECT OF USERS
  */
 exports.sendInvite = (req,res) => {
-  // console.log(req);
   const gameLink = req.body.url;
   const inviteeEmail = req.body.inviteeEmail;
   const sender = req.body.gameOwner;
@@ -132,8 +131,6 @@ exports.sendInvite = (req,res) => {
     debug: true
   });
 
-  // const transporter = nodemailer.createTransport(process.env.EMAIL_SERVICES)
-
   const mailOptions = {
     from: '"Andela Legolas 👻" <andelalegolas@gmail.com>',
     to: inviteeEmail,
@@ -146,13 +143,11 @@ exports.sendInvite = (req,res) => {
   
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.log(error)
       return res.status(500).json({ message: error})
     }
     return res.status(200).json({ message: 'Email sent successfully'})
   })
-  // console.log(res);
-}
+};
 exports.findUsers = (req, res) => {
   const query = req.params.inviteeSearch || '';
   User.find({ name: new RegExp(query, 'i') }).limit(10)
@@ -162,14 +157,7 @@ exports.findUsers = (req, res) => {
       }
       res.json(result);
     });
-}
-
-// exports.sendInvite = (req, res) => {
-//   console.log(req);
-//   console.log(res);
-//   // let transporter = nodemailer.createTransport(transport[, defaults]);
-// }
-
+};
 
 /**
  * Create user API
