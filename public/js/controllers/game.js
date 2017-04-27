@@ -1,5 +1,4 @@
 angular.module('mean.system')
-//  EDITTED BY MARANATHA
 //  MOVED THE FUNCTION TO A NEW LINE.
 //  ADD SOME $SCOPE VARIABLES
 .controller('GameController', ['$scope', '$rootScope', 'game', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
@@ -98,7 +97,6 @@ angular.module('mean.system')
 
     $scope.isCustomGame = function() {
       if (game.players.length < 3) {
-        // alert('Minimum of Three player allowed. There are currently ' + game.players.length + ' players. Please Wait A Little!!!');
       }
       return !(/^\d+$/).test(game.gameID) && game.state === 'awaiting players';
     };
@@ -131,7 +129,6 @@ angular.module('mean.system')
     };
 
     $scope.startGame = function() {
-      //  EDITTED BY MARANATHA
       //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
       //  ELSE DISPLAY A POPUP ERROR MESSAGE
       if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
@@ -149,10 +146,6 @@ angular.module('mean.system')
     }
 
     $scope.findUsers = () => {
-      // if (!sessionStorage.invitedUsers) {
-      //   sessionStorage.invitedUsers = JSON.stringify([]);
-      // }
-
       $http.get(`/api/search/users/${$scope.inviteeSearch}`)
         .then((response) => {
           if (response.data.length > 0) {
@@ -189,8 +182,6 @@ angular.module('mean.system')
             $scope.inviteStatus = {};
           }
           $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
-          // document.getElementById(data.inviteeEmail).disabled = true;
-          // document.getElementById(`emailsent?${data.inviteeEmail}`).disabled = true;
           $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
           console.log('this.data', response);
           console.log('$scope.invitedUsersList', $scope.invitedUsersList);
@@ -201,7 +192,6 @@ angular.module('mean.system')
           $(`#${$scope.getValidId(user.email)}`).prop('disabled', false);
           $(`#${$scope.getValidId(user.email)}`).html('Send Invite');
         });
-        // console.log('data.invitee', data.inviteeID);
       }
     };
 
