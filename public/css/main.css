@@ -1,0 +1,558 @@
+/*---------------------------------------
+    Upgraded CSS. This will overwrite style.css           
+-----------------------------------------*/
+
+body {
+		background: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+		font-weight: 400;
+}
+
+
+/*---------------------------------------
+    Typorgraphy              
+-----------------------------------------*/
+h1,h2,h3,h4,h5,h6 {
+  font-weight: 600;
+}
+
+h3,h5 {
+  font-weight: 500;
+}
+
+h1 {
+    font-size: 40px;
+    letter-spacing: 4px;
+}
+
+h2 {
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+h3 {
+  line-height: 36px;
+  padding-bottom: 6px;
+}
+
+h5 {
+    letter-spacing: 1px;
+    padding-top: 10px;
+}
+
+p {
+    color: #707070;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+a {
+  text-decoration: none !important;
+  outline: none;
+}
+
+
+/*---------------------------------------
+    General               
+-----------------------------------------*/
+.section-title {
+  box-sizing: border-box;
+  border: 3px solid #444;
+  position: relative;
+  padding: 32px;
+  margin-bottom: 72px;
+}
+
+.section-title h2 {
+  background: #ffffff;
+  position: absolute;
+  margin-left: -49px;
+  top: -56px;
+  left: 32%;
+  padding: 22px 32px;
+  margin-bottom: 6px;
+}
+
+#portfolio .section-title h2 {
+  background: #eee;
+}
+
+.section-title p {
+  padding-top: 10px;
+}
+
+#about,
+#whatiscfh,
+#team, 
+#charity,
+#howtoplay,
+#leaderboard,
+#warning {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+}
+
+#whatiscfh,
+#portfolio {
+  background: #eee;
+}
+
+#about,
+#whatiscfh,
+#team,
+#howtoplay,
+#portfolio,
+footer {
+  text-align: center;
+}
+
+.parallax-section {
+  background-attachment: fixed !important;
+  background-size: cover !important;
+  padding-top: 12rem;
+  padding-bottom: 12rem;
+}
+
+
+
+/*---------------------------------------
+    NAVIGATION BRAND            
+-----------------------------------------*/
+.navbar-brand{
+    display: block;
+    margin-top: -30px;
+}
+
+
+/*---------------------------------------
+    Navigation Links section              
+-----------------------------------------*/
+.custom-navbar {
+    margin-bottom: 0;
+    background-color: #3e7293;
+    height: 75px;
+}
+
+.custom-navbar .navbar-brand {
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 3rem;
+    line-height: 40px;
+}
+
+.custom-navbar .nav li a {
+    color: #ddd;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    line-height: 40px;
+    transition: all 0.4s ease-in-out;
+}
+
+.custom-navbar .nav li a:hover {
+    background: transparent;
+    color: #ffffff;
+}
+
+.custom-navbar .navbar-nav > li > a:hover,
+.custom-navbar .navbar-nav > li > a:focus {
+  background-color: transparent;
+}
+
+.custom-navbar .nav li.active > a {
+    background-color: transparent;
+    color: #ffffff;
+}
+
+.custom-navbar .navbar-toggle {
+    border: none;
+    padding-top: 10px;
+}
+
+.custom-navbar .navbar-toggle {
+    background-color: transparent;
+}
+
+.custom-navbar .navbar-toggle .icon-bar {
+    background: #ffffff;
+    border-color: transparent;
+}
+
+.custom-navbar .nav li a.btn-donate, a.btn-donate.big{
+    background: #ed7d1a;
+    color: white;
+    border-color: transparent;
+    line-height: 10px;
+    border-radius: 0;
+    margin-top: 15px;
+    display: inline-block;
+    width: 115px;
+    height: 42px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -ms-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+}
+
+a.btn-donate.big{
+    width: 230px;
+    height: 60px;
+    font-size: 24px;
+    line-height: 50px;
+}
+
+.custom-navbar .nav li a.btn-donate:hover{
+  background: white;
+  color: #333;
+}
+
+a.btn-donate.big:hover{
+    background: #3e7293;
+}
+.btn-donate.primary{
+    height: 50px;
+    line-height: 30px;
+    padding: 10px 25px;
+    background: #3e7293;
+    color: white;
+    border-radius: 0;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+@media(min-width:768px) {
+    .custom-navbar {
+        padding: 20px 0;
+        border-bottom: 0;
+        background: 0 0; 
+    }
+    .custom-navbar.top-nav-collapse {
+        background: #3e7293;
+        padding: 0;
+    }
+
+}
+
+
+
+/*---------------------------------------
+    Home section              
+-----------------------------------------*/
+#home {
+    background: 50% 0 repeat-y fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+    color: #ffffff;
+    display: -webkit-box;
+    display: -webkit-flex;
+     display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+     -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+#home h3 {
+  letter-spacing: 2px;
+}
+
+#home .btn {
+    background: transparent;
+    border: 3px solid #ffffff;
+    border-radius: 0px;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: 12px;
+    padding: 14px 42px;
+    margin-top: 42px;
+    margin-right: 12px;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+#home .btn-white {
+    background: #ffffff;
+    color: #3e7293;
+    border-color: transparent;
+    -webkit-transition: all 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
+}
+
+#home .btn-white:hover {
+    background: #3e7293;
+    color: #ffffff;
+}
+
+#home .btn-secondary {
+    background: #ed7d1a;
+    color: #ffffff;
+    border-color: transparent;
+}
+
+#home .btn-secondary:hover { 
+    background: #ffffff;
+    color: #ed7d1a;
+}
+
+#home .btn-danger:hover {
+  background: #3e7293
+  color: #ffffff;
+}
+
+#home .btn-default:hover {
+    background: #ffffff;
+    color: #3e7293;
+    border-color: transparent;
+}
+
+/*---------------------------------------
+    What is CFH           
+-----------------------------------------*/
+#whatiscfh .lead{
+  margin-top: 30px;
+}
+
+/*---------------------------------------
+    Video section              
+-----------------------------------------*/
+#charity{
+    background: url('../img/video-bg.jpg') 50% 0 repeat-y fixed;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center center;
+}
+
+#charity iframe {
+  border: none;
+}
+
+
+
+/*---------------------------------------
+  How to Play section              
+-----------------------------------------*/
+#howtoplay .service-thumb {
+  padding: 32px;
+  position: relative;
+  transition: all 0.4s ease-in-out;
+}
+
+#howtoplay .col-md-4:nth-child(4) .service-thumb {
+  background: #3e7293;
+  color: #ffffff;
+}
+
+
+#howtoplay .col-md-4:nth-child(4) .service-thumb .lead{
+  color: #ffffff;
+}
+
+#howtoplay .fa {
+  font-size: 42px;
+  padding-top: 16px;
+  padding-bottom: 20px;
+}
+
+#howtoplay ul {
+  margin: 0px;
+  padding: 8px;
+}
+
+#howtoplay ul li {
+  font-weight: bold;
+  list-style: none;
+  display: block;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+#leaderboard {
+  background: #3e7293;
+  color: white
+}
+
+#leaderboard h2{
+  margin-top: 10px;
+  font-size: 42px;
+}
+
+#leaderboard ol{
+  margin-top: 50px;
+}
+
+#leaderboard ol li{
+  list-style: decimal-leading-zero; 
+  font-size: 20px;
+  padding-left: 40px;
+  margin-bottom: 25px;
+  color: #bbbbbb;
+}
+
+#leaderboard ol li span{
+  display: block;
+  float: right;
+  color: #dddddd;
+}
+
+/*---------------------------------------
+  Warning section              
+-----------------------------------------*/
+#warning strong {
+  display: block;
+  padding-top: 8px;
+}
+
+#warning .col-md-4 {
+  padding: 2rem;
+}
+
+
+
+/*---------------------------------------
+   Footer section              
+-----------------------------------------*/
+footer {
+    background: url('../img/footer-bg.jpg');
+    background-size: cover;
+    background-position: center center;
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+}
+
+
+
+/* Back top */
+.go-top {
+  background-color: #3e7293;
+  bottom: 2em;
+  right: 2em;
+  color: #ffffff;
+  font-size: 32px;
+  display: none;
+  position: fixed;
+  text-decoration: none;
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  transition: all 0.4s ease-in-out;
+}
+
+.go-top:hover {
+    background: #333;
+    color: #ffffff;
+}
+
+
+/*---------------------------------------
+   Responsive styles            
+-----------------------------------------*/
+@media (max-width: 980px) {
+
+  #home { height: 65vh; }
+
+  #team .team-thumb,
+  #charity iframe {
+    margin-top: 42px;
+  }
+
+}
+
+@media (max-width: 767px) {
+
+  #about,
+  #whatiscfh,
+  #team, 
+  #charity,
+  #howtoplay,
+  #portfolio,
+  #leaderboard,
+  #warning {
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+
+  .custom-navbar .navbar-brand {
+    line-height: 20px;
+  }
+
+  .custom-navbar .navbar-nav li a {
+    line-height: 18px;
+  }
+
+  #whatiscfh .col-md-4 {
+    margin-top: 62px;
+  }
+
+  #howtoplay .service-thumb {
+    margin-top: 42px;
+  }
+
+}
+
+@media (max-width: 670px) {
+
+  #home {
+    height: 100vh;
+  }
+
+}
+
+@media (max-width: 540px) {
+
+  h1 {
+    font-size: 31px;
+    line-height: 39px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+  #home h3 {
+    font-size: 15px;
+  }
+
+  .section-title h2 {
+    top: -54px;
+  }
+
+  .filter-wrapper {
+    padding: 0px;
+  }
+
+}
+
+.text-red{
+  color: #933E48;
+}
+
+.text-primary{
+  color: #3E7393 !important;
+}
+
+.donation-text{    
+    font-size: 16px;
+    text-align: justify;
+    line-height: 1.7;
+}
+
+.donation-text strong{
+  color: #555;
+  text-transform: uppercase;
+}
+
+.text-secondary {
+  color: #ed7d1a !important;
+}
+
