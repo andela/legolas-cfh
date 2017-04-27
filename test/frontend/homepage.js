@@ -22,10 +22,6 @@ describe('Our HTML Page', () => {
     assert.isAtLeast(window.$('h1').length, 1, 'Make sure to create an `h1` element.');
   });
 
-  it('should have a h1 element @h1', () => {
-    assert.isAtLeast(window.$('h1').length, 1, 'Make sure to create an `h1` element.');
-  });
-
   it('should have content in the h1 element @h1', () => {
     assert.equal(window.$('h1').text(), 'Donate Now', 'Make sure to set the content of your `h1` element to "Donate Now".');
   });
