@@ -6,6 +6,7 @@ const sass = require('gulp-sass');
 const eslint = require('gulp-eslint');
 const bower = require('gulp-bower');
 require('dotenv').config();
+const coveralls = require('gulp-coveralls');
 
 gulp.task('nodemon', () => {
  nodemon({
@@ -14,6 +15,8 @@ gulp.task('nodemon', () => {
    watch: ['app', 'config', 'server.js'],
    env: { NODE_ENV: 'development' }
  });
+
+ 
 });
 
 gulp.task('server', ['nodemon'], () => {
@@ -62,3 +65,9 @@ gulp.task('watch', () => {
 });
 
 gulp.task('default', ['server', 'watch']);
+
+
+gulp.task('coveralls', () => {
+  gulp.src('test/coverage/**/lcov.info')
+    .pipe(coveralls());
+});
