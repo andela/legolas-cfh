@@ -1,4 +1,6 @@
+
 const async = require('async');
+const middleware = require('./middlewares/authorization.js');
 
 module.exports = function (app, passport, auth) {
     // User Routes
@@ -90,7 +92,12 @@ module.exports = function (app, passport, auth) {
   const avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
-    // Home route
+  // API routes for user search
+  app.get('/api/search/users/:inviteeSearch?', users.findUsers);
+
+  app.post('/api/invite/user', users.sendInvite);
+
+  // Home route
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);

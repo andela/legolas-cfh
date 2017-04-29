@@ -1,3 +1,47 @@
+<!--
+  USER SEARCH AND INVITE MODAL POPUP
+-->
+<div class="modal fade" tabindex="-1" role="dialog" id="findUser">
+  <div class="modal-dialog userSearch">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="availableUsers">Available Users</h4>
+      </div>
+      <div class="modal-body">
+        <p ng-show="noUser" style="color: orangered; text-align: left; border-radius: 2px 2px 4px 4px">No such user found</p>
+        <div ng-if="inviteStatus" class="invite-list">
+          <p ng-repeat="(email, status) in inviteStatus">{{ status.message }}</p>
+        </div>
+        <div>
+          <input type="text" class="form-control" placeholder="Search for a user to invite" ng-model="inviteeSearch" ng-keyup="findUsers()"/>
+        </div>
+        <div ng-if="searchResult.length > 0" class="invite-list">
+          <table>
+            <thead>
+              <th>Name</th>
+              <th>Invite</th>
+            </thead>
+            <tbody class="search-result">
+              <tr ng-repeat="result in searchResult" ng-hide="hasBeenInvited(result.name + ', ' + result.email)">
+                <td>Name: {{ result.name }}</td>
+                <td>
+                  <button id="{{ getValidId(result.email) }}" class="btn btn-primary" ng-click="sendInvite(result)" title="">
+                    Send Invite!
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--
+  THE REST OF THE GAME
+-->
 <div id="question-container-inner">
   <div class="card longBlack">
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
@@ -7,18 +51,22 @@
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">Finding Players</div>
       <div id="player-count-container">
-        <div id="player-count">{{game.players.length}} / 6 </div>
+        <div id="player-count">{{game.players.length}} / {{game.playerMaxLimit}} </div>
         <div id="the-word-players"> Players </div>
       </div>
       <div id="loading-container">
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
-      <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
+
+      <button class="btn btn-primary" ng-click="findUserPopup()">Find Users</button>
+      {{ myname }}
+      <div id="start-game-container" ng-click="startGame()">
         <div id='start-game-button'>
-          Start Game</br>with {{game.players.length}} players
+          Start Game
         </div>
       </div>
     </div>
+
     <!-- Game Over Stuff -->
     <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">

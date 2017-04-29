@@ -1,10 +1,13 @@
+require('dotenv').config({ silent: true });
 /**
  * Module dependencies.
  */
 const mongoose = require('mongoose');
+
 const jwt = require('jsonwebtoken');
 
 const User = mongoose.model('User');
+const nodemailer = require('nodemailer');
 const avatars = require('./avatars').all();
 
 const secretKey = process.env.SECRET_KEY;
@@ -108,6 +111,52 @@ exports.create = function (req, res) {
   } else {
     return res.redirect('/#!/signup?error=incomplete');
   }
+};
+/**
+ * GET LIST OF CURRENT USERS FROM THE DATABASE BASED ON NAME PARAMS
+ * RETURN JSON OBJECT OF USERS
+ */
+exports.sendInvite = (req,res) => {
+  const gameLink = req.body.url;
+  const inviteeEmail = req.body.inviteeEmail;
+  const sender = req.body.gameOwner;
+  const link = `${gameLink}&email=${inviteeEmail}`;
+
+  let transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        user: 'andelalegolas@gmail.com',
+        pass: 'andelalegolas1'
+    },
+    debug: true
+  });
+
+  const mailOptions = {
+    from: '"Andela Legolas 👻" <andelalegolas@gmail.com>',
+    to: inviteeEmail,
+    subject: 'Invitation to join Game',
+    html: `<h3> Cards for Humanity </h3><br/>
+    You have been invited by <a>${sender}</a> to join a game in cards for humanity<br/>
+    click on this link <a href="${link}">here</a> OR <a href="${gameLink}">this</a> to join the game now.<br/>
+    <strong>Cards For Humanity</strong>`
+  };
+  
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return res.status(500).json({ message: error})
+    }
+    return res.status(200).json({ message: 'Email sent successfully'})
+  })
+};
+exports.findUsers = (req, res) => {
+  const query = req.params.inviteeSearch || '';
+  User.find({ name: new RegExp(query, 'i') }).limit(10)
+    .exec((err, result) => {
+      if (err) {
+        return res.json(err);
+      }
+      res.json(result);
+    });
 };
 
 /**

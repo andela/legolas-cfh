@@ -9,11 +9,14 @@ require('dotenv').config();
 const coveralls = require('gulp-coveralls');
 
 gulp.task('nodemon', () => {
-  nodemon({
-    script: 'server.js',
-    ext: 'js',
-    env: { NODE_ENV: 'development' }
-  });
+ nodemon({
+   script: 'server.js',
+   ext: 'js',
+   watch: ['app', 'config', 'server.js'],
+   env: { NODE_ENV: 'development' }
+ });
+
+ 
 });
 
 gulp.task('server', ['nodemon'], () => {
@@ -21,7 +24,8 @@ gulp.task('server', ['nodemon'], () => {
     proxy: `http://localhost:${process.env.PORT}`,
     port: 3000,
     files: ['public/**/*.*'],
-    reloadOnRestart: true
+    reloadOnRestart: true,
+    open: false
   });
 });
 
