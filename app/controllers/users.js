@@ -12,6 +12,8 @@ const avatars = require('./avatars').all();
 
 const secretKey = process.env.SECRET_KEY;
 
+const gameRecord = require('../models/gameRecord.js');
+
 /**
  * Auth callback
  */
@@ -116,17 +118,17 @@ exports.create = function (req, res) {
  * GET LIST OF CURRENT USERS FROM THE DATABASE BASED ON NAME PARAMS
  * RETURN JSON OBJECT OF USERS
  */
-exports.sendInvite = (req,res) => {
+exports.sendInvite = (req, res) => {
   const gameLink = req.body.url;
   const inviteeEmail = req.body.inviteeEmail;
   const sender = req.body.gameOwner;
   const link = `${gameLink}&email=${inviteeEmail}`;
 
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'andelalegolas@gmail.com',
-        pass: 'andelalegolas1'
+      user: 'andelalegolas@gmail.com',
+      pass: 'andelalegolas1'
     },
     debug: true
   });
@@ -140,13 +142,13 @@ exports.sendInvite = (req,res) => {
     click on this link <a href="${link}">here</a> OR <a href="${gameLink}">this</a> to join the game now.<br/>
     <strong>Cards For Humanity</strong>`
   };
-  
+
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      return res.status(500).json({ message: error})
+      return res.status(500).json({ message: error });
     }
-    return res.status(200).json({ message: 'Email sent successfully'})
-  })
+    return res.status(200).json({ message: 'Email sent successfully' });
+  });
 };
 exports.findUsers = (req, res) => {
   const query = req.params.inviteeSearch || '';
@@ -177,15 +179,14 @@ exports.createAPI = (req, res) => {
             return res.status(500).json({ success: false, message: 'Signup Error' });
           }
           req.logIn(user, (err) => {
-            if (err){
+            if (err) {
               return res.status(500).json({ success: false, message: 'Login Error' });
-            } else {
-              // Login is successful, set the token
-              const token = jwt.sign({
-                id: user.id
-              }, secretKey);
-              return res.status(200).json({ success: true, message: 'Signup successful', token });
             }
+              // Login is successful, set the token
+            const token = jwt.sign({
+              id: user.id
+            }, secretKey);
+            return res.status(200).json({ success: true, message: 'Signup successful', token });
           });
         });
       } else {
@@ -259,7 +260,7 @@ exports.show = function (req, res) {
  * Send User
  */
 exports.me = function (req, res) {
-  res.jsonp(req.user || null);
+  res.json(req.user || null);
 };
 
 /**
@@ -300,4 +301,43 @@ exports.Signin = (req, res) => {
   } else {
     res.status(401).json({ success: false, message: 'no email or password entered' });
   }
+};
+// store game infomation in DATABASE
+exports.gameRecords = (req, res) => {
+  const gameOwner = req.body.gameOwner;
+  const gamePlayDate = req.body.gamePlayDate;
+  const gameRounds = req.body.gameRounds;
+  const gameWinner = req.body.gameWinner;
+  const gamePlayers = req.body.gamePlayers;
+  const gameID = req.params.id;
+
+  const record = new gameRecord({
+    gameOwner,
+    gamePlayDate,
+    gameID,
+    gamePlayers,
+    gameRounds,
+    gameWinner
+  });
+  record.save((err, savedObject) => {
+    if (err) {
+      console.log(err);
+    } else {
+      // res.send(savedObject);
+    }
+  });
+  gamePlayers.forEach((userName) => {
+    User.findOneAndUpdate(
+      { name: userName },
+      { $push: { gameRecord: gameID }
+      }, (error) => {
+        if (error) {
+          console.log(error);
+          res.send('an error occured');
+        } else {
+          res.send('success');
+        }
+      }
+      );
+  });
 };
