@@ -1,12 +1,15 @@
 /*---------------------------------------
     Upgraded CSS. This will overwrite style.css           
 -----------------------------------------*/
-
+html{
+  background-image: none;
+}
 body {
 		background: #ffffff;
     font-family: 'Poppins', sans-serif;
     font-style: normal;
 		font-weight: 400;
+    margin: 0;
 }
 
 
@@ -124,6 +127,52 @@ footer {
     margin-top: -30px;
 }
 
+/*---------------------------------------
+    OVERWRITE NAVIGATION TO COLLAPSE AT 1000PX          
+-----------------------------------------*/
+@media (max-width: 1200px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+    
+    ul.nav.navbar-nav.navbar-right {
+      margin-top: -30px;
+      padding: 0 30px 30px;
+      background: #3e7293;
+    }
+
+}
 
 /*---------------------------------------
     Navigation Links section              
@@ -172,7 +221,9 @@ footer {
 }
 
 .custom-navbar .navbar-toggle {
-    background-color: transparent;
+    background-color: #ed7d1a;
+    border-radius: 0;
+    margin-top: 20px;
 }
 
 .custom-navbar .navbar-toggle .icon-bar {
