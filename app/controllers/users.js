@@ -322,22 +322,9 @@ exports.gameRecords = (req, res) => {
   record.save((err, savedObject) => {
     if (err) {
       console.log(err);
+      res.status(500).send('an error occured');
     } else {
-      // res.send(savedObject);
+      res.status(200).send(`game record saved successfully ${savedObject}`);
     }
-  });
-  gamePlayers.forEach((userName) => {
-    User.findOneAndUpdate(
-      { name: userName },
-      { $push: { gameRecord: gameID }
-      }, (error) => {
-        if (error) {
-          console.log(error);
-          res.send('an error occured');
-        } else {
-          res.send('success');
-        }
-      }
-      );
   });
 };
