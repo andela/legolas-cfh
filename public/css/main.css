@@ -167,9 +167,9 @@ footer {
     }
     
     ul.nav.navbar-nav.navbar-right {
-      margin-top: -30px;
+      margin-top: -31px;
       padding: 0 30px 30px;
-      background: #3e7293;
+      background: rgba(0, 0, 0, 0.8);
     }
 
 }
@@ -375,7 +375,7 @@ a.btn-donate.big:hover{
     Video section              
 -----------------------------------------*/
 #charity{
-    background: url('../img/video-bg.jpg') 50% 0 repeat-y fixed;
+    background: url('../img/charity.jpg') 50% 0 repeat-y fixed;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;
