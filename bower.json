@@ -14,7 +14,8 @@
     "imagesloaded": "^4.1.1",
     "jquery-backstretch": "^2.1.15",
     "smoothscroll": "^0.3.4",
-    "wow": "wowjs#^1.1.2"
+    "wow": "wowjs#^1.1.2",
+    "bootstrap-material-design": "^4.0.2"
   },
   "exportsOverride": {
     "bootstrap": {
@@ -25,5 +26,9 @@
     "angular-ui-utils": {
       "modules": "modules/route/route.js"
     }
+  },
+  "resolutions": {
+    "jquery": "^2.2",
+    "bootstrap": "v4-dev"
   }
 }
