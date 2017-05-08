@@ -175,7 +175,7 @@ angular.module('mean.system')
       const gameOwner = game.players[0].username;
       const gamePlayers = game.players.map(player => player.username);
       const gameID = game.gameID;
-      const gameWinner = `unknown${game.gameID}`;
+      const gameWinner = game.players[game.gameWinner].username;
 
       const gameRecord = {
         gamePlayDate,
