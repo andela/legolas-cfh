@@ -232,13 +232,11 @@ angular.module('mean.system')
       if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
         $scope.showTable = true;
       }
-      if (game.state === 'czar left game' && game.state !== 'game dissolved'
-        && game.state !== 'awaiting players' && game.table.length === 0) {
-          $('#cardModal').modal('show');
-      }
-      if ($scope.isCzar() && game.state === 'czar pick card'
-        && game.state !== 'game dissolved'
-        && game.state !== 'awaiting players' && game.table.length === 0) {
+      // if (game.state === 'czar left game' && game.state !== 'game dissolved'
+      //   && game.state !== 'awaiting players' && game.table.length === 0) {
+      //     $('#cardModal').modal('show');
+      // }
+      if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
           $('#cardModal').modal('show');
         // displayMessage('', '#card-modal');
       }

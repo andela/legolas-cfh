@@ -55,7 +55,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="closeModal" data-dismiss="modal" style="display:show; ">Close</button>
+        <button type="button" class="btn btn-primary" id="closeModal" data-dismiss="modal" style="display:none; ">Close</button>
       </div>
     </div>
   </div>
@@ -66,7 +66,7 @@
 -->
 <div id="question-container-inner" class="panel panel-default question-panel">
   <div class="panel-body">
-    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'czar pick card' || game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
 
     <br><p ng-show="!isCzar() && game.state !== 'awaiting players'"> <center> {{ czarHasDrawn }} </center></p>
     
