@@ -383,8 +383,10 @@ Game.prototype.removePlayer = function(thisPlayer) {
       // If the player is the czar...
       // If players are currently picking a card, advance to a new round.
       if (this.state === 'czar pick card') {
-        this.startNextRound(this);
+        // this.startNextRound(this);
         // this.changeCzar(this);
+        this.state = 'czar pick card';
+        console.log('this.state----', this.state);
       } else if (this.state === "waiting for players to pick") {
         clearTimeout(this.choosingTimeout);
         this.sendNotification('The Czar left the game! Starting a new round.');
