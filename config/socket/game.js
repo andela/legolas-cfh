@@ -381,13 +381,18 @@ Game.prototype.removePlayer = function(thisPlayer) {
     // Check if the player is the czar
     if (this.czar === playerIndex) {
       // If the player is the czar...
-      // If players are currently picking a card, advance to a new round.
       if (this.state === 'czar pick card') {
-        this.startNextRound(this);
-        // this.changeCzar(this);
+        // If players are currently waiting for a card to be picked,
+        // assign a new czar and allow him select a card.
+        
+        this.state = 'czar left game';
+
+        // this.startNextRound(this);
+        this.changeCzar(this);
         // this.state = 'czar pick card';
         console.log('this.state----', this.state);
       } else if (this.state === "waiting for players to pick") {
+        // If players are currently picking a card, advance to a new round.
         clearTimeout(this.choosingTimeout);
         this.sendNotification('The Czar left the game! Starting a new round.');
         return this.stateChoosing(this);
@@ -446,10 +451,15 @@ Game.prototype.killGame = function() {
 Game.prototype.startNextRound = (self) => {
   if (self.state === 'czar pick card') {
     self.stateChoosing(self);
+  } else if (self.state === 'czarLeftGame') {
+    self.changeCzar(self);
   }
 };
 
 Game.prototype.changeCzar = (self) => {
+  if (this.state === 'czar left game') {
+    
+  }
   self.state = 'czar pick card';
   console.log(self.state, 'czar picked');
   self.table = [];
