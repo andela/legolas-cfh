@@ -40,6 +40,25 @@
   </div>
 </div>
 
+<div id="cardModal" class="modal fade" role="dialog" data-controls-modal="card-modal" data-backdrop="static">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" style="color: #69d2e8; text-align: center;">You are the Czar - Click card to pick the next question</h4>
+      </div>
+      <div class="modal-body" align="center">
+        <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="closeModal" data-dismiss="modal" style="display:show; ">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--
   THE REST OF THE GAME
 -->
