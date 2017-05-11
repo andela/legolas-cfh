@@ -177,7 +177,7 @@ exports.createAPI = (req, res) => {
             return res.status(500).json({ success: false, message: 'Signup Error' });
           }
           req.logIn(user, (err) => {
-            if (err){
+            if (err) {
               return res.status(500).json({ success: false, message: 'Login Error' });
             } else {
               // Login is successful, set the token
@@ -280,24 +280,24 @@ exports.user = function (req, res, next, id) {
 
 exports.Signin = (req, res) => {
   if (req.body.email && req.body.password) {
-    User.findOne({ email: req.body.email }).exec((err, User) => {
+    User.findOne({ email: req.body.email }).exec((err, user) => {
       if (err) throw err;
-      if (!User) {
-        res.status(401).json({ success: false, message: 'User email does not exists' });
-      } else if (User) {
-        const validPassword = User.authenticate(req.body.password);
+      if (!user) {
+        res.status(401).json({ success: false, message: 'Invalid username or password' });
+      } else {
+        const validPassword = user.authenticate(req.body.password);
         if (!validPassword) {
-          res.status(401).json({ success: false, message: 'invalid password' });
+          res.status(401).json({ success: false, message: 'Invalid username or password' });
         } else {
-          req.logIn(User, (err) => {
+          req.logIn(user, (err) => {
             if (err) throw err;
           });
-          const token = jwt.sign(User, secretKey);
-          res.status(200).json({ success: true, message: 'signin successfull', token });
+          const token = jwt.sign(user, secretKey);
+          res.status(200).json({ success: true, message: 'Signin successful', token });
         }
       }
     });
   } else {
-    res.status(401).json({ success: false, message: 'no email or password entered' });
+    res.status(401).json({ success: false, message: 'No email or password entered' });
   }
 };
