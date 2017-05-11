@@ -14,6 +14,7 @@ angular.module('mean.system')
     $scope.showFindUsersButton = false;
     $scope.inviteeSearch = '';
     $scope.invitedUsersList = [];
+    $scope.region = region;
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -128,13 +129,13 @@ angular.module('mean.system')
     $scope.startGame = () => {
       //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
       //  ELSE DISPLAY A POPUP ERROR MESSAGE
-      if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
-        angular.element('#regionModal').modal('show');
-        // game.startGame();
-        $scope.showFindUsersButton = false;
-      } else if (game.players.length < game.playerMinLimit) {
+      if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
         $('#game-alert').modal('show');
+      } else {
+        angular.element('#regionModal').modal('show');
+        console.log('The regions are ', region.regions);
+        $scope.showFindUsersButton = false;
       }
     };
 
@@ -284,7 +285,21 @@ angular.module('mean.system')
       }
     };
 
+    // $scope.locateRegion = () => {
+      if ($scope.game.playerIndex === 0) {
+        region.getSelectedRegion().then((selectedRegion) => {
+          $scope.selectedRegion = selectedRegion;
+        });
+      }
+    // };
 
+    $scope.beginGame = () => {
+      game.setRegion($scope.selectedRegion).then(() => {
+        game.startGame();
+        console.log(`selected region is ${$scope.selectedRegion}`);
+      });
+      angular.element('#regionModal').modal('hide');
+    };
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       // console.log('joining custom game');

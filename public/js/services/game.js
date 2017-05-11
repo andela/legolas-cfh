@@ -218,8 +218,8 @@ angular.module('mean.system')
       socket.emit('pickCards',{cards: cards});
     };
 
-    game.pickWinning = function(card) {
-      socket.emit('pickWinning',{card: card.id});
+    game.pickWinning = (card) => {
+      socket.emit('pickWinning', { card: card.id });
     };
 
     // Starts the next round after the Czar clicks

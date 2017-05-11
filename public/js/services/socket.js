@@ -13,11 +13,11 @@ angular.module('mean.system')
     emit: function(eventName, data, callback){
       socket.emit(eventName, data, function(){
         var args = arguments;
-      });
-      $rootScope.safeApply(function(){
-        if(callback){
-          callback.apply(socket, args);
-        }
+        $rootScope.safeApply(function(){
+          if(callback){
+            callback.apply(socket, args);
+          }
+        });
       });
     },
     removeAllListeners: function(eventName, callback){

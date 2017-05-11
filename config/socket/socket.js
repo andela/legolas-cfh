@@ -25,7 +25,7 @@ module.exports = function(io) {
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards,socket.id);
       } else {
-        console.log('Received pickCard from',socket.id, 'but game does not appear to exist!');
+        console.log('Received pickCard from', socket.id, 'but game does not appear to exist!');
       }
     });
 
@@ -75,6 +75,15 @@ module.exports = function(io) {
 
     socket.on('czarSelectCard', () => {
       allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
+    });
+
+    socket.on('setRegion', (data, fn) => {
+      if (allGames[socket.gameID]) {
+        const thisGame = allGames[socket.gameID];
+        console.log(`Setting region for game ${socket.gameID}`);
+        thisGame.setRegion(data.region);
+        fn({ success: true });
+      }
     });
   });
 

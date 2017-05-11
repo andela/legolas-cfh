@@ -44,8 +44,12 @@ exports.all = function(req, res) {
 /**
  * List of Answers (for Game class)
  */
-exports.allAnswersForGame = function(cb) {
-    Answer.find({official:true}).select('-_id').exec(function(err, answers) {
+exports.allAnswersForGame = (cb, region = 'all') => {
+    let query = { official: true };
+    if (region !== 'all') {
+        query = { official: true, $or: [{ region: 'all' }, { region }] };
+    }
+    Answer.find(query).select('-_id').exec((err, answers) => {
         if (err) {
             console.log(err);
         } else {
