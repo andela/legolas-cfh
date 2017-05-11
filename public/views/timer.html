@@ -9,7 +9,7 @@
   <div class="mdl-card__title mdl-card--expand">
     <div id="time" ng-bind="game.time"></div>
   </div>
-  <div class="mdl-card__actions mdl-card--border">
+  <div class="mdl-card__actions">
     <span id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'"> Time Remaining</span>
     <span id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'"> Next Round In</span>
     <span id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</span>

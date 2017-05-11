@@ -1050,7 +1050,7 @@ body{
 
             #game-end-container{
                 width: 100%;
-                background: #252525;
+                background: #3e7293;
                 @include br;
                 text-align: center;
                 overflow: hidden;
@@ -1144,7 +1144,7 @@ body{
                 background: #252525;
                 @include br;
                 text-align: center;
-                overflow: hidden;
+                // overflow: hidden;
                 height: 50%;
                 position: relative;
                 margin-top: 10px;
@@ -1162,7 +1162,7 @@ body{
                     right: 10%;
                     width: 80%;
                     height: 50px;
-                    margin-top: 5%;
+                    margin-top: 10%;
 
                     #smaller-text{
                         font-size: 18px;
@@ -1175,8 +1175,8 @@ body{
                     color: black;
 
                     position: absolute;
-                    bottom: 4%;
-                    margin: 0 2%;
+                    top: 10%;
+                    margin: 170px 2%;
                     width: 96%;
                     padding: 3px;
                     text-align: left;
@@ -1233,7 +1233,7 @@ body{
 
             #cards-container{
                 width: 100%;
-                background: #252525;
+                background: #3e7293;
                 margin-top: 11px;
                 @include br;
 

@@ -88,6 +88,9 @@
 <!--========================-->
 <div class="demo-card-wide mdl-card mdl-shadow--2dp" id="question-container-inner">
   <div class="mdl-card__title card">
+    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+    
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">Finding Players</div>
       <div id="player-count-container">
@@ -98,12 +101,6 @@
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
     </div>
-  </div>
-  <div class="mdl-card__supporting-text">
-    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
-
-    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
-    
     <!-- Game Over Stuff -->
     <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
@@ -120,14 +117,14 @@
     </div>
 
   </div>
-  <div class="mdl-card__actions mdl-card--border">
-    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" ng-click="findUserPopup()">
+  <div class="mdl-card__actions mdl-card--border" ng-show="game.state === 'awaiting players'">
+    <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--raised mdl-js-ripple-effect" ng-click="findUserPopup()">
       Find Users
-    </a> {{ myname }}
+    </button> {{ myname }}
     <div id="start-game-container" ng-click="startGame()">
-      <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id='start-game-button'>
+      <button class="mdl-button mdl-js-button mdl-button--accent mdl-button--raised mdl-js-ripple-effect" id='start-game-button'>
         Start Game
-      </a>
+      </button>
     </div>
   </div>
 </div>
