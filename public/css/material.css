@@ -4,6 +4,7 @@
 #cards-container {
   margin-top: 45px;
 }
+
 .mdl-layout__header-row {
   padding: 10px;
 }
@@ -11,7 +12,7 @@
   height: 67px;
 }
 .demo-card-event.mdl-card {
-  margin-top: 61px;
+  margin-top: 60px;
   width: 214px;
   height: 201px;
   background: #3E4EB8;
@@ -83,4 +84,32 @@
 }
 #start-game-container {
   float: right;
+}
+.player-conatainer{
+    padding:1%;
+    padding-top:2%;
+}
+#above-czar-container {
+    height: 65%;
+    width: 100%;
+    position: relative;
+    left: -5%;
+}
+.d-avatar{
+    margin-top: -11px;
+    margin-left: -4px;
+}
+.czar-star{
+    background: grey;
+}
+.mdl-list {
+  position: relative;
+  left: -27px;
+}
+.mdl-list__item .mdl-list__item-secondary-content
+{
+    margin-left: 0px;
+}
+.mdl-list__item{
+    font-size: 15px;
 }
