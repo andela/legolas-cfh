@@ -40,6 +40,36 @@
   </div>
 </div>
 
+<div id="regionModal" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #646747">
+        <h3 class="modal-title" style="color: #000">Hi Player</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="padding-10">
+          <h6>Kindly select your region: &nbsp;&nbsp;</h6>
+        </div>
+        <!--<div class="styled-select blue semi-square" >
+          <select id="selectedCountry" style="text-align:center; color:white; outline:0;" ng-model="selectedCountry" ng-options="region.country for region in countries" ng-change="selectCountry();"></select>
+        </div>
+        <div class="row padding-10">
+          <div class="form-group center width-65">
+            <select id="region-select" class="form-control" ng-options="region as region.label for region in regions track by region.code" ng-model="selectedRegion"></select>
+          </div>
+        </div>-->
+      </div>
+      <div class="modal-footer center">
+        <h6 id="finding-players" style="color: #000">By clicking the start button, you have agreed to begin a game session</h6>
+        <button type="button" class="btn btn" ng-click="gameStart()" style="color: #fff; background: #FED136;">Start</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="cardModal" class="modal fade" role="dialog" data-controls-modal="card-modal" data-backdrop="static">
   <div class="modal-dialog">
     <!-- Modal content-->

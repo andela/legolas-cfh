@@ -1,8 +1,8 @@
 angular.module('mean.system')
 // MOVED THE FUNCTION TO A NEW LINE.
 // ADD SOME $SCOPE VARIABLES
-.controller('GameController', ['$scope', '$rootScope', 'game', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
-  ($scope, $rootScope, game, $http, $timeout, $location, MakeAWishFactsService, $dialog) => {
+.controller('GameController', ['$scope', '$rootScope', 'game', 'region', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
+  ($scope, $rootScope, game, region, $http, $timeout, $location, MakeAWishFactsService, $dialog) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -117,11 +117,20 @@ angular.module('mean.system')
     $scope.winnerPicked = () =>
       game.winningCard !== -1;
 
+    // $scope.startGame = () => {
+    //   if (game.players.length < game.playerMinLimit) {
+    //     $rootScope.popupMessage = 'Sorry, you need a minimum of 3 people to play Cards for Humanity';
+    //     $('#popup-modal').modal('show');
+    //   } else {
+    //     angular.element('#modalShow').modal('show');
+    //   }
+    // };
     $scope.startGame = () => {
       //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
       //  ELSE DISPLAY A POPUP ERROR MESSAGE
       if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
-        game.startGame();
+        angular.element('#regionModal').modal('show');
+        // game.startGame();
         $scope.showFindUsersButton = false;
       } else if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
@@ -129,87 +138,9 @@ angular.module('mean.system')
       }
     };
 
-    // FIND USERS
-    $scope.findUserPopup = () => {
-      $('#findUser').modal('show');
-    };
-
-    $scope.findUsers = () => {
-      $http.get(`/api/search/users/${$scope.inviteeSearch}`)
-        .then((response) => {
-          if (response.data.length > 0) {
-            $scope.searchResult = response.data;
-            $scope.noUser = false;
-          } else {
-            $scope.searchResult = [];
-            $scope.noUser = 'No such user found';
-            // console.log('No such user found');
-          }
-        }, (data, status, headers, config) => {
-          // console.log(status);
-        });
-    };
-
-    $scope.sendInvite = (user) => {
-      if (!$scope.hasBeenInvited(`${user.name}, ${user.email}`)) {
-        $(`#${$scope.getValidId(user.email)}`).prop('disabled', true);
-        $(`#${$scope.getValidId(user.email)}`).html('Sending...');
-        const data = {
-          url: document.URL,
-          inviteeEmail: user.email,
-          gameOwner: game.players[0].username
-        };
-        // console.log(data);
-        $http({
-          method: 'POST',
-          url: '/api/invite/user',
-          headers: { 'Content-Type': 'application/json' },
-          data
-        })
-        .success((response) => {
-          if (!$scope.inviteStatus) {
-            $scope.inviteStatus = {};
-          }
-          $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
-          $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
-          // console.log('this.data', response);
-          // console.log('$scope.invitedUsersList', $scope.invitedUsersList);
-        })
-        .error((error) => {
-          $scope.inviteStatus[user.email] = 'Could not send invite';
-          console.log('error sent to game.js', error);
-          $(`#${$scope.getValidId(user.email)}`).prop('disabled', false);
-          $(`#${$scope.getValidId(user.email)}`).html('Send Invite');
-        });
-      }
-    };
-
-    $scope.hasBeenInvited = nameAndEmail => ($scope.invitedUsersList.includes(nameAndEmail));
-
     $scope.abandonGame = () => {
       game.leaveGame();
       $location.path('/');
-    };
-
-    $scope.shuffleCards = () => {
-      // $('#cardModal').modal('show');
-      const card = $('#card');
-      card.addClass('animated flipOutX');
-      $timeout(() => {
-        // console.log('move to $scope.startNextRound()');
-        $scope.startNextRound();
-        // $('#closeModal').click();
-        card.removeClass('animated flipOutX');
-        $('#closeModal').click();
-        // $('#cardModal').modal('show');
-      }, 500);
-    };
-
-    $scope.startNextRound = () => {
-      // console.log('startNextRound() should start the game');
-      if ($scope.isCzar()) {
-        game.startNextRound();
-      }
     };
 
     $scope.getValidId = str => (str.replace(/[^\w-]/g, '-'));
@@ -274,6 +205,86 @@ angular.module('mean.system')
         }
       }
     });
+
+    // FIND USERS
+    $scope.findUserPopup = () => {
+      $('#findUser').modal('show');
+    };
+
+    $scope.findUsers = () => {
+      $http.get(`/api/search/users/${$scope.inviteeSearch}`)
+        .then((response) => {
+          if (response.data.length > 0) {
+            $scope.searchResult = response.data;
+            $scope.noUser = false;
+          } else {
+            $scope.searchResult = [];
+            $scope.noUser = 'No such user found';
+            // console.log('No such user found');
+          }
+        }, (data, status, headers, config) => {
+          // console.log(status);
+        });
+    };
+
+    $scope.sendInvite = (user) => {
+      if (!$scope.hasBeenInvited(`${user.name}, ${user.email}`)) {
+        $(`#${$scope.getValidId(user.email)}`).prop('disabled', true);
+        $(`#${$scope.getValidId(user.email)}`).html('Sending...');
+        const data = {
+          url: document.URL,
+          inviteeEmail: user.email,
+          gameOwner: game.players[0].username
+        };
+        // console.log(data);
+        $http({
+          method: 'POST',
+          url: '/api/invite/user',
+          headers: { 'Content-Type': 'application/json' },
+          data
+        })
+        .success((response) => {
+          if (!$scope.inviteStatus) {
+            $scope.inviteStatus = {};
+          }
+          $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
+          $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
+          // console.log('this.data', response);
+          // console.log('$scope.invitedUsersList', $scope.invitedUsersList);
+        })
+        .error((error) => {
+          $scope.inviteStatus[user.email] = 'Could not send invite';
+          console.log('error sent to game.js', error);
+          $(`#${$scope.getValidId(user.email)}`).prop('disabled', false);
+          $(`#${$scope.getValidId(user.email)}`).html('Send Invite');
+        });
+      }
+    };
+
+    $scope.hasBeenInvited = nameAndEmail => ($scope.invitedUsersList.includes(nameAndEmail));
+
+    $scope.shuffleCards = () => {
+      // $('#cardModal').modal('show');
+      const card = $('#card');
+      card.addClass('animated flipOutX');
+      $timeout(() => {
+        // console.log('move to $scope.startNextRound()');
+        $scope.startNextRound();
+        // $('#closeModal').click();
+        card.removeClass('animated flipOutX');
+        $('#closeModal').click();
+        // $('#cardModal').modal('show');
+      }, 500);
+    };
+
+    $scope.startNextRound = () => {
+      // console.log('startNextRound() should start the game');
+      if ($scope.isCzar()) {
+        game.startNextRound();
+      }
+    };
+
+
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       // console.log('joining custom game');
