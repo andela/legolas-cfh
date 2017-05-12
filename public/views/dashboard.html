@@ -1,0 +1,104 @@
+<div ng-controller="IndexController">
+  <div id="dashboardPage">
+    <div class="dashboard">
+    <!-- =========================
+     NAVIGATION LINKS     
+============================== -->
+		<div class="navbar  top-nav-collapse custom-navbar dashboard-nav" role="navigation">
+			<div class="container">
+
+				<!-- navbar header -->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand"><img src="img/logo.png" width="320" height="105" ></a>
+				</div>
+
+				<div class="collapse navbar-collapse">
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="/">Home</a></li>
+						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
+						<li ng-show="showOptions"><a href="#!/signup">Signup</a></li>
+						<li ng-hide="showOptions"><a href="/signout" ng-click="signout()">Sign Out</a></li>
+						<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+<!-- =========================
+     MAIN DASHBOARD  
+============================== -->
+<div class="dashbody center-block" >
+  <div class="center-block">
+    <h3 style="color:#3e7293;">
+       Welcome to your Dashboard, {{global.user.name}}
+    </h3>
+   <div>
+       <br>
+       <br>
+       <div class="tab">
+         <div class= "row">
+           <div class ="col-sm-10 col-sm-offset-1">
+         <ul class="nav nav-tabs" role="tablist" id="dashboard-nav">
+           <li class="col-sm-4 ">
+             <a href="#game-history" data-toggle="tab">
+               Your Game History
+             </a>
+           </li>
+            <li class="col-sm-4 active">
+             <a href="#dash-leaderboard"  data-toggle="tab">
+               Leaderboard
+             </a>
+           </li>
+
+           <li class=" col-sm-4">
+             <a href="#your-donations"  data-toggle="tab">
+               Your Donations
+             </a>
+           </li>
+
+           
+         </ul>
+         </div>
+         </div>
+      
+       
+    
+         <div class="tab-content">
+           <div  role="tabpanel" class="tab-pane fade in active" id="dash-leaderboard" leaderboard>
+           </div>
+
+           <div class="tab-pane fade" id="game-history" history>
+           </div>
+
+           <div class="tab-pane fade" id="your-donations" donations>
+           </div>
+
+         </div>
+        </div>
+         </div>
+  </div>
+</div>
+
+  <!-- =========================
+			FOOTER SECTION   
+		============================== -->
+		<footer>
+			<div class="container">
+				<div class="row">
+
+					<div class="col-md-12 col-sm-12">
+
+						<p>Copyright &copy; 2017 Andela Talent Accelerator | All Rights Reserved.</p>
+
+					</div>
+					
+				</div>
+			</div>
+		</footer>
