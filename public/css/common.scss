@@ -394,10 +394,11 @@ html{
     // -moz-background-size: cover;
     // -o-background-size: cover;
     // background-size: cover;
-    @include gradient-bg;
+    // @include gradient-bg;
     background-attachment: fixed;
     background-repeat: no-repeat;
     position: relative;
+    background: #2a2d34;
 
     @include mobile-only{
         //margin: 3px;
@@ -407,7 +408,7 @@ html{
 body{
     font-family: $main-font;
     background: transparent;
-    margin: 10px;
+    // margin: 10px;
 
     @include tablet-portrait-only{
         margin: 5px;
@@ -570,7 +571,7 @@ body{
                 padding-bottom: 4%;
                 height: 54px;
                 width: 100%;
-                background: #7CE4E8;
+                background: #f68c41;
                 margin: 0 0 1% 8%;
                 @include br;
 
@@ -1050,7 +1051,7 @@ body{
 
             #game-end-container{
                 width: 100%;
-                background: #3e7293;
+                background: #2a2d34;
                 @include br;
                 text-align: center;
                 overflow: hidden;
@@ -1233,7 +1234,7 @@ body{
 
             #cards-container{
                 width: 100%;
-                background: #3e7293;
+                background: #2a2d34;
                 margin-top: 11px;
                 @include br;
 
