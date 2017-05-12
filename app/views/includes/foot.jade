@@ -2,11 +2,11 @@ div.modal.fade#game-alert(tabindex="-1", role="dialog")
   div.modal-dialog.game-alert-dialog
     div.modal-content
       div.modal-header
+        p.modal-title#game-alert-title
+          {{ alertMessage }}
         button.close(type="button", data-dismiss="modal", aria-label="Close")
           span(aria-hidden="true")
             &times;
-        h3.modal-title#game-alert-title
-          {{ alertMessage }}
 
 script.
       var _gaq=[['_setAccount','UA-44959535-1'],['_trackPageview']];
@@ -20,6 +20,8 @@ script(type='text/javascript', src='/js/smoothscroll.js')
 //Bootstrap
 script(type='text/javascript', src='/lib/tether/dist/js/tether.min.js')
 script(type='text/javascript', src='/lib/bootstrap/js/bootstrap.js')
+// Material Design
+script(type='text/javascript', src='/lib/material-design-lite/material.min.js')
 
 // Material Design
 script(type='text/javascript', src='/lib/material-design-lite/material.min.js')
@@ -38,6 +40,9 @@ script(type='text/javascript', src='/js/init.js')
 script(type='text/javascript', src='/js/app.js')
 script(type='text/javascript', src='/js/directives.js')
 script(type='text/javascript', src='/js/filters.js')
+
+//Application Animation
+script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js')
 
 //Application Services
 script(type='text/javascript', src='/js/services/global.js')
