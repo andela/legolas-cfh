@@ -2,11 +2,11 @@ div.modal.fade#game-alert(tabindex="-1", role="dialog")
   div.modal-dialog.game-alert-dialog
     div.modal-content
       div.modal-header
+        p.modal-title#game-alert-title
+          {{ alertMessage }}
         button.close(type="button", data-dismiss="modal", aria-label="Close")
           span(aria-hidden="true")
             &times;
-        h3.modal-title#game-alert-title
-          {{ alertMessage }}
 
 script.
       var _gaq=[['_setAccount','UA-44959535-1'],['_trackPageview']];

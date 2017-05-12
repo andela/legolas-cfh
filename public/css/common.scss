@@ -430,6 +430,7 @@ body{
 
 #game-alert {
   padding-top: 15%;
+  font-weight: bolder;
 }
 
 .invite-list {
@@ -441,6 +442,12 @@ body{
 }
 .invite-list .mdl-card {
   width: 100%;
+}
+
+.no-user {
+  color: #ff4500;
+  text-align: left;
+  border-radius: 2px 2px 4px 4px;
 }
 
 #main-container{
