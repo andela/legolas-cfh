@@ -4,37 +4,64 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="findUser">
   <div class="modal-dialog userSearch">
     <div class="modal-content">
+      
       <div class="modal-header">
+        <h5 class="modal-title" id="availableUsers">Invite Other Players</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="availableUsers">Available Users</h4>
       </div>
+      
       <div class="modal-body">
-        <p ng-show="noUser" style="color: orangered; text-align: left; border-radius: 2px 2px 4px 4px">No such user found</p>
+        
+        <p ng-show="noUser" class="">No such user found</p>
         <div ng-if="inviteStatus" class="invite-list">
           <p ng-repeat="(email, status) in inviteStatus">{{ status.message }}</p>
         </div>
+
         <div>
-          <input type="text" class="form-control" placeholder="Search for a user to invite" ng-model="inviteeSearch" ng-keyup="findUsers()"/>
+          <input type="text" class="form-control" placeholder="Search for a user to invite" ng-model="inviteeSearch" ng-keyup="findUsers()" />
         </div>
-        <div ng-if="searchResult.length > 0" class="invite-list">
-          <table>
-            <thead>
-              <th>Name</th>
-              <th>Invite</th>
-            </thead>
-            <tbody class="search-result">
-              <tr ng-repeat="result in searchResult" ng-hide="hasBeenInvited(result.name + ', ' + result.email)">
-                <td>Name: {{ result.name }}</td>
-                <td>
-                  <button id="{{ getValidId(result.email) }}" class="btn btn-primary" ng-click="sendInvite(result)" title="">
-                    Send Invite!
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+        <div ng-if="searchResult.length > 0" class="invite-list mdl-layout__content">
+          <div class="demo-list-action mdl-list search-result mdl-card mdl-shadow--2dp">
+            <div class="mdl-list__item" ng-repeat="result in searchResult" ng-hide="hasBeenInvited(result.name + ', ' + result.email)">
+              <span class="mdl-list__item-primary-content">
+                <div>
+                  <img src={{result.avatar}} class="material-icons mdl-list__item-avatar">
+                </div>
+                <span>{{ result.name }}</span>
+              </span>
+              <button id="{{ getValidId(result.email) }}" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
+                Send Invite!
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div id="cardModal" class="modal fade" role="dialog" data-controls-modal="card-modal" data-backdrop="static">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">You are the Czar - Click card to pick the next question</h4>
+      </div>
+      <div class="modal-body" align="center">
+        <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
         </div>
       </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="closeModal" data-dismiss="modal" style="display:none; ">Close</button>
+      </div>
+    
     </div>
   </div>
 </div>
@@ -63,32 +90,56 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
 <!--
   THE REST OF THE GAME
 -->
-<div id="question-container-inner">
-  <div class="card longBlack">
-    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+<div id="question-container-inner" class="panel panel-default question-panel">
+  <div class="panel-body">
+    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'czar pick card' || game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
 
-    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
-
+    <br><p ng-show="!isCzar() && game.state !== 'awaiting players'"> <center> {{ czarHasDrawn }} </center></p>
+    
     <div id="startGame" ng-show="game.state === 'awaiting players'">
-      <div id="finding-players">Finding Players</div>
-      <div id="player-count-container">
-        <div id="player-count">{{game.players.length}} / {{game.playerMaxLimit}} </div>
-        <div id="the-word-players"> Players </div>
-      </div>
-      <div id="loading-container">
-        <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
-      </div>
 
-      <button class="btn btn-primary" ng-click="findUserPopup()">Find Users</button>
-      {{ myname }}
-      <div id="start-game-container" ng-click="startGame()">
-        <div id='start-game-button'>
-          Start Game
+      <div class="row">
+        <div id="player-count-container" class="col-md-4">
+          <h2 id="player-count">{{game.players.length}} / {{game.playerMaxLimit}} </h2>
+          <h4 id="the-word-players"> Players </h4>
+        </div>
+
+        <div class="col-md-4">
+          <div class="row">
+            <h5 id="finding-players" >
+              Finding players
+            </h5>
+          </div>
+          <div id="loading-container" class="row">
+            <div id="loading-gif" class="col-md-4 loading-gif col-md-offset-2">
+              <img ng-src="../img/loaders/loader.gif" src="../img/loaders/loader.gif">
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+              <a href="javascript:void(0)" id="start-game-button" ng-click="startGame()" class="btn btn-raised btn-info">
+                Start Game
+                <div class="ripple-container"></div>
+              </a>
+            </div>
+          </div>
+          <div class="clearfix"><br/></div>
+          <div class="row">
+            <div class="col-md-12 col-md-offset-2">
+              <a href="javascript:void(0)" ng-click="findUserPopup()" class="btn btn-raised btn-info">
+                Find Users
+                <div class="ripple-container"></div>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
 
-    <!-- Game Over Stuff -->
     <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
         <div class="game-end-headline">What the!? The game ended because too many people left! </div>
@@ -102,6 +153,7 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
         That makes you a loser, unfortunately.
       </div>
     </div>
+    
+    <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
   </div>
 </div>
-
