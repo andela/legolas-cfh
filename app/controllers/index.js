@@ -21,11 +21,3 @@ exports.render = function(req, res) {
         user: req.user ? JSON.stringify(req.user) : "null"
     });
 };
-exports.gameTour = (req, res) => {
-  if (Object.keys(req.query)[0] === 'custom') {
-    res.redirect('/#!/gametour');
-  } else {
-    res.redirect('/#!/gametour');
-  }
-};
-
