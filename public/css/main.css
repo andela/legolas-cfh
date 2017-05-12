@@ -555,4 +555,7 @@ footer {
 .text-secondary {
   color: #ed7d1a !important;
 }
-
+.modal-text{
+  color:#3e7293;
+  font-size: 17px;
+}
