@@ -73,7 +73,7 @@ angular.module('mean.system')
     $http.post('/api/auth/login', user).then((response) => {
       if (response.data.success) {
         $window.localStorage.setItem('token', response.data.token);
-        $location.path('/');
+        $window.location.href = '/';
       } else {
         $scope.showError = () => 'invalid';
         $scope.loginError = response.data.message;

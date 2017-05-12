@@ -160,24 +160,25 @@ angular.module('mean.system')
           } else {
             addToNotificationQueue('Select TWO answers!');
           }
-        } else if (data.state === 'waiting for czar to decide') {
-          if (game.czar === game.playerIndex) {
-            addToNotificationQueue("Everyone's done. Choose the winner!");
-          } else {
-            addToNotificationQueue('The czar is contemplating...');
-          }
-        } else if (data.state === 'winner has been chosen' &&
-                game.curQuestion.text.indexOf('<u></u>') > -1) {
-          game.curQuestion = data.curQuestion;
-        } else if (data.state === 'awaiting players') {
-          joinOverrideTimeout = $timeout(() => {
-            game.joinOverride = true;
-          }, 15000);
-        } else if (data.state === 'game dissolved' || data.state === 'game ended') {
-          game.players[game.playerIndex].hand = [];
-          game.time = 0;
-
-          const gamePlayDate = new Date();
+        }
+      } else if (data.state === 'waiting for czar to decide') {
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue("Everyone's done. Choose the winner!");
+        } else {
+          addToNotificationQueue('The czar is contemplating...');
+        }
+      } else if (data.state === 'winner has been chosen' &&
+              game.curQuestion.text.indexOf('<u></u>') > -1) {
+        game.curQuestion = data.curQuestion;
+      } else if (data.state === 'awaiting players') {
+        joinOverrideTimeout = $timeout(() => {
+          game.joinOverride = true;
+        }, 15000);
+      } else if (data.state === 'game dissolved' || data.state === 'game ended') {
+        game.players[game.playerIndex].hand = [];
+        game.time = 0;
+        if(data.state==='game ended') {
+          const gamePlayDate = new Date().toLocaleString().split(',');
           const gameRounds = game.round;
           const gameOwner = game.players[0].username;
           const gamePlayers = game.players.map(player => player.username);
@@ -185,16 +186,16 @@ angular.module('mean.system')
           const gameWinner = game.players[game.gameWinner].username;
 
           const gameRecord = {
-            gamePlayDate,
-            gameRounds,
-            gameOwner,
-            gameWinner,
-            gamePlayers,
+          gamePlayDate,
+          gameRounds,
+          gameOwner,
+          gameWinner,
+          gamePlayers,
 
-          };
-          /* this is to ensure that the game recores is only updated once and
-          and not for evry user playing in the game.
-          */
+        };
+        /* this is to ensure that the game recores is only updated once and
+        and not for evry user playing in the game.
+        */
           if ($window.user.name === gamePlayers[0]) {
             $http.post(`/api/games/${gameID}/start`, gameRecord);
           }
@@ -212,8 +213,8 @@ angular.module('mean.system')
         resolve($location.path('/'));
       })).then(() => {
         $timeout(() => {
-        $('#game-alert').modal('show');
-      }, 1000);
+          $('#game-alert').modal('show');
+        }, 1000);
       });
     });
 
