@@ -104,5 +104,7 @@ module.exports = function (app, passport, auth) {
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
+  // Intro route
+  app.get('/gametour', index.gameTour);
 };
 

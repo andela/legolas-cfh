@@ -1,4 +1,4 @@
-angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives'])
+angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', 'mean.system', 'mean.directives', 'angular-intro'])
   .config(['$routeProvider',
       function($routeProvider) {
           $routeProvider.
@@ -23,7 +23,10 @@ angular.module('mean', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.route', '
           when('/choose-avatar', {
             templateUrl: '/views/choose-avatar.html'
           }).
-          otherwise({
+          when('/gametour', {
+            templateUrl: '/views/onboard.html'
+          })
+          .otherwise({
             redirectTo: '/'
           });
       }
