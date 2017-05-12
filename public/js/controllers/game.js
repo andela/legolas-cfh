@@ -14,6 +14,7 @@ angular.module('mean.system')
     $scope.showFindUsersButton = false;
     $scope.inviteeSearch = '';
     $scope.invitedUsersList = [];
+    $scope.startNewGame = false;
 
     $scope.pickCard = function(card) {
       if (!$scope.hasPickedCards) {
@@ -132,7 +133,11 @@ angular.module('mean.system')
       //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
       //  ELSE DISPLAY A POPUP ERROR MESSAGE
       if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
-        game.startGame();
+        if (!$scope.startNewGame) {
+          $('#newGameModal').modal('show');
+        } else {
+          game.startGame();
+        }
         $scope.showFindUsersButton = false;
       } else if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
