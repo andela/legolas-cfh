@@ -338,7 +338,7 @@ exports.gameHistory = (req, res) => {
   const name = req.query.name;
   gameRecord.find({
     gamePlayers: { $in: [name] }
-  }).exec((err, records) => {
+  }).sort({ $natural: -1 }).exec((err, records) => {
     if (err) console.log(err);
     if (records) res.status(200).send(records);
   });
@@ -349,8 +349,8 @@ exports.leaderBoard = (req, res) => {
 .sort({ gameWins: -1 })
 .limit(20)
 .exec((err, records) => {
-    res.send(records);
-  });
+  res.send(records);
+});
 };
 
 exports.donations = (req, res) => {

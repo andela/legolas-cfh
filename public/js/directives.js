@@ -121,11 +121,10 @@ angular.module('mean.directives', [])
     template:
     `
     <div class="no-data" ng-show="gameHistory.length === 0">
-      You have not participated in any game yet.
-      You shouldn't lead a boring life, you know.
+      You have not Played any game yet.
     </div>
       <div class="game-history" ng-repeat="game in gameHistory">
-            <table class="table dashboard-table">
+            <table class="table dashboard-table game-table">
               <thead>
                 <tr>
                   <th>Game Play date</th>
@@ -136,18 +135,17 @@ angular.module('mean.directives', [])
               </thead>
               <tbody>
                 <tr>
-                <td>  {{game.gamePlayDate}}</td>
+                <td>  <p id="game-date">
+                  <i class="fa fa-clock-o"></i>
+                  {{game.gamePlayDate[1]}}&nbsp;&nbsp;
+                  <i class="fa fa-calendar"></i>
+                  {{game.gamePlayDate[0]}}
+                  </p></td>
                   <td>
                   <p id="game-rounds"> {{game.gameRounds}} </p>
-                  <p id="game-date">
-                  <i class="fa fa-clock-o"></i>
-                  {{game.gamePlayTime}}
-                  <i class="fa fa-calendar"></i>
-                  {{game.gamePlayDate}}
-                  </p>
                   </td>
                   <td>
-                    <p ng-repeat="player in game.gamePlayers track by $index">
+                    <p  class= "players" ng-repeat="player in game.gamePlayers track by $index">
                       {{player}}
                     </p>
                   </td>
@@ -170,7 +168,7 @@ angular.module('mean.directives', [])
     template:
     `
     <div class="no-data" ng-show="userDonations.length === 0">
-      No Donations!
+      No Donations Yet!
     </div>
     <table class="table dashboard-table" ng-show="userDonations.length > 0">
       <thead>
