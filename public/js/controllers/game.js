@@ -14,6 +14,7 @@ angular.module('mean.system')
     $scope.showFindUsersButton = false;
     $scope.inviteeSearch = '';
     $scope.invitedUsersList = [];
+    $scope.startNewGame = false;
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -121,7 +122,11 @@ angular.module('mean.system')
       //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
       //  ELSE DISPLAY A POPUP ERROR MESSAGE
       if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
-        game.startGame();
+        if (!$scope.startNewGame) {
+          $('#newGameModal').modal('show');
+        } else {
+          game.startGame();
+        }
         $scope.showFindUsersButton = false;
       } else if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
@@ -237,8 +242,11 @@ angular.module('mean.system')
       //     $('#cardModal').modal('show');
       // }
       if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
-          $('#cardModal').modal('show');
+        $('#cardModal').modal('show');
         // displayMessage('', '#card-modal');
+      }
+      if (game.state === 'game dissolved') {
+        $('#cardModal').modal('hide');
       }
       if ($scope.isCzar() === false && game.state === 'czar pick card'
         && game.state !== 'game dissolved'
