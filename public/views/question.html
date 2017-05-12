@@ -4,38 +4,64 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="findUser">
   <div class="modal-dialog userSearch">
     <div class="modal-content">
+      
       <div class="modal-header">
+        <h5 class="modal-title" id="availableUsers">Invite Other Players</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="availableUsers">Available Users</h4>
       </div>
+      
       <div class="modal-body">
-        <p ng-show="noUser" style="color: orangered; text-align: left; border-radius: 2px 2px 4px 4px">No such user found</p>
+        
+        <p ng-show="noUser" class="">No such user found</p>
         <div ng-if="inviteStatus" class="invite-list">
           <p ng-repeat="(email, status) in inviteStatus">{{ status.message }}</p>
         </div>
+
         <div>
-          <input type="text" class="form-control" placeholder="Search for a user to invite" ng-model="inviteeSearch" ng-keyup="findUsers()"
-          />
+          <input type="text" class="form-control" placeholder="Search for a user to invite" ng-model="inviteeSearch" ng-keyup="findUsers()" />
         </div>
-        <div ng-if="searchResult.length > 0" class="invite-list">
-          <table>
-            <thead>
-              <th>Name</th>
-              <th>Invite</th>
-            </thead>
-            <tbody class="search-result">
-              <tr ng-repeat="result in searchResult" ng-hide="hasBeenInvited(result.name + ', ' + result.email)">
-                <td>Name: {{ result.name }}</td>
-                <td>
-                  <button id="{{ getValidId(result.email) }}" class="btn btn-primary" ng-click="sendInvite(result)" title="">
-                    Send Invite!
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+        <div ng-if="searchResult.length > 0" class="invite-list mdl-layout__content">
+          <div class="demo-list-action mdl-list search-result mdl-card mdl-shadow--2dp">
+            <div class="mdl-list__item" ng-repeat="result in searchResult" ng-hide="hasBeenInvited(result.name + ', ' + result.email)">
+              <span class="mdl-list__item-primary-content">
+                <div>
+                  <img src={{result.avatar}} class="material-icons mdl-list__item-avatar">
+                </div>
+                <span>{{ result.name }}</span>
+              </span>
+              <button id="{{ getValidId(result.email) }}" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
+                Send Invite!
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+<div id="cardModal" class="modal fade" role="dialog" data-controls-modal="card-modal" data-backdrop="static">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">You are the Czar - Click card to pick the next question</h4>
+      </div>
+      <div class="modal-body" align="center">
+        <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
+          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
         </div>
       </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="closeModal" data-dismiss="modal" style="display:none; ">Close</button>
+      </div>
+    
     </div>
   </div>
 </div>
@@ -46,19 +72,11 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
 <div class="modal fade" id="regionModal" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <!--<div class="modal-header" style="background-color: #646747">
-        <h4 class="modal-title">Cards for Humanity</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>-->
+      
       <div class="modal-body">
         <div class="padding-10">
           <h6>Kindly select your region: &nbsp;&nbsp;</h6>
         </div>
-        <!--<div class="styled-select blue semi-square" >
-          <select id="selectedCountry" style="text-align:center; color:white; outline:0;" ng-model="selectedCountry" ng-options="region.country for region in countries" ng-change="selectCountry();"></select>
-        </div>-->
         <div class="row padding-10">
           <div class="form-group center width-65">
             <select id="region-select" class="form-control" ng-options="region as region.label for region in region.regions track by region.code" ng-model="selectedRegion"></select>
@@ -71,34 +89,6 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
       <div class="modal-footer center">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; beginGame();">Start</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!--<div class="modal-footer center">
-  <h6 id="finding-players" style="color: #000">By clicking the start button, you have agreed to begin a game session</h6>
-  <button type="button" class="btn btn" ng-click="beginGame()" style="color: #fff; background: #FED136;">Start</button>
-</div>-->
-
-<div id="cardModal" class="modal fade" role="dialog" data-controls-modal="card-modal" data-backdrop="static">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" style="color: #69d2e8; text-align: center;">You are the Czar - Click card to pick the next question</h4>
-      </div>
-      <div class="modal-body" align="center">
-        <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
-          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
-          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
-          <img src='../img/card-back.jpg' style='width: 100px;' class='animated flipInX' id='card' />
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id="closeModal" data-dismiss="modal" style="display:none; ">Close</button>
       </div>
     </div>
   </div>
