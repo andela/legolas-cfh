@@ -170,7 +170,7 @@ angular.module('mean.system')
       game.players[game.playerIndex].hand = [];
       game.time = 0;
 
-      const gamePlayDate = new Date();
+      const gamePlayDate = new Date().toLocaleString().split(',');
       const gameRounds = game.round;
       const gameOwner = game.players[0].username;
       const gamePlayers = game.players.map(player => player.username);
@@ -188,7 +188,9 @@ angular.module('mean.system')
       /* this is to ensure that the game recores is only updated once and
       and not for evry user playing in the game.
        */
-      if ($window.user.name === gamePlayers[0]) {
+      let num = 0;
+      if ($window.user.name === gamePlayers[0] && num === 0) {
+        num = +1;
         $http.post(`/api/games/${gameID}/start`, gameRecord);
       }
     }

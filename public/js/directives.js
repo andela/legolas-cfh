@@ -76,4 +76,121 @@ angular.module('mean.directives', [])
         }
       }
     };
-  });
+  }).directive('leaderboard', ['$http', $http => ({
+    restrict: 'A',
+    link: (scope) => {
+      $http.get('/api/leaderboard')
+        .success((response) => {
+          scope.leaderboard = response;
+        });
+    },
+    template:
+    `
+    <div class="no-data" ng-show="leaderboard.length === 0">
+      No leader board yet.
+    </div>
+    <div class= "leader-board" ng-show="leaderboard.length>0" >
+    <table class="table table-inverse dashboard-table">
+      <thead>
+        <tr>
+          <th> Rank </th>
+          <th class="bordered"> Player </th>
+          <th class="bordered"> Number of Wins </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="player in leaderboard track by $index">
+          <td> {{$index + 1}} </td>
+          <td> {{player.name}} </td>
+          <td> {{player.gameWins}} </td>
+         </tr>
+      </tbody>
+    </table>
+    </div>
+    `,
+  })])
+  .directive('history', ['$http', '$window', ($http, $window) => ({
+    restrict: 'A',
+    link: (scope) => {
+      const userName = $window.user.name;
+      $http.get('/api/games/history', { params: { name: userName } })
+        .success((response) => {
+          scope.gameHistory = response;
+        });
+    },
+    template:
+    `
+    <div class="no-data" ng-show="gameHistory.length === 0">
+      You have not participated in any game yet.
+      You shouldn't lead a boring life, you know.
+    </div>
+      <div class="game-history" ng-repeat="game in gameHistory">
+            <table class="table dashboard-table">
+              <thead>
+                <tr>
+                  <th>Game Play date</th>
+                  <th> Game Rounds </th>
+                  <th class="bordered"> Game Players </th>
+                  <th class="bordered"> Game Winner </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                <td>  {{game.gamePlayDate}}</td>
+                  <td>
+                  <p id="game-rounds"> {{game.gameRounds}} </p>
+                  <p id="game-date">
+                  <i class="fa fa-clock-o"></i>
+                  {{game.gamePlayTime}}
+                  <i class="fa fa-calendar"></i>
+                  {{game.gamePlayDate}}
+                  </p>
+                  </td>
+                  <td>
+                    <p ng-repeat="player in game.gamePlayers track by $index">
+                      {{player}}
+                    </p>
+                  </td>
+                  <td> {{game.gameWinner}} </td>
+                </tr>
+              </tbody>
+            </table>
+       </div>
+       `,
+  })])
+  .directive('donations', ['$http', '$window', ($http, $window) => ({
+    restrict: 'A',
+    link: ($scope) => {
+      const userName = $window.user.name;
+      $http.get('/api/donations', { params: { name: userName } })
+        .success((response) => {
+          $scope.userDonations = response;
+        });
+    },
+    template:
+    `
+    <div class="no-data" ng-show="userDonations.length === 0">
+      No Donations!
+    </div>
+    <table class="table dashboard-table" ng-show="userDonations.length > 0">
+      <thead>
+        <tr>
+          <th>
+            Donation ID
+          </th>
+          <th class="bordered">
+            Amount
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="donation in userDonations">
+          <td>{{donation.crowdrise_donation_id}}</td>
+          <td>{{donation.amount}}</td>
+         </tr>
+      </tbody>
+    </table>
+    `,
+  })])
+
+  ;
