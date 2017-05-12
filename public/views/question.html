@@ -65,6 +65,27 @@
     </div>
   </div>
 </div>
+<!--
+MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
+-->
+<div class="modal fade" id="newGameModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cards for Humanity</h4>
+        </div>
+        <div class="modal-body">
+          <p class="modal-text" >Are you sure you want to start a new game?</p>
+           <p class = "modal-text">Clicking the start button would start a new game session.</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; startGame();">start</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 <!--
   THE REST OF THE GAME

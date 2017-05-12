@@ -111,10 +111,12 @@ body {
   border-radius: 2px 2px 4px 4px;
   overflow: scroll;
   text-align: left;
-  width: 100%; }
-
+  width: 100%;
+}
 .invite-list .mdl-card {
-  width: 100%; }
+  width: 100%;
+  overflow: scroll;
+}
 
 #main-container {
   height: 100%; }
