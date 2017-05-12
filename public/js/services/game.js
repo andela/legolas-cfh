@@ -137,13 +137,21 @@ angular.module('mean.system')
         game.state = data.state;
       }
 
-      if (data.state === 'waiting for players to pick') {
+      if (data.state === 'czar pick card') {
+        game.czar = data.czar;
+        if (game.czar === game.playerIndex) {
+          addToNotificationQueue(`You are now a Czar, 
+            click black card to pop a new question`);
+        } else {
+          addToNotificationQueue('Waiting for Czar to pick card');
+        }
+      } else if (data.state === 'waiting for players to pick') {
         game.czar = data.czar;
         game.curQuestion = data.curQuestion;
-      // Extending the underscore within the question
+        // Extending the underscore within the question
         game.curQuestion.text = data.curQuestion.text.replace(/_/g, '<u></u>');
 
-      // Set notifications only when entering state
+        // Set notifications only when entering state
         if (newState) {
           if (game.czar === game.playerIndex) {
             addToNotificationQueue('You\'re the Card Czar! Please wait!');
@@ -210,33 +218,38 @@ angular.module('mean.system')
       });
     });
 
-    game.joinGame = function (mode, room, createPrivate) {
+    game.joinGame = function(mode,room,createPrivate) {
       mode = mode || 'joinGame';
       room = room || '';
       createPrivate = createPrivate || false;
-      const userID = window.user ? user._id : 'unauthenticated';
-      socket.emit(mode, { userID, room, createPrivate });
+      const userID = !!window.user ? user._id : 'unauthenticated';
+      socket.emit(mode,{userID, room, createPrivate});
     };
 
-    game.startGame = function () {
+    game.startGame = function() {
       socket.emit('startGame');
     };
 
-    game.leaveGame = function () {
+    game.leaveGame = function() {
       game.players = [];
       game.time = 0;
       socket.emit('leaveGame');
     };
 
-    game.pickCards = function (cards) {
-      socket.emit('pickCards', { cards });
+    game.pickCards = function(cards) {
+      socket.emit('pickCards',{cards: cards});
     };
 
-    game.pickWinning = function (card) {
-      socket.emit('pickWinning', { card: card.id });
+    game.pickWinning = function(card) {
+      socket.emit('pickWinning',{card: card.id});
     };
 
     decrementTime();
+
+    // Starts the next round after the Czar clicks
+    game.startNextRound = () => {
+      socket.emit('czarSelectCard');
+    };
 
     return game;
   }]);
