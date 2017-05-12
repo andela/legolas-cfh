@@ -109,9 +109,12 @@ body {
 .invite-list {
   background: #d3d3d3;
   border-radius: 2px 2px 4px 4px;
-  height: 120px;
   overflow: scroll;
-  text-align: left; }
+  text-align: left;
+  width: 100%; }
+
+.invite-list .mdl-card {
+  width: 100%; }
 
 #main-container {
   height: 100%; }
