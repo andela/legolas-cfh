@@ -15,8 +15,6 @@ gulp.task('nodemon', () => {
    watch: ['app', 'config', 'server.js'],
    env: { NODE_ENV: 'development' }
  });
-
- 
 });
 
 gulp.task('server', ['nodemon'], () => {
