@@ -118,21 +118,20 @@ angular.module('mean.system')
     $scope.winnerPicked = () =>
       game.winningCard !== -1;
 
-    // $scope.startGame = () => {
-    //   if (game.players.length < game.playerMinLimit) {
-    //     $rootScope.popupMessage = 'Sorry, you need a minimum of 3 people to play Cards for Humanity';
-    //     $('#popup-modal').modal('show');
-    //   } else {
-    //     angular.element('#modalShow').modal('show');
-    //   }
-    // };
     $scope.startGame = () => {
-      //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
-      //  ELSE DISPLAY A POPUP ERROR MESSAGE
+      //  mai current fix
+      //
+      //
       if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
         $('#game-alert').modal('show');
       } else {
+        // if (!$scope.startNewGame) {
+        //   $('#newGameModal').modal('show');
+        // } else {
+        //   game.startGame();
+        // }
+        $scope.showFindUsersButton = false;
         angular.element('#regionModal').modal('show');
         console.log('The regions are ', region.regions);
         $scope.showFindUsersButton = false;
