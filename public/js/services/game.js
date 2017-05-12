@@ -173,11 +173,12 @@ angular.module('mean.system')
       game.curQuestion = data.curQuestion;
     } else if (data.state === 'awaiting players') {
       joinOverrideTimeout = $timeout(function() {
-        game.joinOverride = true;
+      game.joinOverride = true;
       }, 15000);
     } else if (data.state === 'game dissolved' || data.state === 'game ended') {
       game.players[game.playerIndex].hand = [];
       game.time = 0;
+      $('#cardModal').modal('hide');
     }
   });
 
