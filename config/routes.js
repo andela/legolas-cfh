@@ -17,7 +17,7 @@ module.exports = function (app, passport, auth) {
      // create api routes for signin
   app.post('/api/auth/login', users.Signin);
 
-    app.post('/api/auth/signup', users.createAPI);
+  app.post('/api/auth/signup', users.createAPI);
 
     // Donation Routes
   app.post('/donations', users.addDonation);
@@ -97,6 +97,9 @@ module.exports = function (app, passport, auth) {
 
   app.post('/api/invite/user', users.sendInvite);
 
+  // api end point for game gameRecords
+  app.post('/api/games/:id/start', users.gameRecords);
+
   // Home route
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
@@ -104,3 +107,4 @@ module.exports = function (app, passport, auth) {
   // Intro route
   app.get('/gametour', index.gameTour);
 };
+
