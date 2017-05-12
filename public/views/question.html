@@ -25,7 +25,9 @@
           <div class="demo-list-action mdl-list search-result mdl-card mdl-shadow--2dp">
             <div class="mdl-list__item" ng-repeat="result in searchResult" ng-hide="hasBeenInvited(result.name + ', ' + result.email)">
               <span class="mdl-list__item-primary-content">
-                <i class="material-icons mdl-list__item-avatar">person</i>
+                <div>
+                  <img src={{result.avatar}} class="material-icons mdl-list__item-avatar">
+                </div>
                 <span>{{ result.name }}</span>
               </span>
               <button id="{{ getValidId(result.email) }}" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
