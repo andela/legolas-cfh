@@ -81,7 +81,7 @@ angular.module('mean.system')
       if (isGameCustom()) {
         $window.location = '/app?custom';
       } else {
-        $window.location = '#!/';
+        $window.location = '#!/app';
       }
     };
 
