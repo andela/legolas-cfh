@@ -29,7 +29,7 @@ angular.module('mean.system')
   }
 
   $scope.signup = () => {
-    if (!$scope.email || !$scope.password){
+    if (!$scope.email || !$scope.password) {
       const error = { message: 'Enter your username and password' };
       $scope.showError();
       $scope.error = error;
@@ -38,7 +38,7 @@ angular.module('mean.system')
         email: $scope.email,
         password: $scope.password,
         name: $scope.name,
-        avatar: $scope.avatars.avatar
+        avatar: 0
       };
 
       // call the api
@@ -49,27 +49,19 @@ angular.module('mean.system')
           $location.path('/');
         } else {
           $scope.signupErr = 'Cannot be authenticated';
-          $scope.showError();
+          $scope.showError = () => 'invalid';
         }
       }, (err) => {
+        $scope.showError = () => 'invalid';
         $scope.signupErr = err.data.message;
-        $scope.showError();
       });
     } // if else
   };
 
   $scope.signout = () => {
     $window.localStorage.removeItem('token');
-  };
-
-  if ($window.localStorage.getItem('token')) {
-    $scope.global.authenticated = true;
-  } else {
+    $scope.showOptions = true;
     $scope.global.authenticated = false;
-  }
-
-  $scope.signout = () => {
-    $window.localStorage.removeItem('token');
     $window.user = null;
   };
 
@@ -81,13 +73,14 @@ angular.module('mean.system')
     $http.post('/api/auth/login', user).then((response) => {
       if (response.data.success) {
         $window.localStorage.setItem('token', response.data.token);
-        $location.path('/');
+        $window.location.href = '/';
       } else {
         $scope.showError = () => 'invalid';
+        $scope.loginError = response.data.message;
       }
     }, (err) => {
-      $scope.showError();
-      $scope.error = err;
+      $scope.showError = () => 'invalid';
+      $scope.loginError = err.data.message;
     });
   };
 }]);

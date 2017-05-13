@@ -15,6 +15,8 @@ angular.module('mean.system')
     $scope.inviteeSearch = '';
     $scope.invitedUsersList = [];
     $scope.region = region;
+    $scope.startNewGame = false;
+
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -123,6 +125,16 @@ angular.module('mean.system')
       //
       //
       if (game.players.length < game.playerMinLimit) {
+        //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
+        //  ELSE DISPLAY A POPUP ERROR MESSAGE
+//       if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
+//         if (!$scope.startNewGame) {
+//           $('#newGameModal').modal('show');
+//         } else {
+//           game.startGame();
+//         }
+//         $scope.showFindUsersButton = false;
+//       } else if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
         $('#game-alert').modal('show');
       } else {
@@ -134,7 +146,7 @@ angular.module('mean.system')
         $scope.showFindUsersButton = false;
         angular.element('#regionModal').modal('show');
         console.log('The regions are ', region.regions);
-        $scope.showFindUsersButton = false;
+//         $scope.showFindUsersButton = false;
       }
     };
 
@@ -170,6 +182,9 @@ angular.module('mean.system')
       if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
           $('#cardModal').modal('show');
         // displayMessage('', '#card-modal');
+      }
+      if (game.state === 'game dissolved') {
+        $('#cardModal').modal('hide');
       }
       if ($scope.isCzar() === false && game.state === 'czar pick card'
         && game.state !== 'game dissolved'
@@ -283,6 +298,7 @@ angular.module('mean.system')
         game.startNextRound();
       }
     };
+
 
     // $scope.locateRegion = () => {
       if ($scope.game.playerIndex === 0) {

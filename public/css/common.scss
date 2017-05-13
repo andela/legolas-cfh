@@ -407,7 +407,7 @@ html{
 body{
     font-family: $main-font;
     background: transparent;
-    margin: 10px;
+    // margin: 10px;
 
     @include tablet-portrait-only{
         margin: 5px;
@@ -430,14 +430,24 @@ body{
 
 #game-alert {
   padding-top: 15%;
+  font-weight: bolder;
 }
 
 .invite-list {
   background: #d3d3d3;
   border-radius: 2px 2px 4px 4px;
-  height: 120px;
   overflow: scroll;
   text-align: left;
+  width: 100%;
+}
+.invite-list .mdl-card {
+  width: 100%;
+}
+
+.no-user {
+  color: #ff4500;
+  text-align: left;
+  border-radius: 2px 2px 4px 4px;
 }
 
 #main-container{

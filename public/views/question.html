@@ -73,26 +73,52 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       
+      <div class="modal-header">
+        <h4 class="modal-title">Cards for Humanity</h4>
+      </div>
+      
       <div class="modal-body">
         <div class="padding-10">
-          <h6>Kindly select your region: &nbsp;&nbsp;</h6>
+          <h6>Kindly select your region:</h6>
         </div>
         <div class="row padding-10">
           <div class="form-group center width-65">
             <select id="region-select" class="form-control" ng-options="region as region.label for region in region.regions track by region.code" ng-model="selectedRegion"></select>
           </div>
         </div>
-
-        <p style = "color: #0B394E; font-size: 17px">Are you sure you want to start a new game?</p>
-        <p style = "color: #0B394E; font-size: 17px">Clicking the start button would start a new game session.</p>
+        
+        <p class="modal-text" >Are you sure you want to start a new game?</p>
+        <p class = "modal-text">Clicking the start button would start a new game session.</p>
       </div>
+      
       <div class="modal-footer center">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; beginGame();">Start</button>
       </div>
     </div>
   </div>
 </div>
+<!--
+MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
+-->
+<!-- <div class="modal fade" id="newGameModal" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Cards for Humanity</h4>
+        </div>
+        <div class="modal-body">
+          <p class="modal-text" >Are you sure you want to start a new game?</p>
+           <p class = "modal-text">Clicking the start button would start a new game session.</p>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; startGame();">start</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> -->
 
 <!--
   THE REST OF THE GAME

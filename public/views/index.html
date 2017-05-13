@@ -1,8 +1,8 @@
 <div landing id="main-bod">
 	<div ng-controller="IndexController">
-<!-- =========================
-     NAVIGATION LINKS     
-============================== -->
+		<!-- =========================
+				NAVIGATION LINKS     
+		============================== -->
 		<div class="navbar navbar-fixed-top top-nav-collapse custom-navbar" role="navigation">
 			<div class="container">
 
@@ -22,12 +22,12 @@
 						<li><a href="#" onClick="scroll(0,0)">Home</a></li>
 						<li><a href="#" onClick="scroll(0,600);">About</a></li>
 						<li><a href="#" onClick="scroll(0,1150);">How to Play</a></li>
-						<li><a href="#" onClick="scroll(0,1811);">Leaderboard</a></li>
+						<li><a href="#!/dashboard" ng-hide="showOptions">Dashboard</a>
 						<li><a href="#" onClick="scroll(0,2491);">Charity</a></li>
 						<li><a href="#" onClick="scroll(0,3221);">Warning</a></li>
 						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
 						<li ng-show="showOptions"><a href="#!/signup">Signup</a></li>
-						<li ng-hide="showOptions"><a href="/signout">Sign Out</a></li>
+						<li ng-hide="showOptions"><a href="/signout" ng-click="signout()">Sign Out</a></li>
 						<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
 					</ul>
 
