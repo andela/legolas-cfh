@@ -1,3 +1,13 @@
+div.modal.fade#game-alert(tabindex="-1", role="dialog")
+  div.modal-dialog.game-alert-dialog
+    div.modal-content
+      div.modal-header
+        p.modal-title#game-alert-title
+          {{ alertMessage }}
+        button.close(type="button", data-dismiss="modal", aria-label="Close")
+          span(aria-hidden="true")
+            &times;
+
 script.
       var _gaq=[['_setAccount','UA-44959535-1'],['_trackPageview']];
       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
@@ -5,38 +15,45 @@ script.
       s.parentNode.insertBefore(g,s)}(document,'script'));
 script(type='text/javascript', src='/lib/jquery/jquery.js')
 script(type='text/javascript', src='/lib/underscore/underscore-min.js')
-
-//Bootstrap
+script(type='text/javascript', src='/js/jquery.backstretch.min.js')
+script(type='text/javascript', src='/js/smoothscroll.js')
+//- Bootstrap
 script(type='text/javascript', src='/lib/bootstrap/js/bootstrap.js')
 
-//AngularJS
+//- Material Design
+script(type='text/javascript', src='/lib/material-design-lite/material.min.js')
+
+//- AngularJS
 script(type='text/javascript', src='http://code.angularjs.org/1.1.5/angular.js')
 script(type='text/javascript', src='http://code.angularjs.org/1.1.5/angular-resource.js')
 script(type='text/javascript', src='http://code.angularjs.org/1.1.5/angular-cookies.js')
 
-//Angular UI
+//- Angular UI
 script(type='text/javascript', src='/lib/angular-bootstrap/ui-bootstrap-tpls.js')
 script(type='text/javascript', src='/lib/angular-ui-utils/modules/route.js')
 
-//Application Init
+//- Application Init
 script(type='text/javascript', src='/js/init.js')
 script(type='text/javascript', src='/js/app.js')
 script(type='text/javascript', src='/js/directives.js')
 script(type='text/javascript', src='/js/filters.js')
 
-//Application Services
+//- Application Animation
+script(type='text/javascript', src='https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.js')
+
+//- Application Services
 script(type='text/javascript', src='/js/services/global.js')
 script(type='text/javascript', src='/js/services/socket.js')
 script(type='text/javascript', src='/js/services/game.js')
 
-//Application Controllers
+//- Application Controllers
 script(type='text/javascript', src='/js/controllers/index.js')
 script(type='text/javascript', src='/js/controllers/header.js')
 script(type='text/javascript', src='/js/controllers/game.js')
 script(type='text/javascript', src='/js/init.js')
 
-//Socket.io Client Library
+//- Socket.io Client Library
 script(type='text/javascript', src='/socket.io/socket.io.js')
 
-//Livereload script rendered
-//script(type='text/javascript', src='http://localhost:35729/livereload.js')
+//- Livereload script rendered
+//- script(type='text/javascript', src='http://localhost:35729/livereload.js')

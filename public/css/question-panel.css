@@ -1,0 +1,99 @@
+.question-panel, .timer-panel, .in-game-player-panel {
+    background: #3e7293;
+}
+
+.timer-panel {
+    text-align: center;
+    position: relative;
+    font-weight: bold;
+    text-indent: 0;
+    text-shadow: none;
+    cursor: pointer;
+    min-width: 85px;
+    height: 100%;
+}
+.timer-panel .panel-body #timer-status-czar-choosing {
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding-top: 5px;
+    padding-bottom: 8px;
+    bottom: 0; }
+    @media only screen and (max-width: 1024px) {
+        .timer-panel .panel-body #timer-status-czar-choosing {
+        font-size: 13px; } }
+    @media (max-width: 520px) {
+        .timer-panel .panel-body #timer-status-czar-choosing {
+        font-size: 12px; } }
+.timer-panel .panel-body #time {
+    font-family: 'Roboto', cursive;
+    font-size: 110px;
+    position: absolute;
+    bottom: 25%;
+    left: 0;
+    right: 0;
+}
+@media only screen and (max-width: 1024px) {
+    .timer-panel .panel-body #time {
+        font-size: 90px; }
+    }
+@media (max-width: 520px) {
+    .timer-panel .panel-body #time {
+        font-size: 73px;
+    }
+}
+
+#czar-container {
+    position: relative;
+    bottom: 0;
+    text-align: center;
+    width: 100%;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: black;
+    opacity: 0.4;
+}
+#the-czar {
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+}
+
+.loading-gif img {
+    width: 90px; 
+    height: 90px;
+}
+
+#player-name #player-star, #player-name #king {
+    width: 20px; 
+    height: 20px;
+}
+
+#player-name #king {
+    /*position: absolute;*/
+    bottom: 20px;
+    -webkit-transform: rotate(-18deg);
+    transform: rotate(-18deg);
+    left: -5px;
+    float: right;
+}
+#player-name .player-picture {
+    width: 30px; 
+    height: 30px;
+    float: right;
+}
+
+.h1, .h2, .h3, .h4 {
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-weight: 300;
+}
+
+#player-count-container, #loading-container, #finding-players {
+    float: left;
+    color: #ffffff;
+    text-align: center;
+}

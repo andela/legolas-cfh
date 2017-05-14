@@ -1,71 +1,127 @@
-<div id="main-bod" ng-controller="IndexController">
-  <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
+<div  id="main-bod" ng-controller="IndexController">
+	<div>
+		<!-- =========================
+				NAVIGATION LINKS     
+		============================== -->
+		<div class="navbar navbar-fixed-top top-nav-collapse custom-navbar" role="navigation">
+			<div class="container">
+
+				<!-- navbar header -->
+				<div class="navbar-header">
+					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+						<span class="icon icon-bar"></span>
+					</button>
+					<a href="#" class="navbar-brand"><img src="img/logo.png" width="320" height="105" ></a>
+				</div>
+
+				<div class="collapse navbar-collapse">
+
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#" onClick="scroll(0,0)">Home</a></li>
+						<li><a href="#" onClick="scroll(0,600);">About</a></li>
+						<li><a href="#" onClick="scroll(0,1150);">How to Play</a></li>
+						<li><a href="#" onClick="scroll(0,1811);">Leaderboard</a></li>
+						<li><a href="#" onClick="scroll(0,2491);">Charity</a></li>
+						<li><a href="#" onClick="scroll(0,3221);">Warning</a></li>
+						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
+						<li ng-show="showOptions"><a href="#!/signup">Signup</a></li>
+						<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+
+    <section id="loginform" class="">
+      <div class="container">
         <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo"> 
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span> 
-              <span id="third-word">Humanity</span> 
-            </div> 
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
+          <!--Top header-->
+          <div class="top-header text-center">
+            <h3 class="page-title">Login</h3>
+            <div class="lead col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">Login with your Email address or even faster with your social media account (Github, Facebook, Google or Twitter).
+						<div class="small"><br>Don't have an account. <a href="#!/signup">Click here to register</a></div>
             </div>
-          </div>      
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- Fixed Logo & Menu Bar End -->
-
-<!-- Landing Start -->
-<div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div> 
-  <div class="modified-container">
-    <div class="row" id="main-text"> 
-    <!-- Teaser Text Start -->
-    <div id="landing-logo">
-      <h2 id="slogan">Sign in with:</h2>
-      <div id="login-buttons">
-        <a href="/auth/facebook"><img class="login-item" src="/img/icons/facebook.png"></a>
-        <a href="/auth/github"><img class="login-item" src="/img/icons/github.png"></a>
-        <a href="/auth/twitter"><img class="login-item" src="/img/icons/twitter.png"></a>
-        <a href="/auth/google"><img class="login-item" src="/img/icons/google.png"></a>
-      </div>
-      <p id="create">Or log in below:</p>
-
-      <div class="sign-body">
-        <div class="more-sign">
-          <div class="sign-error" ng-show="showError() === 'invalid'">
-            Please check your username/password and try again.
+            <div class="col-xs-12">
+              <hr class="separator">
+            </div>
+            
           </div>
-          <form class="signup form-horizontal" action="/users/session" method="post">
-            <div class="control-group">
-              <label for="email" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="email" type="text" name="email" placeholder="Email" required novalidate />
-              </div>
+          <!--Login via Social Media-->
+          <div class="col-sm-6">
+            <div class="col-sm-8 col-md-7 col-md-offset-4 div col-sm-offset-3 socialbuttonblock">
+              <a class="btn btn-block btn-social btn-github"  href="/auth/github">
+                <span class="fa fa-github"></span> Sign in with Github
+              </a>
+              <a class="btn btn-block btn-social btn-facebook" href="/auth/facebook">
+                <span class="fa fa-facebook"></span> Sign in with Facebook
+              </a>
+              <a class="btn btn-block btn-social btn-twitter" href="/auth/twitter">
+                <span class="fa fa-twitter"></span> Sign in with Twitter
+              </a>
+              <a class="btn btn-block btn-social btn-google" href="/auth/google">
+                <span class="fa fa-google"></span> Sign in with Google
+              </a>
             </div>
-            <div class="control-group">
-              <label for="password" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="password" type="password" name="password" placeholder="Password" required novalidate />
-              </div>
-            </div>
-            <div class="form-actions top-margin">
-              <button id="sign-up-btn-other" type='submit'>Sign In</button>
-            </div>
-          </form>
+          </div>
+          <!--Login via Email-->
+          <div class="col-sm-6">
+              <form class="form-horizontal">
+								<div class="form-group">
+									<label class="col-sm-8">Email <span class="mandatory">*</span></label>
+									<div class="col-sm-8">
+										<input type="email" name="email" id="email" value="" class="form-control" placeholder="Your Email Address" ng-model='email' required novalidate>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label label class="col-sm-8">Password <span class="mandatory">*</span></label>
+									<div class="col-sm-8">
+										<input type="password" placeholder="Password" name="password" id="password" value="" class="form-control" ng-model='password' required novalidate > 
+									</div>
+								</div>
+
+							
+								<div class="alert alert-danger col-sm-8" ng-show="showError() === 'invalid'" >
+									{{ loginError }}
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button ng-click='login()' type="submit" class="btn btn-primary">Login</button>
+									</div>
+								</div>
+							</form>
+          </div>
+
         </div>
       </div>
-    </div>
-    </div>
-    </div>
-  </div>
-</div>
+    </section>
 
+		<!-- =========================
+			FOOTER SECTION   
+		============================== -->
+		<footer>
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-10 col-sm-offset-1 col-md-offset-2 col-md-8">
+						<p class="small">This game is based on the Cards Against Humanity card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations go directly to charity, as managed by crowdrise.</p>
+					</div>
+				</div>
+				<div class="row">
+
+					<div class="col-md-12 col-sm-12">
+
+						<p>Copyright &copy; 2017 Andela Talent Accelerator | All Rights Reserved.</p>
+
+					</div>
+					
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- Back top -->
+		<a href="#back-top" class="go-top"><i class="fa fa-angle-up"></i></a>
+	</div>
+</div>
