@@ -9,14 +9,12 @@ require('dotenv').config();
 const coveralls = require('gulp-coveralls');
 
 gulp.task('nodemon', () => {
- nodemon({
-   script: 'server.js',
-   ext: 'js',
-   watch: ['app', 'config', 'server.js'],
-   env: { NODE_ENV: 'development' }
- });
-
- 
+  nodemon({
+    script: 'server.js',
+    ext: 'js',
+    watch: ['app', 'config', 'server.js'],
+    env: { NODE_ENV: 'development' }
+  });
 });
 
 gulp.task('server', ['nodemon'], () => {

@@ -1,32 +1,24 @@
-<div id="in-game-player-container" class="in-game-player-panel panel panel-default">
-  <div class="panel-body">
-  </div>
-  <div class="row">
-    <div class="col-md-9">
-      Username
-    </div>
-    <div class="col-md-3">
-      Score
-    </div>
-  </div>
-  <div ng-repeat="player in game.players">
-    <div class="row">
-      <div class="col-md-9" id="player-name">
-        <img ng-show="isPlayer($index)" id="player-star" src="../img/11.png"/>
-        {{player.username | upperFirstLetter}}
-        <img ng-show="isPremium($index)" ng-src="img/king.png" id="king">
-        <img class="player-picture" ng-src="{{player.avatar}}"/>
+<!-- List items with avatar and action -->
+<div class="mdl-list">
+  <div id="player-container" ng-repeat="player in game.players" class="mdl-list__item mdl-list__item--two-line player-container mdl-button--raised">
+    <div id="above-czar-container" class="mdl-list__item-primary-content ">
+      <div id="avatar_" class=d-avatar>
+        <span ng-show="isPremium($index)">
+          <img ng-src="img/king.png" id="king">
+        </span>
+        <img ng-src="{{player.avatar}}" />
       </div>
-      <div class="col-md-3">
-        <div id="player-score">
-          {{player.points}}/{{game.pointLimit}}
+      <div id="player-container-inner">
+        <div id="player-name"><span>{{player.username | upperFirstLetter}}</span></div>
+        <div id="player-score" class="mdl-list__item-sub-title"><span>{{player.points}}/{{game.pointLimit}}</span></div>
+        <!--<div class="czar-star">-->
+        <div ng-show="isPlayer($index)" id="player-star">
+          <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons player-star">star</i></a>
         </div>
       </div>
     </div>
-    <div id="czar-container" ng-show="currentCzar($index)">
-      <span id='the-czar'>CZAR</span>
+    <div id="czar-container" ng-show="currentCzar($index)" class="mdl-list__item-secondary-content">
+      <span id='the-czar' class="mdl-list__item-secondary-info">CZAR</span>
     </div>
-    <div class="divider"></div>
   </div>
 </div>
-

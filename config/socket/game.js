@@ -4,18 +4,18 @@ var questions = require('../../app/controllers/questions');
 var answers = require('../../app/controllers/answers');
 
 var guestNames = [
-  "Disco Potato",
-  "Silver Blister",
-  "Insulated Mustard",
-  "Funeral Flapjack",
-  "Toenail",
-  "Urgent Drip",
-  "Raging Bagel",
-  "Aggressive Pie",
-  "Loving Spoon",
-  "Swollen Node",
-  "The Spleen",
-  "Dingle Dangle"
+  'Disco Potato',
+  'Silver Blister',
+  'Insulated Mustard',
+  'Funeral Flapjack',
+  'Toenail',
+  'Urgent Drip',
+  'Raging Bagel',
+  'Aggressive Pie',
+  'Loving Spoon',
+  'Swollen Node',
+  'The Spleen',
+  'Dingle Dangle'
 ];
 
 function Game(gameID, io) {

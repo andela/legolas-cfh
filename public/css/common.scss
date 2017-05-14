@@ -394,10 +394,11 @@ html{
     // -moz-background-size: cover;
     // -o-background-size: cover;
     // background-size: cover;
-    @include gradient-bg;
+    // @include gradient-bg;
     background-attachment: fixed;
     background-repeat: no-repeat;
     position: relative;
+    background: #2a2d34;
 
     @include mobile-only{
         //margin: 3px;
@@ -453,8 +454,8 @@ body{
 #main-container{
     height: 100%;
     #app-container {
-        height: 100%;
-        max-width: 1200px;
+        // height: 100%;
+        // max-width: 1200px;
         margin: 0px auto;
         position: relative;
 
@@ -498,7 +499,7 @@ body{
 
             #abandon-game-button{
                 display: inline-block;
-                float:right;
+                // float:right;
                 border-radius: 8px;
                 -moz-border-radius: 8px;
                 -webkit-border-radius: 8px;
@@ -580,9 +581,10 @@ body{
                 position: relative;
                 padding-top: 4%;
                 padding-bottom: 4%;
-                min-height: 85px;
-                background: #7CE4E8;
-                margin: 0 0 6% 8%;
+                height: 54px;
+                width: 100%;
+                background: #f68c41;
+                margin: 0 0 1% 8%;
                 @include br;
 
                 @include mobile-only{
@@ -631,8 +633,8 @@ body{
 
 
                         img {
-                            width: 100%;
-                            height: 140%;
+                            width: 58%;
+                            // height: 140%;
                             float: left;
                             @include br;
                             min-width: 40px;
@@ -656,10 +658,10 @@ body{
                     #player-container-inner{
                         float: left;
                         position: relative;
-                        bottom: 8px;
-                        left: 2px;
-                        max-width: 62%;
-                        overflow: hidden;
+                        bottom: 20px;
+                        left: 45px;
+                        width: 76%;
+                        // overflow: hidden;
 
                         @include tablet-portrait-only{
                             left: 3px;
@@ -715,9 +717,11 @@ body{
 
                         #player-star{
                         float: left;
-                        margin-top: 3px;
-                        margin-left: 10px;
-
+                        position: relative;
+                        top: -10px;
+                        left: 130px;
+                        width: 26px;
+                        
                         @include tablet-portrait-only{
                             margin-top: 1px;
                             margin-left: 5px;
@@ -739,22 +743,23 @@ body{
                 }
 
                 #czar-container {
-                    position: absolute;
-                    bottom: 0;
+                    position: relative;
+                    bottom: -8px;
+                    left: -44px;
                     text-align: center;
-                    width: 100%;
+                    // width: 100%;
                     @include br-bottom;
-                    background: black;
-                    opacity:0.4;
+                    // background: black;
+                    // opacity:0.4;
 
                     @include mobile-only{
                         overflow: auto;
                     }
 
                     #the-czar{
-                        color: #fff;
-                        font-weight: bold;
-                        font-size: 20px;
+                        color: #000;
+                        // font-weight: bold;
+                        font-size: 13px;
 
                         @include mobile-only{
                             display: none;
@@ -891,7 +896,7 @@ body{
                     }
 
                     #question-container-inner{
-                        width: 100%;
+                        width: 98%;
                         height: 100%;
                         .card{
                             width: 100%;
@@ -1062,7 +1067,7 @@ body{
 
             #game-end-container{
                 width: 100%;
-                background: #252525;
+                background: #2a2d34;
                 @include br;
                 text-align: center;
                 overflow: hidden;
@@ -1121,7 +1126,7 @@ body{
                             @include button-smaller;
                             width: 40%;
                             margin: 5%;
-                            height: 28%;
+                            // height: 28%;
                             font-size: 21px;
                             line-height: 155%;
                             padding-top: 5%;
@@ -1136,7 +1141,7 @@ body{
                             @include button-smaller;
                             width: 40%;
                             margin: 5%;
-                            height: 28%;
+                            // height: 28%;
                             font-size: 21px;
                             line-height: 155%;
                             padding-top: 5%;
@@ -1156,7 +1161,7 @@ body{
                 background: #252525;
                 @include br;
                 text-align: center;
-                overflow: hidden;
+                // overflow: hidden;
                 height: 50%;
                 position: relative;
                 margin-top: 10px;
@@ -1174,7 +1179,7 @@ body{
                     right: 10%;
                     width: 80%;
                     height: 50px;
-                    margin-top: 5%;
+                    // margin-top: 5%;
 
                     #smaller-text{
                         font-size: 18px;
@@ -1187,8 +1192,9 @@ body{
                     color: black;
 
                     position: absolute;
-                    bottom: 4%;
+                    bottom: 10%;
                     margin: 0 2%;
+                    // margin: 170px 2%;
                     width: 96%;
                     padding: 3px;
                     text-align: left;
@@ -1245,7 +1251,7 @@ body{
 
             #cards-container{
                 width: 100%;
-                background: #252525;
+                background: #2a2d34;
                 margin-top: 11px;
                 @include br;
 
