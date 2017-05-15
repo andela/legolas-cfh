@@ -4,11 +4,11 @@ require("console-stamp")(console, "m/dd HH:MM:ss");
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
-var avatars = require(__dirname + '/../../app/controllers/avatars.js').all();
+var avatars = require('../../app/controllers/avatars').all();
 // Valid characters to use to generate random private game IDs
-var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
-module.exports = function(io) {
+module.exports = (io) => {
 
   // var game;
   var allGames = {};
@@ -23,9 +23,9 @@ module.exports = function(io) {
     socket.on('pickCards', function(data) {
       console.log(socket.id,"picked",data);
       if (allGames[socket.gameID]) {
-        allGames[socket.gameID].pickCards(data.cards,socket.id);
+        allGames[socket.gameID].pickCards(data.cards, socket.id);
       } else {
-        console.log('Received pickCard from',socket.id, 'but game does not appear to exist!');
+        console.log('Received pickCard from', socket.id, 'but game does not appear to exist!');
       }
     });
 
@@ -76,9 +76,19 @@ module.exports = function(io) {
     socket.on('czarSelectCard', () => {
       allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
     });
+
+    socket.on('setRegion', (data, fn) => {
+      if (allGames[socket.gameID]) {
+        const thisGame = allGames[socket.gameID];
+        console.log(`Setting region for game ${socket.gameID}`);
+        thisGame.setRegion(data.region);
+        fn({ success: true });
+      }
+    });
   });
 
-  var joinGame = function(socket,data) {
+
+  var joinGame = function(socket, data) {
     var player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
@@ -87,7 +97,7 @@ module.exports = function(io) {
         _id: data.userID
       }).exec(function(err, user) {
         if (err) {
-          console.log('err',err);
+          console.log('err', err);
           return err; // Hopefully this never happens.
         }
         if (!user) {
@@ -99,7 +109,7 @@ module.exports = function(io) {
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];
         }
-        getGame(player,socket,data.room,data.createPrivate);
+        getGame(player, socket, data.room, data.createPrivate);
       });
     } else {
       // If the user isn't authenticated (guest)
@@ -107,8 +117,8 @@ module.exports = function(io) {
       // IF PLAYER_LENGTH IS GREATER THAN OR EQUAL TO PLAYER_MAX_LIMIT
       // DISPLAY ERROR POPUP
       player.username = 'Guest';
-      player.avatar = avatars[Math.floor(Math.random()*4)+12];
-      getGame(player,socket,data.room,data.createPrivate);
+      player.avatar = avatars[Math.floor(Math.random() * 4) + 12];
+      getGame(player, socket, data.room, data.createPrivate);
     }
   };
 
@@ -153,7 +163,6 @@ module.exports = function(io) {
         fireGame(player,socket);
       }
     }
-
   };
 
   var fireGame = function(player,socket) {
@@ -168,7 +177,7 @@ module.exports = function(io) {
       gamesNeedingPlayers.push(game);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
-      console.log(socket.id,'has joined newly created game',game.gameID);
+      console.log(socket.id, 'has joined newly created game',game.gameID);
       game.assignPlayerColors();
       game.assignGuestNames();
       game.sendUpdate();
@@ -176,7 +185,7 @@ module.exports = function(io) {
       game = gamesNeedingPlayers[0];
       allPlayers[socket.id] = true;
       game.players.push(player);
-      console.log(socket.id,'has joined game',game.gameID);
+      console.log(socket.id, 'has joined game', game.gameID);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
       game.assignPlayerColors();

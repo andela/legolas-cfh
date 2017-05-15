@@ -1,0 +1,134 @@
+#main-container {
+  background: #2a2d34;
+}
+#cards-container {
+  margin-top: 45px;
+}
+
+#player-score {
+  letter-spacing: 2px;
+  color: white;
+}
+.mdl-layout__header {
+  background: #3e7293;
+}
+.mdl-layout__header-row {
+  padding: 10px;
+}
+.mdl-card__supporting-text {
+  height: 67px;
+}
+.orange {
+  background: #f68c41;
+}
+.blue {
+  background: #3e7293
+}
+.demo-card-event.mdl-card {
+  margin-top: 60px;
+  width: 214px;
+  height: 201px;
+  background: #f68c41;
+}
+.demo-card-event > .mdl-card__title {
+  align-items: flex-start;
+  font-size: 10em;
+  margin: 0 auto;
+  padding-top: 0;
+}
+.demo-card-event > .mdl-card__actions {
+  display: flex;
+  box-sizing:border-box;
+  justify-content: center;
+  align-items: center;
+}
+.demo-card-event > .mdl-card__actions > .material-icons {
+  padding-right: 10px;
+}
+.demo-card-event > .mdl-card__title,
+.demo-card-event > .mdl-card__actions,
+.demo-card-event > .mdl-card__actions > .mdl-button {
+  color: #fff;
+}
+
+.demo-card-wide.mdl-card {
+  margin-top: 61px;
+  width: 600px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #2a2d34;
+  height: 148px;
+  border-radius: 0;
+  
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+
+.game-cards.mdl-card {
+  position: relative;
+  display: inline-block;
+  box-sizing: border-box;
+  width: 17.5%;
+  min-height: 220px;
+  padding: 3%;
+  margin: 1%;
+  text-align: center;
+  background: url('../img/card.png');
+  background-size: 94%;
+  background-repeat: no-repeat;
+  border-radius: 8px;
+  color: #252525;
+  font-family: Arial;
+  font-size: 15px;
+  font-weight: bold;
+  vertical-align: middle;
+  background-color: #2a2d34 !important;
+}
+
+.card-text{
+  vertical-align: top;
+  padding-top: 5%;
+}
+.mdl-navigation__link {
+  font-weight: 900;
+  cursor: pointer;
+}
+#leave-game-button {
+  color: #ed7d1a;
+}
+#start-game-container {
+  float: right;
+}
+.player-conatainer{
+    padding:1%;
+    padding-top:2%;
+}
+#above-czar-container {
+    height: 65%;
+    width: 100%;
+    position: relative;
+    left: -5%;
+}
+.d-avatar{
+    margin-top: -11px;
+    margin-left: -4px;
+}
+.czar-star{
+    background: grey;
+}
+.mdl-list {
+  position: relative;
+  left: -27px;
+}
+.mdl-list__item .mdl-list__item-secondary-content
+{
+    margin-left: 0px;
+}
+.mdl-list__item{
+    font-size: 15px;
+}
+#loading-container img {
+  width: 50px;
+  height: 50px;
+}

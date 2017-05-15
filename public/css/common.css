@@ -65,21 +65,10 @@ html, body, .main-container, .cont, #first-section, #inner-container {
   height: 100%; }
 
 html {
-  /* IE10 Consumer Preview */
-  background-image: -ms-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Mozilla Firefox */
-  background-image: -moz-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Opera */
-  background-image: -o-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* Webkit (Safari/Chrome 10) */
-  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #0B394E), color-stop(1, #ABCE8D));
-  /* Webkit (Chrome 11+) */
-  background-image: -webkit-linear-gradient(top left, #0B394E 0%, #ABCE8D 100%);
-  /* W3C Markup, IE10 Release Preview */
-  background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  position: relative; }
+  position: relative;
+  background: #2a2d34; }
   @media (max-width: 520px) {
     html {
       margin-top: 0px; } }
@@ -107,14 +96,13 @@ body {
   font-weight: bolder; }
 
 .invite-list {
-  background: #d3d3d3;
-  border-radius: 2px 2px 4px 4px;
   overflow: scroll;
   text-align: left;
   width: 100%; }
 
 .invite-list .mdl-card {
-  width: 100%; }
+  width: 100%;
+  left: 0; }
 
 .no-user {
   color: #ff4500;
@@ -124,8 +112,6 @@ body {
 #main-container {
   height: 100%; }
   #main-container #app-container {
-    height: 100%;
-    max-width: 1200px;
     margin: 0px auto;
     position: relative; }
     #main-container #app-container #menu-container {
@@ -157,7 +143,6 @@ body {
           color: #FC575E; }
       #main-container #app-container #menu-container #abandon-game-button {
         display: inline-block;
-        float: right;
         border-radius: 8px;
         -moz-border-radius: 8px;
         -webkit-border-radius: 8px;
@@ -221,9 +206,10 @@ body {
         position: relative;
         padding-top: 4%;
         padding-bottom: 4%;
-        min-height: 85px;
-        background: #7CE4E8;
-        margin: 0 0 6% 8%;
+        height: 54px;
+        width: 100%;
+        background: #f68c41;
+        margin: 0 0 1% 8%;
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
         border-radius: 8px; }
@@ -264,8 +250,7 @@ body {
                   bottom: 31px;
                   left: -3px; } }
             #main-container #app-container #social-bar-container #player-container #above-czar-container #avatar_ img {
-              width: 100%;
-              height: 140%;
+              width: 58%;
               float: left;
               -webkit-border-radius: 8px;
               -moz-border-radius: 8px;
@@ -287,10 +272,9 @@ body {
           #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner {
             float: left;
             position: relative;
-            bottom: 8px;
-            left: 2px;
-            max-width: 62%;
-            overflow: hidden; }
+            bottom: 20px;
+            left: 45px;
+            width: 76%; }
             @media only screen and (min-width: 521px) and (max-width: 768px) {
               #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner {
                 left: 3px; } }
@@ -327,8 +311,10 @@ body {
                     line-height: 40%; } }
             #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-star {
               float: left;
-              margin-top: 3px;
-              margin-left: 10px; }
+              position: relative;
+              top: -10px;
+              left: 130px;
+              width: 26px; }
               @media only screen and (min-width: 521px) and (max-width: 768px) {
                 #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-star {
                   margin-top: 1px;
@@ -342,25 +328,22 @@ body {
                   #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-star img {
                     width: 18px; } }
         #main-container #app-container #social-bar-container #player-container #czar-container {
-          position: absolute;
-          bottom: 0;
+          position: relative;
+          bottom: -8px;
+          left: -44px;
           text-align: center;
-          width: 100%;
           -webkit-border-bottom-right-radius: 8px;
           -webkit-border-bottom-left-radius: 8px;
           -moz-border-radius-bottomright: 8px;
           -moz-border-radius-bottomleft: 8px;
           border-bottom-right-radius: 8px;
-          border-bottom-left-radius: 8px;
-          background: black;
-          opacity: 0.4; }
+          border-bottom-left-radius: 8px; }
           @media (max-width: 520px) {
             #main-container #app-container #social-bar-container #player-container #czar-container {
               overflow: auto; } }
           #main-container #app-container #social-bar-container #player-container #czar-container #the-czar {
-            color: #fff;
-            font-weight: bold;
-            font-size: 20px; }
+            color: #000;
+            font-size: 13px; }
             @media (max-width: 520px) {
               #main-container #app-container #social-bar-container #player-container #czar-container #the-czar {
                 display: none; } }
@@ -490,7 +473,7 @@ body {
               width: 71%;
               margin-left: 1%; } }
           #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner {
-            width: 100%;
+            width: 98%;
             height: 100%; }
             #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card {
               width: 100%;
@@ -612,7 +595,7 @@ body {
                 padding: 0px 10px 10px 10px; } }
       #main-container #app-container #gameplay-container #game-end-container {
         width: 100%;
-        background: #252525;
+        background: #2a2d34;
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
         border-radius: 8px;
@@ -687,7 +670,6 @@ body {
               display: block;
               width: 40%;
               margin: 5%;
-              height: 28%;
               font-size: 21px;
               line-height: 155%;
               padding-top: 5%; }
@@ -729,7 +711,6 @@ body {
               display: block;
               width: 40%;
               margin: 5%;
-              height: 28%;
               font-size: 21px;
               line-height: 155%;
               padding-top: 5%; }
@@ -747,7 +728,6 @@ body {
         -moz-border-radius: 8px;
         border-radius: 8px;
         text-align: center;
-        overflow: hidden;
         height: 50%;
         position: relative;
         margin-top: 10px;
@@ -763,7 +743,7 @@ body {
           right: 10%;
           width: 80%;
           height: 50px;
-          margin-top: 5%; }
+          margin-top: 10%; }
           #main-container #app-container #gameplay-container #czar-blank-container #czar-blank-inner #smaller-text {
             font-size: 18px; }
         #main-container #app-container #gameplay-container #czar-blank-container #charity-fact-container {
@@ -773,8 +753,8 @@ body {
           background-color: #fff;
           color: black;
           position: absolute;
-          bottom: 4%;
-          margin: 0 2%;
+          top: 10%;
+          margin: 170px 2%;
           width: 96%;
           padding: 3px;
           text-align: left; }
@@ -814,7 +794,7 @@ body {
                 width: 53%; } }
       #main-container #app-container #gameplay-container #cards-container {
         width: 100%;
-        background: #252525;
+        background: #2a2d34;
         margin-top: 11px;
         -webkit-border-radius: 8px;
         -moz-border-radius: 8px;
