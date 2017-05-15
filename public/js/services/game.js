@@ -212,8 +212,8 @@ angular.module('mean.system')
         resolve($location.path('/'));
       })).then(() => {
         $timeout(() => {
-        $('#game-alert').modal('show');
-      }, 1000);
+          $('#game-alert').modal('show');
+        }, 1000);
       });
     });
 

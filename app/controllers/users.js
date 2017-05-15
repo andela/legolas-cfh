@@ -324,7 +324,43 @@ exports.gameRecords = (req, res) => {
       console.log(err);
       res.status(500).send('an error occured');
     } else {
-      res.status(200).send(`game record saved successfully ${savedObject}`);
+      console.log(savedObject);
+      // res.status(200).send(`game record saved successfully ${savedObject}`);
+    }
+  });
+  User.findOneAndUpdate({ name: gameWinner }, { $inc: { gameWins: 1 } })
+  .exec((err, update) => {
+    if (err) console.log(err);
+    if (update) res.send(update);
+  });
+};
+exports.gameHistory = (req, res) => {
+  const name = req.query.name;
+  gameRecord.find({
+    gamePlayers: { $in: [name] }
+  }).sort({ $natural: -1 }).exec((err, records) => {
+    if (err) console.log(err);
+    if (records) res.status(200).send(records);
+  });
+};
+exports.leaderBoard = (req, res) => {
+ // res.send('succes  : true')
+  User.find({})
+.sort({ gameWins: -1 })
+.limit(20)
+.exec((err, records) => {
+  res.send(records);
+});
+};
+
+exports.donations = (req, res) => {
+  const name = req.query.name;
+  User.findOne({ name }).exec((err, object) => {
+    if (err) {
+      console.log(err);
+    } else {
+      const donation = object.donations;
+      res.send(donation);
     }
   });
 };
