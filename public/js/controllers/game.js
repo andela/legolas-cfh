@@ -1,8 +1,8 @@
 angular.module('mean.system')
 // MOVED THE FUNCTION TO A NEW LINE.
 // ADD SOME $SCOPE VARIABLES
-.controller('GameController', ['$scope', '$rootScope', 'game', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
-  ($scope, $rootScope, game, $http, $timeout, $location, MakeAWishFactsService, $dialog) => {
+.controller('GameController', ['$scope', '$rootScope', 'game', 'region', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
+  ($scope, $rootScope, game, region, $http, $timeout, $location, MakeAWishFactsService, $dialog) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -14,6 +14,7 @@ angular.module('mean.system')
     $scope.showFindUsersButton = false;
     $scope.inviteeSearch = '';
     $scope.invitedUsersList = [];
+    $scope.region = region;
     $scope.startNewGame = false;
 
     $scope.pickCard = (card) => {
@@ -121,18 +122,93 @@ angular.module('mean.system')
     $scope.startGame = () => {
       //  ALLOW START GAME ONLY WHEN THE MIN AND MAX PLAYER NUMBERS ARE TRUE
       //  ELSE DISPLAY A POPUP ERROR MESSAGE
-      if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
-        if (!$scope.startNewGame) {
-          $('#newGameModal').modal('show');
-        } else {
-          game.startGame();
-        }
-        $scope.showFindUsersButton = false;
-      } else if (game.players.length < game.playerMinLimit) {
+      if (game.players.length < game.playerMinLimit) {
         $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
         $('#game-alert').modal('show');
+      } else {
+        $scope.showFindUsersButton = false;
+        angular.element('#regionModal').modal('show');
+        console.log('The regions are ', region.regions);
       }
+
+      // if (game.players.length >= game.playerMinLimit && game.players.length < game.playerMaxLimit) {
+      //   if (!$scope.startNewGame) {
+      //     $('#newGameModal').modal('show');
+      //   } else {
+      //     game.startGame();
+      //   }
+      //   $scope.showFindUsersButton = false;
+      // } else if (game.players.length < game.playerMinLimit) {
+      //   $rootScope.alertMessage = 'The game requires a minimum of 3 players to be played!';
+      //   $('#game-alert').modal('show');
+      // }
     };
+
+    $scope.abandonGame = () => {
+      game.leaveGame();
+      $location.path('/');
+    };
+
+    $scope.getValidId = str => (str.replace(/[^\w-]/g, '-'));
+
+    // Catches changes to round to update when no players pick card
+    // (because game.state remains the same)
+    $scope.$watch('game.round', () => {
+      $scope.hasPickedCards = false;
+      $scope.showTable = false;
+      $scope.winningCardPicked = false;
+      $scope.makeAWishFact = makeAWishFacts.pop();
+      if (!makeAWishFacts.length) {
+        makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+      }
+      $scope.pickedCards = [];
+    });
+
+    // In case player doesn't pick a card in time, show the table
+    $scope.$watch('game.state', () => {
+      if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
+        $scope.showTable = true;
+      }
+      if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+        $('#cardModal').modal('show');
+      }
+      if (game.state === 'game dissolved') {
+        $('#cardModal').modal('hide');
+      }
+      if ($scope.isCzar() === false && game.state === 'czar pick card'
+        && game.state !== 'game dissolved'
+        && game.state !== 'awaiting players' && game.table.length === 0) {
+        $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
+      }
+      if (game.state !== 'czar pick card'
+        && game.state !== 'awaiting players'
+        && game.state !== 'game dissolve') {
+        $scope.czarHasDrawn = '';
+      }
+    });
+
+    $scope.$watch('game.gameID', () => {
+      if (game.gameID && game.state === 'awaiting players') {
+        if (!$scope.isCustomGame() && $location.search().game) {
+          // If the player didn't successfully enter the request room,
+          // reset the URL so they don't think they're in the requested room.
+          $location.search({});
+        } else if ($scope.isCustomGame() && !$location.search().game) {
+          // Once the game ID is set, update the URL if this is a game with friends,
+          // where the link is meant to be shared.
+          $location.search({ game: game.gameID });
+          if (!$scope.modalShown) {
+            setTimeout(() => {
+              const link = document.URL;
+              const txt = 'Give the following link to your friends so they can join your game: ';
+              $('#lobby-how-to-play').text(txt);
+              $('#oh-el').css({ textAlign: 'center', fontSize: '22px', background: 'white', color: 'black' }).text(link);
+            }, 200);
+            $scope.modalShown = true;
+          }
+        }
+      }
+    });
 
     // FIND USERS
     $scope.findUserPopup = () => {
@@ -191,11 +267,6 @@ angular.module('mean.system')
 
     $scope.hasBeenInvited = nameAndEmail => ($scope.invitedUsersList.includes(nameAndEmail));
 
-    $scope.abandonGame = () => {
-      game.leaveGame();
-      $location.path('/');
-    };
-
     $scope.shuffleCards = () => {
       // $('#cardModal').modal('show');
       const card = $('#card');
@@ -203,10 +274,8 @@ angular.module('mean.system')
       $timeout(() => {
         // console.log('move to $scope.startNextRound()');
         $scope.startNextRound();
-        // $('#closeModal').click();
         card.removeClass('animated flipOutX');
         $('#closeModal').click();
-        // $('#cardModal').modal('show');
       }, 500);
     };
 
@@ -217,71 +286,19 @@ angular.module('mean.system')
       }
     };
 
-    $scope.getValidId = str => (str.replace(/[^\w-]/g, '-'));
+      if ($scope.game.playerIndex === 0) {
+        region.getSelectedRegion().then((selectedRegion) => {
+          $scope.selectedRegion = selectedRegion;
+        });
+      }
 
-    // Catches changes to round to update when no players pick card
-    // (because game.state remains the same)
-    $scope.$watch('game.round', () => {
-      $scope.hasPickedCards = false;
-      $scope.showTable = false;
-      $scope.winningCardPicked = false;
-      $scope.makeAWishFact = makeAWishFacts.pop();
-      if (!makeAWishFacts.length) {
-        makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-      }
-      $scope.pickedCards = [];
-    });
-
-    // In case player doesn't pick a card in time, show the table
-    $scope.$watch('game.state', () => {
-      if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
-        $scope.showTable = true;
-      }
-      // if (game.state === 'czar left game' && game.state !== 'game dissolved'
-      //   && game.state !== 'awaiting players' && game.table.length === 0) {
-      //     $('#cardModal').modal('show');
-      // }
-      if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
-        $('#cardModal').modal('show');
-        // displayMessage('', '#card-modal');
-      }
-      if (game.state === 'game dissolved') {
-        $('#cardModal').modal('hide');
-      }
-      if ($scope.isCzar() === false && game.state === 'czar pick card'
-        && game.state !== 'game dissolved'
-        && game.state !== 'awaiting players' && game.table.length === 0) {
-        $scope.czarHasDrawn = 'Wait! Czar is drawing Card';
-      }
-      if (game.state !== 'czar pick card'
-        && game.state !== 'awaiting players'
-        && game.state !== 'game dissolve') {
-        $scope.czarHasDrawn = '';
-      }
-    });
-
-    $scope.$watch('game.gameID', () => {
-      if (game.gameID && game.state === 'awaiting players') {
-        if (!$scope.isCustomGame() && $location.search().game) {
-          // If the player didn't successfully enter the request room,
-          // reset the URL so they don't think they're in the requested room.
-          $location.search({});
-        } else if ($scope.isCustomGame() && !$location.search().game) {
-          // Once the game ID is set, update the URL if this is a game with friends,
-          // where the link is meant to be shared.
-          $location.search({ game: game.gameID });
-          if (!$scope.modalShown) {
-            setTimeout(() => {
-              const link = document.URL;
-              const txt = 'Give the following link to your friends so they can join your game: ';
-              $('#lobby-how-to-play').text(txt);
-              $('#oh-el').css({ textAlign: 'center', fontSize: '22px', background: 'white', color: 'black' }).text(link);
-            }, 200);
-            $scope.modalShown = true;
-          }
-        }
-      }
-    });
+    $scope.beginGame = () => {
+      game.setRegion($scope.selectedRegion).then(() => {
+        game.startGame();
+        console.log(`selected region is ${$scope.selectedRegion}`);
+      });
+      angular.element('#regionModal').modal('hide');
+    };
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       // console.log('joining custom game');

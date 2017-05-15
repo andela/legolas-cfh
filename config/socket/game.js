@@ -5,18 +5,18 @@ var answers = require('../../app/controllers/answers');
 // var questions = require(__dirname + '/../../app/controllers/questions.js');
 // var answers = require(__dirname + '/../../app/controllers/answers.js');
 var guestNames = [
-  "Disco Potato",
-  "Silver Blister",
-  "Insulated Mustard",
-  "Funeral Flapjack",
-  "Toenail",
-  "Urgent Drip",
-  "Raging Bagel",
-  "Aggressive Pie",
-  "Loving Spoon",
-  "Swollen Node",
-  "The Spleen",
-  "Dingle Dangle"
+  'Disco Potato',
+  'Silver Blister',
+  'Insulated Mustard',
+  'Funeral Flapjack',
+  'Toenail',
+  'Urgent Drip',
+  'Raging Bagel',
+  'Aggressive Pie',
+  'Loving Spoon',
+  'Swollen Node',
+  'The Spleen',
+  'Dingle Dangle'
 ];
 
 function Game(gameID, io) {
@@ -41,6 +41,7 @@ function Game(gameID, io) {
     stateJudging: 16,
     stateResults: 6
   };
+  this.region = null;
   // setTimeout ID that triggers the czar judging state
   // Used to automatically run czar judging if players don't pick before time limit
   // Gets cleared if players finish picking before time limit.
@@ -118,20 +119,20 @@ Game.prototype.prepareGame = function() {
       timeLimits: this.timeLimits
     });
 
-  var self = this;
+  const self = this;
   async.parallel([
     this.getQuestions,
     this.getAnswers
-    ],
-    function(err, results){
-      if (err) {
-        console.log(err);
-      }
-      self.questions = results[0];
-      self.answers = results[1];
+  ],
+  function(err, results) {
+    if (err) {
+      console.log(err);
+    }
+    self.questions = results[0];
+    self.answers = results[1];
 
-      self.startGame();
-    });
+    self.startGame();
+  });
 };
 
 Game.prototype.startGame = function() {
@@ -248,16 +249,16 @@ Game.prototype.stateDissolveGame = function() {
   this.sendUpdate();
 };
 
-Game.prototype.getQuestions = function(cb) {
-  questions.allQuestionsForGame(function(data){
-    cb(null,data);
-  });
+Game.prototype.getQuestions = (cb) => {
+  questions.allQuestionsForGame((data) => {
+    cb(null, data);
+  }, this.region.code);
 };
 
-Game.prototype.getAnswers = function(cb) {
-  answers.allAnswersForGame(function(data){
-    cb(null,data);
-  });
+Game.prototype.getAnswers = (cb) => {
+  answers.allAnswersForGame((data) => {
+    cb(null, data);
+  }, this.region.code);
 };
 
 Game.prototype.shuffleCards = (cards) => {
@@ -448,6 +449,11 @@ Game.prototype.killGame = function() {
   clearTimeout(this.judgingTimeout);
 };
 
+Game.prototype.setRegion = (region) => {
+  this.region = region;
+  console.log(`Region for game set to ${this.region}`);
+};
+
 Game.prototype.startNextRound = (self) => {
   if (self.state === 'czar pick card') {
     self.stateChoosing(self);
@@ -457,9 +463,6 @@ Game.prototype.startNextRound = (self) => {
 };
 
 Game.prototype.changeCzar = (self) => {
-  // if (this.state === 'czar left game') {
-    
-  // }
   self.state = 'czar pick card';
   console.log(self.state, 'czar picked');
   self.table = [];

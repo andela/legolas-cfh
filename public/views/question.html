@@ -6,8 +6,8 @@
     <div class="modal-content">
       
       <div class="modal-header">
-        <h5 class="modal-title" id="availableUsers">Invite Other Players</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" id="availableUsers">Invite Other Players</h5>
       </div>
       
       <div class="modal-body">
@@ -65,80 +65,66 @@
     </div>
   </div>
 </div>
+
 <!--
 MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
 -->
-<div class="modal fade" id="newGameModal" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Cards for Humanity</h4>
-        </div>
-        <div class="modal-body">
-          <p class="modal-text" >Are you sure you want to start a new game?</p>
-           <p class = "modal-text">Clicking the start button would start a new game session.</p>
-        </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; startGame();">start</button>
-        </div>
+<div class="modal fade" id="regionModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Cards for Humanity</h4>
       </div>
-      
+      <div class="modal-body">
+        
+        <div class="padding-10">
+          <h6>Kindly select your region:</h6>
+        </div>
+        
+        <div class="row padding-10">
+          <div class="form-group center width-65">
+            <select id="region-select" class="form-control" ng-options="region as region.label for region in region.regions track by region.code" ng-model="selectedRegion"></select>
+          </div>
+        </div>
+
+        <p class="modal-text" >Are you sure you want to start a new game?</p>
+        <p class = "modal-text">Clicking the start button would start a new game session.</p>
+      </div>
+      <div class="modal-footer center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; beginGame();">Start</button>
+      </div>
+      <!--<div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; startGame();">start</button>
+      </div>-->
     </div>
+    
   </div>
+</div>
 
 <!--
   THE REST OF THE GAME
 -->
-<!--<div id="question-container-inner">
-  <div class="card longBlack">
-    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
 
+<div class="demo-card-wide mdl-card mdl-shadow--2dp" id="question-container-inner">
+  <div class="mdl-card__title card">
+    <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'czar pick card' || game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
     <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+    <div id="czarHasDrawn" ng-if="!isCzar() && game.state !== 'awaiting players'" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{czarHasDrawn}}</div>
+    <div ng-show="!isCzar() && game.state !== 'awaiting players'"> <center> {{ czarHasDrawn }} </center></div>
 
-    <br><p ng-show="!isCzar() && game.state !== 'awaiting players'"> <center> {{ czarHasDrawn }} </center></p>
     
     <div id="startGame" ng-show="game.state === 'awaiting players'">
-
-      <div class="row">
-        <div id="player-count-container" class="col-md-4">
-          <h2 id="player-count">{{game.players.length}} / {{game.playerMaxLimit}} </h2>
-          <h4 id="the-word-players"> Players </h4>
-        </div>
-
-        <div class="col-md-4">
-          <div class="row">
-            <h5 id="finding-players" >
-              Finding players
-            </h5>
-          </div>
-          <div id="loading-container" class="row">
-            <div id="loading-gif" class="col-md-4 loading-gif col-md-offset-2">
-              <img ng-src="../img/loaders/loader.gif" src="../img/loaders/loader.gif">
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="row">
-            <div class="col-md-12 col-md-offset-2">
-              <a href="javascript:void(0)" id="start-game-button" ng-click="startGame()" class="btn btn-raised btn-info">
-                Start Game
-                <div class="ripple-container"></div>
-              </a>
-            </div>
-          </div>
-          <div class="clearfix"><br/></div>
-          <div class="row">
-            <div class="col-md-12 col-md-offset-2">
-              <a href="javascript:void(0)" ng-click="findUserPopup()" class="btn btn-raised btn-info">
-                Find Users
-                <div class="ripple-container"></div>
-              </a>
-            </div>
-          </div>
-        </div>
+      <div id="finding-players">Finding Players</div>
+      <div id="player-count-container">
+        <div id="player-count">{{game.players.length}} / {{game.playerMaxLimit}} </div>
+        <div id="the-word-players"> Players </div>
       </div>
+      <div id="loading-container">
+        <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
+      </div>
+
     </div>-->
 
      <!--Game Over Stuff -->
@@ -173,6 +159,7 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
     </div>
+
     <!-- Game Over Stuff -->
     <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">

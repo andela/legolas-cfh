@@ -435,14 +435,15 @@ body{
 }
 
 .invite-list {
-  background: #d3d3d3;
-  border-radius: 2px 2px 4px 4px;
+//   background: #d3d3d3;
+//   border-radius: 2px 2px 4px 4px;
   overflow: scroll;
   text-align: left;
   width: 100%;
 }
 .invite-list .mdl-card {
   width: 100%;
+  left: 0;
 }
 
 .no-user {
@@ -454,6 +455,10 @@ body{
 #main-container{
     height: 100%;
     #app-container {
+
+        // height: 100%;
+        // max-width: 1200px;
+
         margin: 0px auto;
         position: relative;
 
@@ -497,7 +502,7 @@ body{
 
             #abandon-game-button{
                 display: inline-block;
-                float:right;
+                // float:right;
                 border-radius: 8px;
                 -moz-border-radius: 8px;
                 -webkit-border-radius: 8px;
@@ -632,6 +637,7 @@ body{
 
                         img {
                             width: 58%;
+
                             float: left;
                             @include br;
                             min-width: 40px;
@@ -658,7 +664,6 @@ body{
                         bottom: 20px;
                         left: 45px;
                         width: 76%;
-                        
 
                         @include tablet-portrait-only{
                             left: 3px;
@@ -744,8 +749,6 @@ body{
                     bottom: -8px;
                     left: -44px;
                     text-align: center;
-                    @include br-bottom;
-                    
 
                     @include mobile-only{
                         overflow: auto;
