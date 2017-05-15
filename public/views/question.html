@@ -6,8 +6,8 @@
     <div class="modal-content">
       
       <div class="modal-header">
-        <h5 class="modal-title" id="availableUsers">Invite Other Players</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h5 class="modal-title" id="availableUsers">Invite Other Players</h5>
       </div>
       
       <div class="modal-body">
@@ -69,20 +69,35 @@
 <!--
 MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
 -->
-<div class="modal fade" id="newGameModal" role="dialog">
+<div class="modal fade" id="regionModal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Cards for Humanity</h4>
       </div>
       <div class="modal-body">
+        
+        <div class="padding-10">
+          <h6>Kindly select your region:</h6>
+        </div>
+        
+        <div class="row padding-10">
+          <div class="form-group center width-65">
+            <select id="region-select" class="form-control" ng-options="region as region.label for region in region.regions track by region.code" ng-model="selectedRegion"></select>
+          </div>
+        </div>
+
         <p class="modal-text" >Are you sure you want to start a new game?</p>
-          <p class = "modal-text">Clicking the start button would start a new game session.</p>
+        <p class = "modal-text">Clicking the start button would start a new game session.</p>
       </div>
-      <div class="modal-footer">
+      <div class="modal-footer center">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; beginGame();">Start</button>
+      </div>
+      <!--<div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">close</button>
         <button type="button" class="btn btn-primary" data-dismiss="modal" style=" background: #ed7d1a;" ng-click="startNewGame = true; startGame();">start</button>
-      </div>
+      </div>-->
     </div>
     
   </div>
@@ -96,7 +111,7 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'czar pick card' || game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
     <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
     <div id="czarHasDrawn" ng-if="!isCzar() && game.state !== 'awaiting players'" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{czarHasDrawn}}</div>
-    <br><p ng-show="!isCzar() && game.state !== 'awaiting players'"> <center> {{ czarHasDrawn }} </center></p>
+    <div ng-show="!isCzar() && game.state !== 'awaiting players'"> <center> {{ czarHasDrawn }} </center></div>
     
     <div id="startGame" ng-show="game.state === 'awaiting players'">
       <div id="finding-players">Finding Players</div>

@@ -435,14 +435,15 @@ body{
 }
 
 .invite-list {
-  background: #d3d3d3;
-  border-radius: 2px 2px 4px 4px;
+//   background: #d3d3d3;
+//   border-radius: 2px 2px 4px 4px;
   overflow: scroll;
   text-align: left;
   width: 100%;
 }
 .invite-list .mdl-card {
   width: 100%;
+  left: 0;
 }
 
 .no-user {
@@ -1179,7 +1180,7 @@ body{
                     right: 10%;
                     width: 80%;
                     height: 50px;
-                    // margin-top: 5%;
+                    margin-top: 10%;
 
                     #smaller-text{
                         font-size: 18px;
@@ -1192,9 +1193,9 @@ body{
                     color: black;
 
                     position: absolute;
-                    bottom: 10%;
-                    margin: 0 2%;
-                    // margin: 170px 2%;
+                    top: 10%;
+                    // margin: 0 2%;
+                    margin: 170px 2%;
                     width: 96%;
                     padding: 3px;
                     text-align: left;
