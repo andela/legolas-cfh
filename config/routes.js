@@ -105,13 +105,14 @@ module.exports = function (app, passport, auth) {
 
   // api endpoint for game wins
   app.get('/api/leaderboard', users.leaderBoard);
-  //api endpoint for donations
-  app.get('/api/donations', users.donations)
+  // api endpoint for donations
+  app.get('/api/donations', users.donations);
 
   // Home route
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
+  app.get('/gametour', index.gameTour);
   // api end point for view game history
 };
 
