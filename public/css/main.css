@@ -8,7 +8,9 @@ body {
     font-style: normal;
 		font-weight: 400;
 }
-
+body.dark-bg {
+  background: #2a2d34;
+}
 
 /*---------------------------------------
     Typorgraphy              
@@ -144,6 +146,7 @@ footer {
 
 .custom-navbar .nav li a {
     color: #ddd;
+    cursor: pointer;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.6px;
@@ -325,7 +328,7 @@ a.btn-donate.big:hover{
     Video section              
 -----------------------------------------*/
 #charity{
-    background: url('../img/video-bg.jpg') 50% 0 repeat-y fixed;
+    background: url('../img/home-bg-slider-img2.jpg') 50% 0 repeat-y fixed;
     -webkit-background-size: cover;
     background-size: cover;
     background-position: center center;
