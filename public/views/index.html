@@ -13,18 +13,17 @@
 						<span class="icon icon-bar"></span>
 						<span class="icon icon-bar"></span>
 					</button>
-					<a href="#" class="navbar-brand"><img src="img/logo.png" width="320" height="105" ></a>
+					<a href="#!" class="navbar-brand"><img src="img/logo.png" width="320" height="105" ></a>
 				</div>
 
 				<div class="collapse navbar-collapse">
 
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="#" onClick="scroll(0,0)">Home</a></li>
-						<li><a href="#" onClick="scroll(0,600);">About</a></li>
-						<li><a href="#" onClick="scroll(0,1150);">How to Play</a></li>
-						<li><a href="#!/dashboard" ng-hide="showOptions">Dashboard</a>
-						<li><a href="#" onClick="scroll(0,2491);">Charity</a></li>
-						<li><a href="#" onClick="scroll(0,3221);">Warning</a></li>
+						<li><a onClick="scroll(0,0);">Home</a></li>
+						<li><a onClick="scroll(0,700);">About</a></li>
+						<li><a onClick="scroll(0,1350);">How to Play</a></li>
+						<li><a onClick="scroll(0,2891);">Charity</a></li>
+						<li><a href="#!/dashboard" ng-hide="showOptions">Dashboard</a></li>
 						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
 						<li ng-show="showOptions"><a href="#!/signup">Signup</a></li>
 						<li ng-hide="showOptions"><a href="/signout" ng-click="signout()">Sign Out</a></li>
@@ -89,7 +88,6 @@
 
 					<div>
 						<div class="text-center">
-							<a href="#!/gametour"><button class="btn btn-lg btn-secondary smoothScroll">How to Play</button></a>
 							<h2>HOW TO PLAY (INSTRUCTIONS)</h2>
 							<p class="lead">1. Each player begins with, and will always have, 10 white answer cards.</p>
 							<br><br>
@@ -120,6 +118,13 @@
 					</div>
 
 				</div>
+				<div class="row">
+					<div class="clearfix"></div>
+						<p class="lead tour-text well">
+							First time player? <a href="#!/gametour" class="btn btn-tour btn-secondary smoothScroll">Take A Tour!</a>
+						</p>
+				</div>
+
 			</div>
 		</section>
 

@@ -67,8 +67,7 @@ html, body, .main-container, .cont, #first-section, #inner-container {
 html {
   background-attachment: fixed;
   background-repeat: no-repeat;
-  position: relative;
-  background: #2a2d34; }
+  position: relative; }
   @media (max-width: 520px) {
     html {
       margin-top: 0px; } }
@@ -331,13 +330,7 @@ body {
           position: relative;
           bottom: -8px;
           left: -44px;
-          text-align: center;
-          -webkit-border-bottom-right-radius: 8px;
-          -webkit-border-bottom-left-radius: 8px;
-          -moz-border-radius-bottomright: 8px;
-          -moz-border-radius-bottomleft: 8px;
-          border-bottom-right-radius: 8px;
-          border-bottom-left-radius: 8px; }
+          text-align: center; }
           @media (max-width: 520px) {
             #main-container #app-container #social-bar-container #player-container #czar-container {
               overflow: auto; } }
