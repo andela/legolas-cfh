@@ -398,7 +398,6 @@ html{
     background-attachment: fixed;
     background-repeat: no-repeat;
     position: relative;
-    background: #2a2d34;
 
     @include mobile-only{
         //margin: 3px;
@@ -455,8 +454,10 @@ body{
 #main-container{
     height: 100%;
     #app-container {
+
         // height: 100%;
         // max-width: 1200px;
+
         margin: 0px auto;
         position: relative;
 
@@ -635,7 +636,7 @@ body{
 
                         img {
                             width: 58%;
-                            // height: 140%;
+
                             float: left;
                             @include br;
                             min-width: 40px;
@@ -662,7 +663,6 @@ body{
                         bottom: 20px;
                         left: 45px;
                         width: 76%;
-                        // overflow: hidden;
 
                         @include tablet-portrait-only{
                             left: 3px;
@@ -722,7 +722,7 @@ body{
                         top: -10px;
                         left: 130px;
                         width: 26px;
-                        
+
                         @include tablet-portrait-only{
                             margin-top: 1px;
                             margin-left: 5px;
@@ -748,10 +748,6 @@ body{
                     bottom: -8px;
                     left: -44px;
                     text-align: center;
-                    // width: 100%;
-                    @include br-bottom;
-                    // background: black;
-                    // opacity:0.4;
 
                     @include mobile-only{
                         overflow: auto;
@@ -759,7 +755,6 @@ body{
 
                     #the-czar{
                         color: #000;
-                        // font-weight: bold;
                         font-size: 13px;
 
                         @include mobile-only{
@@ -1194,7 +1189,6 @@ body{
 
                     position: absolute;
                     top: 10%;
-                    // margin: 0 2%;
                     margin: 170px 2%;
                     width: 96%;
                     padding: 3px;

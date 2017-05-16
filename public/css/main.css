@@ -9,6 +9,9 @@ body {
 		font-weight: 400;
 }
 
+body.dark-bg {
+  background: #2a2d34;
+}
 
 /*---------------------------------------
     Typorgraphy              
@@ -90,8 +93,8 @@ a {
 #leaderboard,
 #warning,
 #loginform {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
 }
 
 #whatiscfh,
@@ -144,6 +147,7 @@ footer {
 
 .custom-navbar .nav li a {
     color: #ddd;
+    cursor: pointer;
     font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.6px;
@@ -181,28 +185,40 @@ footer {
     border-color: transparent;
 }
 
-.custom-navbar .nav li a.btn-donate, a.btn-donate.big{
-    background: #ed7d1a;
-    color: white;
-    border-color: transparent;
-    line-height: 10px;
-    border-radius: 0;
-    margin-top: 15px;
-    display: inline-block;
-    width: 115px;
-    height: 42px;
-    -webkit-transition: all 0.5s;
-    -moz-transition: all 0.5s;
-    -ms-transition: all 0.5s;
-    -o-transition: all 0.5s;
-    transition: all 0.5s;
+.custom-navbar .nav li a.btn-donate, a.btn-donate.big, .btn-tour {
+  background: #ed7d1a;
+  color: white;
+  border-color: transparent;
+  line-height: 10px;
+  border-radius: 0;
+  margin-top: 15px;
+  display: inline-block;
+  width: 115px;
+  height: 42px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -ms-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
-a.btn-donate.big{
-    width: 230px;
-    height: 60px;
-    font-size: 24px;
-    line-height: 50px;
+a.btn-donate.big {
+  width: 230px;
+  height: 60px;
+  font-size: 24px;
+  line-height: 50px;
+}
+.btn-tour {
+  margin-top: 0px;
+  margin-left: 15px;
+  padding-top: 20px;
+  height: 50px;
+  font-size: 22px;
+  width: 160px;
+}
+
+.tour-text {
+  margin-top: 40px;
 }
 
 .custom-navbar .nav li a.btn-donate:hover{
@@ -324,11 +340,11 @@ a.btn-donate.big:hover{
 /*---------------------------------------
     Video section              
 -----------------------------------------*/
-#charity{
-    background: url('../img/video-bg.jpg') 50% 0 repeat-y fixed;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center center;
+#charity {
+  background: url('../img/home-bg-slider-img2.jpg') 50% 0 repeat-y fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
 }
 
 #charity iframe {

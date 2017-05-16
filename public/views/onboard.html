@@ -1,0 +1,242 @@
+<div id="app-container" ng-controller="GameTourController">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+     
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title"><a href="#!"><img src="img/logo.png" width="240" height="78" ></a></span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">Donate</a>
+          <span class="mdl-navigation__link" href="" id="tweet-container">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
+          </span>
+          <a class="mdl-navigation__link" id='abandon-game-button'>Abandon Game</a>
+        </nav>
+      </div>
+    </header>
+    
+    <div id="gameplay-container">
+      <div id="upper-gameplay-container">
+        <div id="menu-timeremaining-container">
+          <div id="menu-container" class="col-md-4">
+            <span id="menu-button">Menu</span>
+          </div>
+          <div id="timer-container" class="col-md-4">
+            <div class="demo-card-event mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title mdl-card--expand">
+                <div id="time">11</div>
+              </div>
+              <div class="mdl-card__actions">
+                <span id="timer-status-round">Time Remaining</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Time remaining container-->
+
+        <div id="question-container-outer">
+          <div class="demo-card-wide mdl-card mdl-shadow--2dp" class="col-md-3" id="question-container-inner">
+            <div class="mdl-card__title card">
+              <!--<span ng-show="awaiting players"></span>-->
+              <!--<span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'czar pick card' || game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'" class="ng-binding" style="display: none;"></span>-->
+              <!-- ngIf: game.notification -->
+              <!-- ngIf: !isCzar() && game.state !== 'awaiting players' -->
+              <!--<div style="display: show;"> <center>Awaiting Players</center></div>-->
+              <div id="startGame">
+                <div id="finding-players">Finding Players</div>
+                <div id="player-count-container">
+                  <div id="player-count">1 / 12 </div>
+                  <div id="the-word-players"> Players </div>
+                </div>
+                <div id="loading-container">
+                  <div id="loading-gif"><img src="../img/loader.gif"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mdl-card__actions mdl-card--border">
+              <button class="mdl-button mdl-js-button blue mdl-button--raised mdl-js-ripple-effect" id="invite-player">
+                Find Users
+              </button> 
+              <div id="start-game-container">
+                <button class="mdl-button mdl-js-button orange mdl-button--raised mdl-js-ripple-effect" id="start-game">
+                  Start Game
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="cards-container">
+        <div id="social-bar-container">
+          <!--<player> List items with avatar and action -->
+          <div class="mdl-list">
+            <!-- ngRepeat: player in game.players -->
+            <div id="player-container" class="mdl-list__item mdl-list__item--two-line player-container mdl-button--raised">
+              <div id="above-czar-container" class="mdl-list__item-primary-content ">
+                <div id="avatar_" class="d-avatar">
+                  <img ng-src="/img/chosen/N04.png" src="/img/chosen/N04.png">
+                </div>
+                <div id="player-container-inner">
+                  <div id="player-name"><span>George Bush</span></div>
+                  <div id="player-score" class="mdl-list__item-sub-title"><span>2/5</span></div>
+                </div>
+              </div>
+            </div>
+            <div id="player-container" class="mdl-list__item mdl-list__item--two-line player-container mdl-button--raised">
+              <div id="above-czar-container" class="mdl-list__item-primary-content ">
+                <div id="avatar_" class="d-avatar">
+                  <img ng-src="/img/chosen/N04.png" src="/img/chosen/N04.png">
+                </div>
+                <div id="player-container-inner">
+                  <div id="player-name"><span>Bashar Al Assad</span></div>
+                  <div id="player-score" class="mdl-list__item-sub-title"><span>1/5</span></div>
+                  <div id="player-star">
+                    <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons player-star">star</i></a>
+                  </div>
+                </div>
+              </div>
+              <div id="czar-container" class="mdl-list__item-secondary-content">
+                <span id="the-czar" class="mdl-list__item-secondary-info">CZAR</span>
+              </div>
+            </div>
+            <div id="player-container" class="mdl-list__item mdl-list__item--two-line player-container mdl-button--raised">
+              <div id="above-czar-container" class="mdl-list__item-primary-content ">
+                <div id="avatar_" class="d-avatar">
+                  <span>
+                    <img ng-src="img/king.png" id="king" src="img/king.png">
+                  </span>
+                  <img ng-src="/img/chosen/N04.png" src="/img/chosen/N04.png">
+                </div>
+                <div id="player-container-inner">
+                  <div id="player-name"><span>Donald Trump</span></div>
+                  <div id="player-score" class="mdl-list__item-sub-title"><span>3/5</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--</player>-->
+        </div>
+        <div id="cards" class="hand">
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">A middle-aged man on roller skates.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Dying of dysentery.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Coat hanger abortions.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Being rich.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Team-building exercises.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Lactation.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Jewish fraternities.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Dying.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Two midgets shitting into a bucket.</span>
+          </div>
+          <div class="game-cards mdl-card smallest" id="answers" style="cursor: pointer;">
+            <span class="card-text">Child beauty pageants.</span>
+          </div>
+        </div>
+      </div>
+
+      <div id="game-end-container">
+        <div id="inner-info-exit">
+          <div class="game-end-answer-text">
+            <h2>What would you like to do now?</h2>
+            You might consider donating to charity to atone for the horrifying answers you've submitted. Donating will also place a lovely crown on your avatar's head.
+          </div>
+          <div class="game-end-answer-text" id="cards">
+            <h2>What would you like to do now?</h2>
+            Help yourself to another game or help a child in need? Donating will also place a lovely crown on your avatar's head.
+          </div>
+          <div id="inner-text-container">
+            <a href="/#!/app">
+              <div id="join-new-game">
+                Join a New Game
+              </div>
+            </a>
+            <a href="/">
+              <div id="exit-match">
+                Return to Lobby
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div id="charity-widget-container">
+          <a id="crowdriseStaticLink-fundraiser-121142" title="Fundraising Websites on Crowdrise" >Fundraising Websites - Crowdrise</a>
+          <div class="ymmyclsgqcctzgkq" id="crDonateWidget_cfhio_cards4humanity" style="width: 300px;">
+            <div class="crDonateTriangle">
+              <a>
+                <img src="https://s3-us-west-1.amazonaws.com/cr-rackspace-cloud-files-backups/Prod_Static/cr_widget_give_v2.png">
+              </a>
+            </div>
+            <div class="crDonateWidgetOuter">
+              <div class="crDonateWidget">
+                <h4>— Make an Impact —</h4>
+                <div class="crDonated">
+                  $681
+                  <div class="crDonatedLabel">Amount Raised</div>
+                </div>
+                <div class="crImageAndTitleOuter">
+                  <div class="crImageAndTitle">
+                    <img src="https://www.crowdrise.com/media/medium/crowdrise_image-5260825b569ed.jpg" width="195" height="195">
+                    <div><a target="_blank">Cards For Humanity</a></div>
+                  </div>
+                  <img src="https://s3-us-west-1.amazonaws.com/cr-rackspace-cloud-files-backups/Prod_Static/hp-profile-shadow.png" class="CRShadowImage">
+                </div>
+                <div class="gradientButton">
+                  <a><span class="donateNow">Donate Now</span></a>
+                </div>
+                <div class="startFundraiser">
+                  <strong>or</strong>
+                  <a>Click here</a> to start a fundraiser
+                </div>
+                <div class="crLogo">
+                  <a>
+                    <img src="https://s3-us-west-1.amazonaws.com/cr-rackspace-cloud-files-backups/Prod_Static/cr_widget_logo_2013.png">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="czar-blank-container">
+        <div id="czar-blank-inner">
+          You are the Card Czar. <br>
+          <span id="smaller-text">Players are choosing their answers. Prepare to select a winner.</span>
+        </div>
+        <div id="charity-fact-container">
+          <div id="charity-fact-tagline">Did you know?</div>
+
+          <div id="charity-fact">
+            Every wish experience is driven by the wish kid’s interests, creativity and personality.
+          </div>
+
+          <div id="charity-logo-container">
+            <img src="/img/make-a-wish-logo.png">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
