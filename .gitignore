@@ -3,9 +3,5 @@ public/lib
 .sass-cache/
 .DS_store
 c4h_keys.txt
-<<<<<<< HEAD
-=======
 .env
 bower_components
->>>>>>> d78f4a21c08fde430179c32a722db96147d81326
-
