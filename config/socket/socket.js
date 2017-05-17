@@ -100,10 +100,6 @@ module.exports = (io) => {
       exitGame(socket);
     });
 
-    // socket.on('drawCard', () => {
-    //   allGames[socket.gameID].drawCard(allGames[socket.gameID]);
-    // });
-
     socket.on('czarSelectCard', () => {
       allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
     });
@@ -129,7 +125,7 @@ module.exports = (io) => {
       }).exec((err, user) => {
         if (err) {
           console.log('err', err);
-          return err; // Hopefully this never happens.
+          return err;
         }
         if (!user) {
           // If the user's ID isn't found (rare)
@@ -281,4 +277,4 @@ module.exports = (io) => {
     socket.leave(socket.gameID);
   };
 };
-// end
+
