@@ -14,6 +14,7 @@
         <!--<div class="czar-star">-->
         <div ng-show="isPlayer($index)" id="player-star">
           <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons player-star">star</i></a>
+          <span ng-if="!isPlayerSet && isPlayer($index)">{{setPlayer(player.avatar, player.username)}}</span>
         </div>
       </div>
     </div>

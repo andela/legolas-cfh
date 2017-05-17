@@ -10,7 +10,8 @@ var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz';
 
 module.exports = (io) => {
 
-  // var game;
+  var game;
+  let chatMessages = [];
   var allGames = {};
   var allPlayers = {};
   var gamesNeedingPlayers = [];
@@ -20,8 +21,17 @@ module.exports = (io) => {
     console.log(socket.id +  ' Connected');
     socket.emit('id', {id: socket.id});
 
-    socket.on('pickCards', function(data) {
-      console.log(socket.id,"picked",data);
+    // initialize chat when a new socket is connected
+    socket.emit('initializeChat', chatMessages);
+
+    // send recieved chat message to all connected sockets
+    socket.on('chat message', (chat) => {
+      game = allGames[socket.gameID];
+      game.players.forEach(player => player.socket.emit('chat message', chat));
+    });
+
+    socket.on('pickCards', (data) => {
+      console.log(socket.id, 'picked', data);
       if (allGames[socket.gameID]) {
         allGames[socket.gameID].pickCards(data.cards, socket.id);
       } else {
@@ -29,34 +39,34 @@ module.exports = (io) => {
       }
     });
 
-    socket.on('pickWinning', function(data) {
+    socket.on('pickWinning', (data) => {
       if (allGames[socket.gameID]) {
-        allGames[socket.gameID].pickWinning(data.card,socket.id);
+        allGames[socket.gameID].pickWinning(data.card, socket.id);
       } else {
-        console.log('Received pickWinning from',socket.id, 'but game does not appear to exist!');
+        console.log('Received pickWinning from', socket.id, 'but game does not appear to exist!');
       }
     });
 
-    socket.on('joinGame', function(data) {
+    socket.on('joinGame', (data) => {
       if (!allPlayers[socket.id]) {
-        joinGame(socket,data);
+        joinGame(socket, data);
       }
     });
 
-    socket.on('joinNewGame', function(data) {
+    socket.on('joinNewGame', (data) => {
       exitGame(socket);
-      joinGame(socket,data);
+      joinGame(socket, data);
     });
 
-    socket.on('startGame', function() {
+    socket.on('startGame', () => {
       if (allGames[socket.gameID]) {
-        var thisGame = allGames[socket.gameID];
-        console.log('comparing',thisGame.players[0].socket.id,'with',socket.id);
+        const thisGame = allGames[socket.gameID];
+        console.log('comparing', thisGame.players[0].socket.id, 'with', socket.id);
         if (thisGame.players.length >= thisGame.playerMinLimit) {
           // Remove this game from gamesNeedingPlayers so new players can't join it.
-          gamesNeedingPlayers.forEach(function(game,index) {
-            if (game.gameID === socket.gameID) {
-              return gamesNeedingPlayers.splice(index,1);
+          gamesNeedingPlayers.forEach((gameSession, index) => {
+            if (gameSession.gameID === socket.gameID) {
+              return gamesNeedingPlayers.splice(index, 1);
             }
           });
           thisGame.prepareGame();
@@ -65,13 +75,18 @@ module.exports = (io) => {
       }
     });
 
-    socket.on('leaveGame', function() {
+    socket.on('leaveGame', () => {
       exitGame(socket);
     });
 
-    socket.on('disconnect', function(){
+    socket.on('disconnect', () => {
+      console.log('Rooms on Disconnect ', io.sockets.adapter.rooms);
       exitGame(socket);
     });
+
+    // socket.on('drawCard', () => {
+    //   allGames[socket.gameID].drawCard(allGames[socket.gameID]);
+    // });
 
     socket.on('czarSelectCard', () => {
       allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
@@ -240,9 +255,14 @@ module.exports = (io) => {
         }
         game.killGame();
         delete allGames[socket.gameID];
+        chatMessages = [];
+      }
+       if (game.players.length === 1) {
+        chatMessages = [];
+        game.sendUpdate();
       }
     }
     socket.leave(socket.gameID);
   };
-
 };
+// end
