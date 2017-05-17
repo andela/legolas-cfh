@@ -26,9 +26,9 @@
 }
 .demo-card-event.mdl-card {
   margin-top: 60px;
-  width: 214px;
-  height: 201px;
-  background: #f68c41;
+  /*width: 214px;*/
+  height: 200px;
+  background: transparent;
 }
 .demo-card-event > .mdl-card__title {
   align-items: flex-start;
@@ -110,10 +110,10 @@
     position: relative;
     left: -5%;
 }
-.d-avatar{
+/*.d-avatar{
     margin-top: -11px;
     margin-left: -4px;
-}
+}*/
 .czar-star{
     background: grey;
 }
