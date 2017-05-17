@@ -15,7 +15,7 @@ body.dark-bg {
 
 #main-bod{
   max-width: 1400px;
-  margin: 30px auto;
+  margin: 0 auto;
   background-color: white;
 }
 
@@ -188,6 +188,7 @@ footer {
 }
 
 
+
 /*---------------------------------------
     Navigation Links section              
 -----------------------------------------*/
@@ -244,7 +245,16 @@ footer {
     border-color: transparent;
 }
 
-.custom-navbar .nav li a.btn-donate, a.btn-donate.big, .btn-tour {
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  color: #333;
+}
+
+
+.mdl-navigation__link:hover {
+    color: #ed7d1a;
+}
+
+a.btn-donate, a.btn-donate.big, .btn-tour {
   background: #ed7d1a;
   color: white;
   border-color: transparent;
@@ -259,6 +269,14 @@ footer {
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+
+a.btn-donate {
+    line-height: 42px !important;
+    width: 120px;
+    margin-top: -3px;
+    padding: 0 10px !important;
+    color: white !important;
 }
 
 a.btn-donate.big {
@@ -788,6 +806,12 @@ footer {
   border-color: white;
 }
 
+@media screen and (max-width: 389px) {
+  .playing-card {
+    width: 75% !important;
+  }
+}
+
 .text-white {
   color: white;
 }
@@ -879,8 +903,9 @@ footer {
   border-top: 1px solid black;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 768px) {
   #charity-widget-container {
     margin-top: -120px;
   }
 }
+
