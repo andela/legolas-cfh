@@ -642,3 +642,16 @@ footer {
   color:#3e7293;
   font-size: 17px;
 }
+.leaderbod {
+  font-size: 20px;
+  font-weight: 35px;
+  color: white ;
+}
+.leaderhead{
+  margin-bottom: 20px;
+  margin-top: 15px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 25px;
+  font-weight: 35px;
+  color: white ;
+}
