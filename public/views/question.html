@@ -2,7 +2,7 @@
   USER SEARCH AND INVITE MODAL POPUP
 -->
 <div class="modal fade" tabindex="-1" role="dialog" id="findUser">
-  <div class="modal-dialog userSearch">
+  <div class="modal-dialog userSearch" ng-controller="InviteController">
     <div class="modal-content">
       
       <div class="modal-header">
@@ -30,7 +30,14 @@
                 </div>
                 <span>{{ result.name }}</span>
               </span>
-              <button id="{{ getValidId(result.email) }}" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
+              <button id="{{ 'add'+getValidId(result.email) }}" ng-hide="isFriend(result)" class="mdl-list__item-secondary-action btn btn-primary" ng-click="addFriend(result)" title="">
+                Add Friend!
+              </button>
+              <button id="{{ 'remove'+getValidId(result.email) }}" ng-show="isFriend(result)" class="mdl-list__item-secondary-action btn btn-primary" ng-click="removeFriend(result)" title="">
+                Remove Friend!
+              </button>
+              &nbsp;
+              <button id="{{ 'send'+getValidId(result.email) }}" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
                 Send Invite!
               </button>
             </div>
