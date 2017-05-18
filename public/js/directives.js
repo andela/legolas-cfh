@@ -275,13 +275,13 @@ angular.module('mean.directives', [])
   <div class= "homeleader" ng-show="leader.length>0" >
     <div class="row">
       <div class="col-md-4 text-center" ><p class="leaderhead">Rank</p> </div>
-      <div class="col-md-4 " ><p class="leaderhead">Name</p></div>
+      <div class="col-md-4 text-center" ><p class="leaderhead">Name</p></div>
       <div class="col-md-4 text-center" ><p class="leaderhead">Games Won</p> </div>
     </div>
     <div class="row" ng-repeat="player in leader track by $index">
       <div ng-if="$index <6">
         <div class="col-md-4 text-center"><p class="leaderbod center-block">{{$index + 1}}</p> </div>
-        <div class="col-md-4  "><p class="leaderbod">{{player.name}}</p></div>
+        <div class="col-md-4 text-center"><p class="leaderbod">{{player.name}}</p></div>
         <div class="col-md-4 text-center"><p class="leaderbod">{{player.gameWins}}</p> </div>
       </div>
     </div>
