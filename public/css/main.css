@@ -318,7 +318,7 @@ a.btn-donate.big:hover{
 }
 
 .badge {
-  position: absolute;
+  position: inherit;
   background: #ed7d1a;
   height: 20px;
   top: 1rem;
