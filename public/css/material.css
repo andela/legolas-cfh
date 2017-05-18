@@ -4,7 +4,6 @@
 #cards-container {
   margin-top: 45px;
 }
-
 #player-score {
   letter-spacing: 2px;
   color: white;
@@ -55,7 +54,6 @@
 .demo-card-event > .mdl-card__actions > .mdl-button {
   color: #fff;
 }
-
 .demo-card-wide.mdl-card {
   margin-top: 61px;
   width: 600px;
@@ -69,7 +67,6 @@
 .demo-card-wide > .mdl-card__menu {
   color: #fff;
 }
-
 .game-cards.mdl-card {
   position: relative;
   display: inline-block;
@@ -90,7 +87,6 @@
   vertical-align: middle;
   background-color: #2a2d34 !important;
 }
-
 .card-text{
   vertical-align: top;
   padding-top: 5%;
@@ -135,4 +131,113 @@
 #loading-container img {
   width: 50px;
   height: 50px;
+}
+/*chat begins here*/
+.chatbox {
+  width: 300px;
+  position: fixed;
+  background-color: #fff;
+  border: 1px solid #fff;
+  bottom: 10px;
+  right: 10px;
+  z-index: 998;
+}
+.chatbox .chat-header {
+  background-color: #3e7293;
+  padding: 0px 15px;
+  color: #fff;
+  border-bottom: 2px solid white;
+}
+.chatbox .chat-header h3 {
+  display: inline-block;
+  margin: 0;
+}
+.chatbox .chat-header .fa {
+  float: right;
+  font-size: 25px;
+  cursor: pointer;
+}
+.chatbox .chat-header .fa-chevron-down {
+  display: none;
+}
+.chatbox .chat-content {
+  padding: 15px 5px;
+  max-height: 280px;
+  overflow: auto;
+  display: none;
+}
+.chatbox .chat .chat-meta {
+  display: block;
+  margin-left: 5px;
+  font-size: 12px;
+  color: #666;
+  line-height: 1.6;
+}
+.chatbox .chat .chat-meta img {
+  float: left;
+  width: 35px;
+  margin-right: 15px;
+}
+.chatbox .chat .chat-message {
+  display: inline-block;
+  margin: 5px 0px 20px 20px;
+  background-color: #e6e6e6;
+  padding: 5px;
+  border-radius: 8px;
+}
+.chatbox .chat-header .fa-chevron-down,
+.chatbox .chat-header .fa-chevron-up {
+  float: right;
+  cursor: pointer;
+  display: block;
+  font-size: 12px;
+  margin-top: 10px
+}
+#chatNotification {
+   font-size: 12px;
+   color: #ed7d1a;
+   margin-top: 4px;
+   display: none;
+ }
+ 
+ #chatInner .emojioneemoji{
+   width: 25px;
+ }
+ 
+ .chat-meta {
+     text-transform: capitalize;
+ }
+ 
+ .send-message {
+     padding-bottom: 5px;
+ }
+ 
+ .send-message button {
+     padding: 2px 5px;
+     margin: 0 5px;
+ }
+ 
+ .chatbox .chat-begin{
+   font-size: 14px;
+   color: #bbb;
+   margin-bottom: 6px;
+ }
+.chatbox .chat-header .fa-chevron-down {
+  display: none;
+}
+.chatbox .chat .chat-message {
+  display: inline-block;
+  margin: 5px 0px 20px 20px;
+  background-color: #f9f9f9;
+  padding: 5px;
+  border-radius: 8px;
+}
+#chatbox-title {
+  font-size: 16px;
+  padding-bottom: 0;
+}
+.chatbox-send {
+  background: #ed7d1a;
+  border: 1px solid #ed7d1a;
+  color: white;
 }
