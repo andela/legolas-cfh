@@ -3,35 +3,39 @@
 		<!-- =========================
 				NAVIGATION LINKS     
 		============================== -->
-		<div class="navbar navbar-fixed-top top-nav-collapse custom-navbar" role="navigation">
-			<div class="container">
-
-				<!-- navbar header -->
-				<div class="navbar-header">
-					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon icon-bar"></span>
-						<span class="icon icon-bar"></span>
-						<span class="icon icon-bar"></span>
-					</button>
-					<a href="#" class="navbar-brand"><img src="img/logo.png" width="320" height="105" ></a>
-				</div>
-
-				<div class="collapse navbar-collapse">
-
-					<ul class="nav navbar-nav navbar-right">
-            <li><a href="#!">Home</a></li>
-						<li><a href="#!#whatiscfh">About</a></li>
-						<li><a href="#!#howtoplay">How to Play</a></li>
-						<li><a href="#!#charity">Charity</a></li>
-						<li ng-hide="showOptions"><a href="#!/dashboard">Dashboard</a></li>
-						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
-						<li ng-hide="showOptions"><a href="/signout" ng-click="signout()">Sign Out</a></li>
-						<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
-					</ul>
-
-				</div>
-			</div>
+		<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <!-- Title -->
+          <span class="mdl-layout-title"><a href="#!"><img src="img/logo.png" width="240" height="78" ></a></span>
+          <!-- Add spacer, to align navigation to the right -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation. We hide it in small screens. -->
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <a class="mdl-navigation__link" href="#!">Home</a>
+            <a class="mdl-navigation__link" href="#!#whatiscfh">About</a>
+            <a class="mdl-navigation__link" href="#!#howtoplay">How to Play</a>
+            <a class="mdl-navigation__link" href="#!#charity">Charity</a>
+            <a class="mdl-navigation__link" href="#!/signin">Login</a>
+            <a class="mdl-navigation__link btn btn-donate" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">Donate Now</a>
+          </nav>
+        </div>
+      </header>
+      <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="#!">Home</a>
+          <a class="mdl-navigation__link" href="#!#whatiscfh">About</a>
+          <a class="mdl-navigation__link" href="#!#howtoplay">How to Play</a>
+          <a class="mdl-navigation__link" href="#!#charity">Charity</a>
+          <a class="mdl-navigation__link" href="#!/signin">Login</a>
+          <a class="mdl-navigation__link btn btn-donate" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">Donate Now</a>
+        </nav>
+      </div>
 		</div>
+
+		<!--====================================
+						SECTION
+		==================================-->
 
     <section id="loginform" class="">
       <div class="container">
