@@ -17,6 +17,10 @@ angular.module('mean.system')
     $scope.region = region;
     $scope.startNewGame = false;
 
+    if (localStorage.getItem('cfh-user')) {
+      window.user = JSON.parse(localStorage.getItem('cfh-user'));
+    }
+
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
         if ($scope.pickedCards.indexOf(card.id) < 0) {

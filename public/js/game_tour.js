@@ -1,6 +1,6 @@
 /* global introJs */
 angular.module('mean.system')
-  .controller('GameTourController', ['$scope', '$window', function ($scope, $window) {
+  .controller('GameTourController', ['$scope', '$window', '$http', '$location', function ($scope, $window, $http, $location) {
     $scope.$on('$locationChangeSuccess', () => {
       if ($scope.gameTour) {
         $scope.gameTour.exit();
@@ -72,16 +72,32 @@ angular.module('mean.system')
       ]
     });
 
-    const isGameCustom = () => {
-      const custom = $window.location.href.indexOf('custom') >= 0;
-      return (custom);
-    };
+    const isGameCustom = () => (!!$location.search().custom);
+    // {
+    //   const custom = $window.location.href.indexOf('custom') >= 0;
+    //   return (custom);
+    // };
 
     const tourComplete = () => {
-      if (isGameCustom()) {
-        $window.location = '/app?custom';
+      if ($window.user && $window.user.isNewUser) {
+        $http.post('/api/tooktour', {
+          id: $window.user._id
+        })
+        .then((res) => {
+          $window.user = res.data;
+          $window.localStorage.setItem('cfh-user', JSON.stringify($window.user));
+          if (isGameCustom()) {
+            $location.path('/app?custom');
+          } else {
+            $location.path('/app');
+          }
+        }, (err) => {
+          console.log(err);
+        });
+      } else if (isGameCustom()) {
+        $location.path('/app?custom');
       } else {
-        $window.location = '#!/app';
+        $location.path('/app');
       }
     };
 

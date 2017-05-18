@@ -921,3 +921,11 @@ footer {
   font-weight: 35px;
   color: white ;
 }
+
+.text-white {
+  color: white !important;
+}
+
+.text-white:hover {
+  color: #232323 !important;
+}

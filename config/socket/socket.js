@@ -28,6 +28,7 @@ module.exports = (io) => {
   let allPlayers = {};
   let gamesNeedingPlayers = [];
   let gameID = 0;
+  let onlineUsers = {};
 
   io.sockets.on('connection', (socket) => {
     console.log(`${socket.id   } Connected`);
@@ -112,7 +113,26 @@ module.exports = (io) => {
         fn({ success: true });
       }
     });
+
+    socket.on('loggedIn', (data) => {
+      // console.log('socket id', socket.id);
+      data.socketID = socket.id;
+      // onlineUsers = loggedInUser(data);
+      onlineUsers[data.email] = data;
+      socket.broadcast.emit('onlineUsers', onlineUsers);
+    });
   });
+
+  // const loggedInUser = (user) => {
+  //   const users = onlineUsers.slice();
+  //   const oldUserIndex = onlineUsers.findIndex(item => item.email === user.email);
+  //   if (oldUserIndex === -1) {
+  //     users.push(user);
+  //   } else {
+  //     users[oldUserIndex] = user;
+  //   }
+  //   return users;
+  // };
 
 
   var joinGame = function (socket, data) {
