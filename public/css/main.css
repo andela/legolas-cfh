@@ -13,6 +13,65 @@ body.dark-bg {
   background: #2a2d34;
 }
 
+#main-bod{
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: white;
+}
+
+/*---------------------------------------
+     OVERWRITE NAVIGATION TO COLLAPSE AT 1000PX          
+ -----------------------------------------*/
+ @media (max-width: 1200px) {
+     .navbar-header {
+         float: none;
+     }
+     .navbar-left,.navbar-right {
+         float: none !important;
+     }
+     .navbar-toggle {
+         display: block;
+     }
+     .navbar-collapse {
+         border-top: 1px solid transparent;
+         box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+     }
+     .navbar-fixed-top {
+         top: 0;
+         border-width: 0 0 1px;
+     }
+     .navbar-collapse.collapse {
+         display: none!important;
+     }
+     .navbar-nav {
+         float: none!important;
+         margin-top: 7.5px;
+     }
+     .navbar-nav>li {
+         float: none;
+     }
+     .navbar-nav>li>a {
+         padding-top: 10px;
+         padding-bottom: 10px;
+     }
+     .collapse.in{
+         display:block !important;
+     }
+     
+     ul.nav.navbar-nav.navbar-right {
+       margin-top: -31px;
+       padding: 0 30px 30px;
+       background: rgba(0, 0, 0, 0.8);
+     }
+ 
+ }
+
+ custom-navbar .navbar-toggle {
+    background-color: #ed7d1a;
+    border-radius: 0;
+    margin-top: 20px;
+  }
+
 /*---------------------------------------
     Typorgraphy              
 -----------------------------------------*/
@@ -129,6 +188,7 @@ footer {
 }
 
 
+
 /*---------------------------------------
     Navigation Links section              
 -----------------------------------------*/
@@ -185,7 +245,16 @@ footer {
     border-color: transparent;
 }
 
-.custom-navbar .nav li a.btn-donate, a.btn-donate.big, .btn-tour {
+.mdl-layout__drawer .mdl-navigation .mdl-navigation__link {
+  color: #333;
+}
+
+
+.mdl-navigation__link:hover {
+    color: #ed7d1a;
+}
+
+a.btn-donate, a.btn-donate.big, .btn-tour {
   background: #ed7d1a;
   color: white;
   border-color: transparent;
@@ -200,6 +269,14 @@ footer {
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+}
+
+a.btn-donate {
+    line-height: 42px !important;
+    width: 120px;
+    margin-top: -3px;
+    padding: 0 10px !important;
+    color: white !important;
 }
 
 a.btn-donate.big {
@@ -662,4 +739,214 @@ footer {
 .modal-text{
   color:#3e7293;
   font-size: 17px;
+}
+
+.question-container {
+  background: white;
+  margin-top: 70px;
+}
+
+.timer__time{
+    margin: 45px auto 0;
+    color: #f68c41;
+    font-size: 120px;
+}
+
+.timer-status-round {
+  margin-top: -30px;
+}
+
+.player-section {
+  margin: 20px 0 30px;
+  max-height: 250px;
+  overflow: scroll;
+}
+
+.player-container{
+  background: rgba(236, 236, 236, 0.68);
+  padding: 10px 20px;
+  margin: 5px 0 5px;
+}
+
+.d-avatar {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  float: left;
+  margin-left: 15px;
+}
+
+.d-avatar img{
+  height: 40px;
+}
+.player-container-inner {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.finding-players {
+  font-size: 26px;
+  text-align: center;
+  color: #3e7293;
+  margin: 15px 0;
+}
+
+.player-count-container {
+  font-size: 16px;
+  color: #555;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.notifications {
+  font-size: 14px;
+  font-weight: bold;
+  color: #990000;
+}
+
+.playing-card {
+  background: white;
+  color: #ad3434;
+  border-radius: 6px;
+  height: 250px;
+  font-size: 16px;
+  margin: 15px;
+  padding: 100px 30px 0;
+  border: 3px solid rgba(42, 46, 53, 0.5);
+  text-align: center;
+  transition: 0.4s ease;
+  -webkit-transition: 0.4s ease;
+  -moz-transition: 0.4s ease;
+}
+
+.playing-card:hover {
+  background: #3E7393;
+  color: white;
+  border-color: white;
+}
+
+@media screen and (max-width: 389px) {
+  .playing-card {
+    width: 75% !important;
+  }
+}
+
+.text-white {
+  color: white;
+}
+
+.hand {
+  margin-left: 30px;
+}
+
+.loading-container {
+  text-align: center;
+}
+
+.the-czar {
+  font-size: 11px;
+  font-weight: bold;
+  color: #b34040;
+}
+
+.czar-blank-inner {
+  padding: 30px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.question-container-box {
+  padding: 30px;
+}
+
+.question-section {
+  margin-bottom: 30px;
+}
+
+.current-question {
+  padding: 15px 0;
+  display: block;
+  font-size: 20px;
+  line-height: 1.6;
+}
+
+.player-star{
+  float: right;
+  top: 0;
+  right: 0;
+  position: absolute;
+  color: #2a2d34;
+}
+
+.czar-blank-inner {
+  padding: 30px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.charity-fact {
+  margin: 30px 0;
+}
+
+.charity-fact-tagline {    
+  margin-top: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #428bca;
+}
+
+.charity-fact-container {
+  border-radius: 0;
+  background: white;
+  opacity: .5;
+  margin-top: 60px;
+  padding: 15px 60px;
+}
+
+.people-left-game-top {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.inner-info-exit{
+  border-radius: 0;
+  background: white;
+  border: none;
+  padding: 30px;
+  margin-top: 0px;
+  box-shadow: none;
+  border-top: 1px solid black;
+}
+
+@media screen and (min-width: 768px) {
+  #charity-widget-container {
+    margin-top: -120px;
+  }
+}
+
+.leaderbod {
+  font-size: 20px;
+  font-weight: 35px;
+  color: white ;
+}
+.leaderhead{
+  margin-bottom: 20px;
+  margin-top: 15px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 25px;
+  font-weight: 35px;
+  color: white ;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.text-white:hover {
+  color: #232323 !important;
 }

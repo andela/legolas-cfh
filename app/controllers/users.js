@@ -424,6 +424,26 @@ exports.removeFriend = (req, res) => {
   });
 };
 
+exports.tookTour = (req, res) => {
+  User.findByIdAndUpdate(
+    req.body.id,
+    { $set: { isNewUser: false } },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
+      if (!updatedUser) {
+        return res.status(404).send({
+          message: 'User does not exist'
+        });
+      }
+      res.status(200).json(updatedUser);
+    }
+  );
+};
+
 exports.donations = (req, res) => {
   const name = req.query.name;
   User.findOne({ name }).exec((err, object) => {

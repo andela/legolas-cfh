@@ -1,34 +1,17 @@
-<!-- Brand and toggle get grouped for better mobile display -->
-
-<div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <a class="navbar-brand" href="/">Cards For Humanity</a>
-</div>
-
-<!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-  <ul class="nav navbar-nav">
-    <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}"><a href="#!/{{item.link}}">{{item.title}}</a></li>
-  </ul>
-
-  <ul class="nav navbar-nav navbar-right" data-ng-hide="global.authenticated">
-    <li><a href="signup">Sign up</a></li>
-    <li class="divider-vertical"></li>
-    <li><a href="signin">Sign in</a>
-  </ul>
-
-  <ul class="nav navbar-nav navbar-right" data-ng-show="global.authenticated">
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{global.user.name}} <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><a href="/signout">Sign out</a>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</div><!-- /.navbar-collapse -->
+ <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title"><a href="#!"><img src="img/logo.png" width="240" height="78" ></a></span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <nav class="mdl-navigation mdl-layout--large-screen-only">
+          <a class="mdl-navigation__link" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">Donate</a>
+          <span class="mdl-navigation__link" href="" id="tweet-container">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </span>
+          <a class="mdl-navigation__link" id='leave-game-button' ng-click="abandonGame()">Abandon Game</a>
+        </nav>
+      </div>
+    </header>

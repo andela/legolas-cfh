@@ -273,7 +273,7 @@ angular.module('mean.system')
 
     $scope.shuffleCards = () => {
       // $('#cardModal').modal('show');
-      const card = $('#card');
+      const card = $(`#${event.target.id}`);
       card.addClass('animated flipOutX');
       $timeout(() => {
         // console.log('move to $scope.startNextRound()');

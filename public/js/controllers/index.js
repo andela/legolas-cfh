@@ -59,10 +59,11 @@ function ($scope, $location, $window, $http, Global, socket, game, AvatarService
       $http.post('/api/auth/signup', signupUser).then((res) => {
         if (res.data.success) {
           $window.localStorage.setItem('token', res.data.token);
+          console.log(res.data.user);
           $window.user = res.data.user;
           $window.localStorage.setItem('cfh-user', JSON.stringify($window.user));
           $scope.showOptions = false;
-          $window.location.href('/#!/gametour');
+          $window.location.href = '/';
         } else {
           $scope.signupErr = 'Cannot be authenticated';
           $scope.showError = () => 'invalid';
@@ -130,4 +131,6 @@ function ($scope, $location, $window, $http, Global, socket, game, AvatarService
       }
     );
   };
+
+  $scope.isNewUser = () => ($window.user && $window.user.isNewUser);
 }]);
