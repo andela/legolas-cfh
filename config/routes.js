@@ -96,6 +96,7 @@ module.exports = function (app, passport, auth) {
   app.get('/api/search/users/:inviteeSearch?', users.findUsers);
 
   app.post('/api/invite/user', users.sendInvite);
+  app.post('/api/appinvite/user', users.inAppInvite);
 
   // api end point for game gameRecords
   app.post('/api/games/:id/start', users.gameRecords);

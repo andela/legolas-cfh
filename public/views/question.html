@@ -37,7 +37,10 @@
                 Remove Friend!
               </button>
               &nbsp;
-              <button id="{{ 'send'+getValidId(result.email) }}" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
+              <button id="{{ 'send'+getValidId(result.email) }}" ng-hide="isFriend(result)" class="mdl-list__item-secondary-action btn btn-primary" ng-click="sendInvite(result)" title="">
+                Send Invite!
+              </button>
+              <button id="{{ 'inApp'+getValidId(result.email) }}" ng-show="isFriend(result)" class="mdl-list__item-secondary-action btn btn-primary" ng-click="inAppInvite(result)" title="">
                 Send Invite!
               </button>
             </div>

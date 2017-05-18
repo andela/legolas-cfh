@@ -150,6 +150,18 @@ exports.sendInvite = (req, res) => {
     return res.status(200).json({ message: 'Email sent successfully' });
   });
 };
+
+exports.inAppInvite = (req, res) => {
+  const inviteeName = req.query.name;
+  User.find({ name: new RegExp(inviteeName, 'i') },
+  (err, results) => {
+    if (err) {
+      console.log('error', err);
+      res.json(err);
+    }
+  });
+};
+
 exports.findUsers = (req, res) => {
   const query = req.params.inviteeSearch || '';
   User.find({ name: new RegExp(query, 'i') }).limit(10)

@@ -15,11 +15,14 @@ module.exports = (io) => {
   const allPlayers = {};
   const gamesNeedingPlayers = [];
   let gameID = 0;
-  let onlineUsers = {};
+  const onlineSockets = {};
+  const onlineUsers = {};
+  const invites = {};
 
   io.sockets.on('connection', function (socket) {
     console.log(socket.id +  ' Connected');
     socket.emit('id', {id: socket.id});
+    socket.emit('onlineUsers', onlineUsers);
 
     socket.on('pickCards', function(data) {
       console.log(socket.id,"picked",data);
@@ -71,6 +74,10 @@ module.exports = (io) => {
     });
 
     socket.on('disconnect', function(){
+      if (onlineSockets[socket.id]) {
+        delete onlineUsers[onlineSockets[socket.id].email];
+        delete onlineSockets[socket.id];
+      }
       exitGame(socket);
     });
 
@@ -89,10 +96,53 @@ module.exports = (io) => {
 
     socket.on('loggedIn', (data) => {
       // console.log('socket id', socket.id);
-      data.socketID = socket.id;
+      // data.socketID = socket.id;
       // onlineUsers = loggedInUser(data);
-      onlineUsers[data.email] = data;
-      socket.broadcast.emit('onlineUsers', onlineUsers);
+      // onlineUsers[data.email] = data;
+      // socket.broadcast.emit('onlineUsers', onlineUsers);
+      onlineSockets[socket.id] = data;
+      onlineUsers[data.email] = socket.id;
+      console.log('logged in user', data.email, socket.id);
+    });
+
+    socket.on('inAppInvite', (data, fn) => {
+      // socket.broadcast.to(data.to).emit('newInvite', data.gameID);
+      const socketId = onlineUsers[data.inviteeEmail];
+      if (socketId) {
+        if (!invites[data.inviteeEmail]) {
+          invites[data.inviteeEmail] = [];
+        }
+        invites[data.inviteeEmail].unshift(data.invite);
+        io.to(socketId).emit('newInvite', invites[data.inviteeEmail]);
+        console.log('Invite sent to', data.inviteeEmail, socketId);
+        fn({ success: true });
+      } else {
+        console.log('Invite failed');
+        fn({ success: false });
+      }
+    });
+
+    socket.on('getInvites', (data, fn) => {
+      if (invites[data.email]) {
+        fn({
+          success: true,
+          invites: invites[data.email]
+        });
+      } else {
+        fn({ success: false });
+      }
+    });
+
+    socket.on('acceptedInvite', (data, fn) => {
+      if (invites[data.email]) {
+        invites[data.email].splice(data.index, 1);
+        fn({
+          success: true,
+          invites: invites[data.email]
+        });
+      } else {
+        fn({ success: false });
+      }
     });
   });
 

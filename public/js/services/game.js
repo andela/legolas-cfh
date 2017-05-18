@@ -19,7 +19,8 @@ angular.module('mean.system')
       curQuestion: null,
       notification: null,
       timeLimits: {},
-      joinOverride: false
+      joinOverride: false,
+      onlineUsers: []
     };
 
     const notificationQueue = [];
@@ -58,6 +59,11 @@ angular.module('mean.system')
     socket.on('id', (data) => {
       game.id = data.id;
     });
+
+    // socket.on('onlineUsers', (data => {
+    //   console.log('online users', data);
+    //   game.onlineUsers = data;
+    // }));
 
     socket.on('prepareGame', (data) => {
       game.playerMinLimit = data.playerMinLimit;
@@ -260,6 +266,10 @@ angular.module('mean.system')
 
       return deferred.promise;
     };
+
+    // game.appInvite = function appInvite(inviteData) {
+    //   socket.emit('sendInvite');
+    // };
 
     decrementTime();
 

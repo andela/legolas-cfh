@@ -240,6 +240,28 @@ a.btn-donate.big:hover{
     margin-top: 20px;
 }
 
+.badge {
+  position: absolute;
+  background: #fed136;
+  height: 2rem;
+  top: 1rem;
+  right: 1.5rem;
+  width: 2rem;
+  text-align: center;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  border-radius: 50%;
+  color:white;
+  border:1px solid #fec503;
+}
+
+.notification-list {
+  background: #222222;
+  border: 1px solid #e7e7e7;
+  padding: 10px;
+  width: 300px;
+}
+
 @media(min-width:768px) {
     .custom-navbar {
         padding: 20px 0;
@@ -252,7 +274,6 @@ a.btn-donate.big:hover{
     }
 
 }
-
 
 
 /*---------------------------------------

@@ -1,10 +1,16 @@
 angular.module('mean.system')
-.controller('IndexController', ['$scope', '$location', '$window', '$http', 'Global', 'socket', 'game', 'AvatarService', function ($scope, $location, $window, $http, Global, socket, game, AvatarService) {
+.controller('IndexController', ['$scope', '$location', '$window', '$http', 'Global', 'socket', 'game', 'AvatarService',
+function ($scope, $location, $window, $http, Global, socket, game, AvatarService) {
   $scope.global = Global;
   $scope.global.signupErr = "";
 
   if ($window.localStorage.getItem('cfh-user')) {
     $window.user = JSON.parse($window.localStorage.getItem('cfh-user'));
+    socket.emit('getInvites', { email: $window.user.email }, (res) => {
+      if (res.success) {
+        $scope.invites = res.invites;
+      }
+    });
   }
 
   if ($window.user) {
@@ -86,6 +92,7 @@ angular.module('mean.system')
         $window.localStorage.setItem('token', response.data.token);
         $window.user = response.data.user;
         socket.emit('loggedIn', user);
+        // console.log('index.js', socket);
         // console.log(socket.on.Scopes.Global[0].socket, 'has been logged in very recently');
         $window.localStorage.setItem('cfh-user', JSON.stringify($window.user));
         $window.location.href = '/';
@@ -97,5 +104,30 @@ angular.module('mean.system')
       $scope.showError = () => 'invalid';
       $scope.loginError = err.data.message;
     });
+  };
+
+  socket.on('newInvite', (data) => {
+    console.log('Number of invites:', data.length);
+    $scope.invites = data;
+    // $scope.invites = data;
+    // $scope.hasInvites = true;
+  });
+  // $scope.readInvites = () => {
+  //   User.readInvites();
+  //   $scope.hasInvites = false;
+  // };
+  $scope.acceptInvite = (index) => {
+    socket.emit(
+      'acceptedInvite',
+      {
+        email: $window.user.email,
+        index
+      },
+      (res) => {
+        if (res.success) {
+          $scope.invites = res.invites;
+        }
+      }
+    );
   };
 }]);

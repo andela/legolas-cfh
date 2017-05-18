@@ -87,6 +87,86 @@ angular.module('mean.system')
           // console.log(status);
         });
     };
+    // console.log('search result scope', $scope.searchResult);
+
+    $scope.inAppInvite = (user) => {
+      console.log('in app notification', user);
+      $(`#inApp${$scope.getValidId(user.email)}`).prop('disabled', true);
+      $(`#inApp${$scope.getValidId(user.email)}`).html('Sending...');
+
+      socket.emit(
+        'inAppInvite',
+        {
+          inviteeEmail: user.email,
+          invite: {
+            gameUrl: document.URL,
+            gameOwner: window.user.name || 'Guest'
+          }
+        },
+        (res) => {
+          if (res.success) {
+            console.log('User is online. message sent');
+            if (!$scope.inviteStatus) {
+              $scope.inviteStatus = {};
+            }
+            // $('.invite-sent').html(`${$('.invite-sent').html()}Invite sent to ${User.getFriends()[friendEmail]}!<br>`);
+            $scope.inviteStatus[user.email] = { message: `App invite successfully sent to ${user.name}!` };
+            $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
+          } else {
+            game.emailInvite({
+              gameUrl: document.URL,
+              inviteeEmail: user.email,
+              gameOwner: window.user.name || 'Guest'
+            }).then((successMessage) => {
+              console.log('success message', successMessage);
+              if (!$scope.inviteStatus) {
+                $scope.inviteStatus = {};
+              }
+              $scope.inviteStatus[user.email] = { message: `Email successfully sent to ${user.name}!` };
+              $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
+            }, (errorMessage) => {
+              $scope.inviteStatus[user.email] = 'Could not send invite';
+              console.log('error sent to game.js', errorMessage);
+              $(`#send${$scope.getValidId(user.email)}`).prop('disabled', false);
+              $(`#send${$scope.getValidId(user.email)}`).html('Send Invite');
+            });
+          }
+        }
+      )
+
+      // socket.emit('inAppInvite', { gameID: game.gameID, to: user.socketID });
+
+      // game.appInvite({
+        // inviteeEmail: user.email,
+        // invite: {
+        //   gameUrl: document.URL,
+        //   gameOwner: window.user.name || 'Guest'
+        // }
+      // }).then((isOnline) => {
+      //   if (isOnline) {
+          // console.log('User is online. message sent');
+          // $('.invite-sent').html(`${$('.invite-sent').html()}Invite sent to ${User.getFriends()[friendEmail]}!<br>`);
+      //   } else {
+          // game.emailInvite({
+          //   gameUrl: document.URL,
+          //   inviteeEmail: user.email,
+          //   gameOwner: window.user.name || 'Guest'
+          // }).then((successMessage) => {
+          //   console.log('success message', successMessage);
+          //   if (!$scope.inviteStatus) {
+          //     $scope.inviteStatus = {};
+          //   }
+          //   $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
+          //   $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
+          // }, (errorMessage) => {
+          //   $scope.inviteStatus[user.email] = 'Could not send invite';
+          //   console.log('error sent to game.js', errorMessage);
+          //   $(`#send${$scope.getValidId(user.email)}`).prop('disabled', false);
+          //   $(`#send${$scope.getValidId(user.email)}`).html('Send Invite');
+          // });
+      //   }
+      // });
+    };
 
     $scope.sendInvite = (user) => {
       if (!$scope.hasBeenInvited(`${user.name}, ${user.email}`)) {
@@ -108,7 +188,7 @@ angular.module('mean.system')
           if (!$scope.inviteStatus) {
             $scope.inviteStatus = {};
           }
-          $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
+          $scope.inviteStatus[user.email] = { message: `Email successfully sent to ${user.name}!` };
           $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
           // console.log('this.data', response);
           // console.log('$scope.invitedUsersList', $scope.invitedUsersList);
