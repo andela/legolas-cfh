@@ -116,7 +116,9 @@ module.exports = function (app, passport, auth) {
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
-  app.get('/gametour', index.gameTour);
   // api end point for view game history
+
+  // api endpoint to mark tour takers
+  app.post('/api/tooktour', users.tookTour);
 };
 

@@ -25,7 +25,11 @@ var UserSchema = new Schema({
     github: {},
     google: {},
     gameWins: { type: Number, default: 0 },
-    friends: {}
+    friends: {},
+    isNewUser: {
+        type: Boolean,
+        default: true
+    }
 });
 
 /**

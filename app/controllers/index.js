@@ -22,10 +22,10 @@ exports.render = function(req, res) {
     });
 };
 
-exports.gameTour = (req, res) => {
-   if (Object.keys(req.query)[0] === 'custom') {
-     res.redirect('/#!/gametour');
-   } else {
-     res.redirect('/#!/gametour');
-   }
-};  
+// exports.gameTour = (req, res) => {
+//    if (Object.keys(req.query)[0] === 'custom') {
+//      res.redirect('/#!/gametour');
+//    } else {
+//      res.redirect('/#!/gametour');
+//    }
+// };  
