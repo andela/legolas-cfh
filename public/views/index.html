@@ -21,7 +21,7 @@
 							<a class="mdl-navigation__link" ng-show="showOptions" href="#!/signup">Signup</a>
 							<a class="mdl-navigation__link" href="/signout" ng-hide="showOptions" ng-click="signout()">Sign Out</a>
               <li ng-hide="showOptions" class="dropdown notification-container">
-                <a class="dropdown-toggle" data-toggle="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" ng-click="readInvites()">
                   <i class="fa fa-bell fa-2x"></i><span class="badge" ng-show="invites && invites.length > 0">{{ invites.length }}</span>
                 </a>
                 <ul class="notification-list dropdown-menu dropdown-menu-right">

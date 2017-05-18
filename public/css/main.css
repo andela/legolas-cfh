@@ -319,17 +319,18 @@ a.btn-donate.big:hover{
 
 .badge {
   position: absolute;
-  background: #fed136;
-  height: 2rem;
+  background: #ed7d1a;
+  height: 20px;
   top: 1rem;
   right: 1.5rem;
-  width: 2rem;
+  width: 20px;
+  padding: 3px;
   text-align: center;
-  line-height: 1.5rem;
-  font-size: 1rem;
+  line-height: 14px;
+  font-size: 11px;
   border-radius: 50%;
-  color:white;
-  border:1px solid #fec503;
+  color:#dddddd;
+  border:1px solid #884911;
 }
 
 .notification-container {
