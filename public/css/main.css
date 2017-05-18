@@ -332,12 +332,33 @@ a.btn-donate.big:hover{
   border:1px solid #fec503;
 }
 
-.notification-list {
-  background: #222222;
-  border: 1px solid #e7e7e7;
-  padding: 10px;
-  width: 300px;
+.notification-container {
+  list-style: none;
+  margin-right: 28px;
 }
+
+.notification-container a {
+  color: #ffffff;
+}
+
+.notification-list {
+   background: rgba(34, 34, 34, 0.75);
+   padding: 10px;
+   color: white;
+   width: 290px;
+   margin-top: 18px;
+   border-radius: 0;
+   margin-left: -110px;
+}
+
+.invite-list {
+  overflow: scroll;
+  text-align: left;
+  width: 100%; }
+
+.invite-list .mdl-card {
+  width: 100%;
+  left: 0; }
 
 @media(min-width:768px) {
     .custom-navbar {
