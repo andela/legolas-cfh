@@ -720,7 +720,6 @@ footer {
   font-size: 17px;
 }
 
-
 .question-container {
   background: white;
   margin-top: 70px;
@@ -909,3 +908,16 @@ footer {
   }
 }
 
+.leaderbod {
+  font-size: 20px;
+  font-weight: 35px;
+  color: white ;
+}
+.leaderhead{
+  margin-bottom: 20px;
+  margin-top: 15px;
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-size: 25px;
+  font-weight: 35px;
+  color: white ;
+}
