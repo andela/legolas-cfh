@@ -60,11 +60,6 @@ angular.module('mean.system')
       game.id = data.id;
     });
 
-    // socket.on('onlineUsers', (data => {
-    //   console.log('online users', data);
-    //   game.onlineUsers = data;
-    // }));
-
     socket.on('prepareGame', (data) => {
       game.playerMinLimit = data.playerMinLimit;
       game.playerMaxLimit = data.playerMaxLimit;
@@ -266,10 +261,6 @@ angular.module('mean.system')
 
       return deferred.promise;
     };
-
-    // game.appInvite = function appInvite(inviteData) {
-    //   socket.emit('sendInvite');
-    // };
 
     decrementTime();
 

@@ -7,8 +7,6 @@ angular.module('mean.system')
     $scope.showFindUsersButton = false;
     $scope.inviteeSearch = '';
     $scope.invitedUsersList = [];
-    // $scope.region = region;
-    // $scope.startNewGame = false;
 
     $scope.$watch('game.gameID', () => {
       if (game.gameID && game.state === 'awaiting players') {
@@ -81,13 +79,10 @@ angular.module('mean.system')
           } else {
             $scope.searchResult = [];
             $scope.noUser = 'No such user found';
-            // console.log('No such user found');
           }
         }, (data, status, headers, config) => {
-          // console.log(status);
         });
     };
-    // console.log('search result scope', $scope.searchResult);
 
     $scope.inAppInvite = (user) => {
       console.log('in app notification', user);
@@ -109,7 +104,6 @@ angular.module('mean.system')
             if (!$scope.inviteStatus) {
               $scope.inviteStatus = {};
             }
-            // $('.invite-sent').html(`${$('.invite-sent').html()}Invite sent to ${User.getFriends()[friendEmail]}!<br>`);
             $scope.inviteStatus[user.email] = { message: `App invite successfully sent to ${user.name}!` };
             $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
           } else {
@@ -144,7 +138,6 @@ angular.module('mean.system')
           inviteeEmail: user.email,
           gameOwner: game.players[0].username
         };
-        // console.log(data);
         $http({
           method: 'POST',
           url: '/api/invite/user',
@@ -157,8 +150,6 @@ angular.module('mean.system')
           }
           $scope.inviteStatus[user.email] = { message: `Email successfully sent to ${user.name}!` };
           $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
-          // console.log('this.data', response);
-          // console.log('$scope.invitedUsersList', $scope.invitedUsersList);
         })
         .error((error) => {
           $scope.inviteStatus[user.email] = 'Could not send invite';
@@ -176,7 +167,6 @@ angular.module('mean.system')
     $scope.isFriend = user => (window.user.friends && window.user.friends[user._id]);
 
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-      // console.log('joining custom game');
       game.joinGame('joinGame', $location.search().game);
     } else if ($location.search().custom) {
       game.joinGame('joinGame', null, true);

@@ -73,10 +73,6 @@ angular.module('mean.system')
     });
 
     const isGameCustom = () => (!!$location.search().custom);
-    // {
-    //   const custom = $window.location.href.indexOf('custom') >= 0;
-    //   return (custom);
-    // };
 
     const tourComplete = () => {
       if ($window.user && $window.user.isNewUser) {
@@ -197,7 +193,6 @@ angular.module('mean.system')
           {
             $scope.$apply(() => {
               $scope.showCharity = false;
-             
             });
             break;
           }

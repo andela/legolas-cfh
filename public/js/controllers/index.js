@@ -93,8 +93,6 @@ function ($scope, $location, $window, $http, Global, socket, game, AvatarService
         $window.localStorage.setItem('token', response.data.token);
         $window.user = response.data.user;
         socket.emit('loggedIn', user);
-        // console.log('index.js', socket);
-        // console.log(socket.on.Scopes.Global[0].socket, 'has been logged in very recently');
         $window.localStorage.setItem('cfh-user', JSON.stringify($window.user));
         $window.location.href = '/';
       } else {
@@ -110,30 +108,21 @@ function ($scope, $location, $window, $http, Global, socket, game, AvatarService
   socket.on('newInvite', (data) => {
     console.log('Number of invites:', data.length);
     $scope.invites = data;
-    // $scope.invites = data;
-    // $scope.hasInvites = true;
   });
-  // $scope.readInvites = () => {
-  //   User.readInvites();
-  //   $scope.hasInvites = false;
-  // };
+  
   $scope.acceptInvite = (index) => {
-    // if (game.state === 'awaiting players') {
-      socket.emit(
-        'acceptedInvite',
-        {
-          email: $window.user.email,
-          index
-        },
-        (res) => {
-          if (res.success) {
-            $scope.invites = res.invites;
-          }
+    socket.emit(
+      'acceptedInvite',
+      {
+        email: $window.user.email,
+        index
+      },
+      (res) => {
+        if (res.success) {
+          $scope.invites = res.invites;
         }
-      );
-    // } else {
-    //   socket.emit('game started')
-    // }
+      }
+    );
   };
 
   $scope.isNewUser = () => ($window.user && $window.user.isNewUser);
