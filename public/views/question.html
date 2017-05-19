@@ -86,17 +86,14 @@ MODAL THAT LETS THE USER KNOW THEIR ARE ABOUT TO START A NEW GAME
         <h4 class="modal-title">Cards for Humanity</h4>
       </div>
       <div class="modal-body">
-        
-        <div class="padding-10">
-          <h6>Kindly select your region:</h6>
-        </div>
-        
-        <div class="row padding-10">
-          <div class="form-group center width-65">
+
+        <div class="row">
+          <h6 class="col-md-5">Kindly select your region:</h6>
+          <div class="col-md-7" style="margin-top: 15px;">
             <select id="region-select" class="form-control" ng-options="region as region.label for region in region.regions track by region.code" ng-model="selectedRegion"></select>
           </div>
         </div>
-
+        
         <p class="modal-text" >Are you sure you want to start a new game?</p>
         <p class = "modal-text">Clicking the start button would start a new game session.</p>
       </div>
