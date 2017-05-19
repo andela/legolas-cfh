@@ -317,6 +317,10 @@ a.btn-donate.big:hover{
     margin-top: 20px;
 }
 
+.mdl-js-layout {
+  overflow: visible;
+}
+
 .badge {
   position: inherit;
   background: #ed7d1a;
