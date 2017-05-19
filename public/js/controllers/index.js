@@ -118,18 +118,22 @@ function ($scope, $location, $window, $http, Global, socket, game, AvatarService
   //   $scope.hasInvites = false;
   // };
   $scope.acceptInvite = (index) => {
-    socket.emit(
-      'acceptedInvite',
-      {
-        email: $window.user.email,
-        index
-      },
-      (res) => {
-        if (res.success) {
-          $scope.invites = res.invites;
+    // if (game.state === 'awaiting players') {
+      socket.emit(
+        'acceptedInvite',
+        {
+          email: $window.user.email,
+          index
+        },
+        (res) => {
+          if (res.success) {
+            $scope.invites = res.invites;
+          }
         }
-      }
-    );
+      );
+    // } else {
+    //   socket.emit('game started')
+    // }
   };
 
   $scope.isNewUser = () => ($window.user && $window.user.isNewUser);

@@ -322,9 +322,9 @@ module.exports = (io) => {
         chatMessages = [];
       }
       if (game.players.length === 1) {
-         chatMessages = [];
-         game.sendUpdate();
-       }
+        chatMessages = [];
+        game.sendUpdate();
+      }
     }
     socket.leave(socket.gameID);
   };

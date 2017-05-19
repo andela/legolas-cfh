@@ -145,15 +145,7 @@ Game.prototype.startGame = function() {
   this.changeCzar(this);
   this.sendUpdate();
   console.log('I am in the start game socket');
-  // this.stateChoosing(this);
 };
-
-// Game.prototype.startGame = function() {
-//   console.log(this.gameID,this.state);
-//   this.shuffleCards(this.questions);
-//   this.shuffleCards(this.answers);
-//   // this.stateChoosing(this);
-// };
 
 Game.prototype.sendUpdate = function() {
   this.io.sockets.in(this.gameID).emit('gameUpdate', this.payload());
@@ -174,12 +166,6 @@ Game.prototype.stateChoosing = (self) => {
   }
   self.round += 1;
   self.dealAnswers();
-  // Rotate card czar
-  // if (self.czar >= self.players.length - 1) {
-  //   self.czar = 0;
-  // } else {
-  //   self.czar += 1;
-  // }
   self.sendUpdate();
 
   self.choosingTimeout = setTimeout(() => {

@@ -132,40 +132,7 @@ angular.module('mean.system')
             });
           }
         }
-      )
-
-      // socket.emit('inAppInvite', { gameID: game.gameID, to: user.socketID });
-
-      // game.appInvite({
-        // inviteeEmail: user.email,
-        // invite: {
-        //   gameUrl: document.URL,
-        //   gameOwner: window.user.name || 'Guest'
-        // }
-      // }).then((isOnline) => {
-      //   if (isOnline) {
-          // console.log('User is online. message sent');
-          // $('.invite-sent').html(`${$('.invite-sent').html()}Invite sent to ${User.getFriends()[friendEmail]}!<br>`);
-      //   } else {
-          // game.emailInvite({
-          //   gameUrl: document.URL,
-          //   inviteeEmail: user.email,
-          //   gameOwner: window.user.name || 'Guest'
-          // }).then((successMessage) => {
-          //   console.log('success message', successMessage);
-          //   if (!$scope.inviteStatus) {
-          //     $scope.inviteStatus = {};
-          //   }
-          //   $scope.inviteStatus[user.email] = { message: `Invite successfully sent to ${user.name}!` };
-          //   $scope.invitedUsersList.push(`${user.name}, ${user.email}`);
-          // }, (errorMessage) => {
-          //   $scope.inviteStatus[user.email] = 'Could not send invite';
-          //   console.log('error sent to game.js', errorMessage);
-          //   $(`#send${$scope.getValidId(user.email)}`).prop('disabled', false);
-          //   $(`#send${$scope.getValidId(user.email)}`).html('Send Invite');
-          // });
-      //   }
-      // });
+      );
     };
 
     $scope.sendInvite = (user) => {
