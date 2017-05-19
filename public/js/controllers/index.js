@@ -52,7 +52,7 @@ function ($scope, $location, $window, $http, Global, socket, game, AvatarService
         email: $scope.email,
         password: $scope.password,
         name: $scope.name,
-        avatar: 0
+        avatar: $scope.avatars.avatar
       };
 
       // call the api

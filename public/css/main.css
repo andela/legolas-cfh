@@ -977,3 +977,7 @@ footer {
 .text-white:hover {
   color: #232323 !important;
 }
+
+.signup__avatars {
+  margin: 13px 0;
+}
