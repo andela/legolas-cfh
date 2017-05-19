@@ -3,10 +3,11 @@
 -----------------------------------------*/
 
 body {
-		background: #ffffff;
-    font-family: 'Poppins', sans-serif;
-    font-style: normal;
-		font-weight: 400;
+  background: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  overflow-x: hidden;
 }
 
 body.dark-bg {
