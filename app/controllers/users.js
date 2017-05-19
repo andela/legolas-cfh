@@ -150,6 +150,18 @@ exports.sendInvite = (req, res) => {
     return res.status(200).json({ message: 'Email sent successfully' });
   });
 };
+
+exports.inAppInvite = (req, res) => {
+  const inviteeName = req.query.name;
+  User.find({ name: new RegExp(inviteeName, 'i') },
+  (err, results) => {
+    if (err) {
+      console.log('error', err);
+      res.json(err);
+    }
+  });
+};
+
 exports.findUsers = (req, res) => {
   const query = req.params.inviteeSearch || '';
   User.find({ name: new RegExp(query, 'i') }).limit(10)
@@ -186,7 +198,7 @@ exports.createAPI = (req, res) => {
             const token = jwt.sign({
               id: user.id
             }, secretKey);
-            return res.status(200).json({ success: true, message: 'Signup successful', token });
+            return res.status(200).json({ success: true, message: 'Signup successful', token, user });
           });
         });
       } else {
@@ -286,6 +298,7 @@ exports.Signin = (req, res) => {
       if (!user) {
         res.status(401).json({ success: false, message: 'Invalid username or password' });
       } else {
+        console.log(user);
         const validPassword = user.authenticate(req.body.password);
         if (!validPassword) {
           res.status(401).json({ success: false, message: 'Invalid username or password' });
@@ -294,7 +307,7 @@ exports.Signin = (req, res) => {
             if (err) throw err;
           });
           const token = jwt.sign(user, secretKey);
-          res.status(200).json({ success: true, message: 'Signin successful', token });
+          res.status(200).json({ success: true, message: 'Signin successful', token, user });
         }
       }
     });
@@ -343,6 +356,7 @@ exports.gameHistory = (req, res) => {
     if (records) res.status(200).send(records);
   });
 };
+
 exports.leaderBoard = (req, res) => {
  // res.send('succes  : true')
   User.find({})
@@ -351,6 +365,83 @@ exports.leaderBoard = (req, res) => {
 .exec((err, records) => {
   res.send(records);
 });
+};
+
+exports.addFriend = (req, res) => {
+  User
+  .findOne({ _id: req.body.myId })
+  .exec((err, user) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json(err);
+    } else {
+      if (!user.friends) user.friends = {};
+      user.friends[req.body.friendId] = {
+        name: req.body.friendName,
+        email: req.body.friendEmail
+      };
+      User.findByIdAndUpdate(
+        user._id,
+        { $set: { friends: user.friends } },
+        { new: true },
+        (err, updatedUser) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json(err);
+          } else {
+            res.status(200).json(updatedUser);
+          }
+        }
+      );
+    }
+  });
+};
+
+exports.removeFriend = (req, res) => {
+  User
+  .findOne({ _id: req.body.myId })
+  .exec((err, user) => {
+    if (err) {
+      console.log(err);
+      res.status(500).json(err);
+    } else {
+      if (!user.friends) user.friends = {};
+      delete user.friends[req.body.friendId];
+      User.findByIdAndUpdate(
+        user._id,
+        { $set: { friends: user.friends } },
+        { new: true },
+        (err, updatedUser) => {
+          if (err) {
+            console.log(err);
+            res.status(500).json(err);
+          } else {
+            res.status(200).json(updatedUser);
+          }
+        }
+      );
+    }
+  });
+};
+
+exports.tookTour = (req, res) => {
+  User.findByIdAndUpdate(
+    req.body.id,
+    { $set: { isNewUser: false } },
+    { new: true },
+    (err, updatedUser) => {
+      if (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
+      if (!updatedUser) {
+        return res.status(404).send({
+          message: 'User does not exist'
+        });
+      }
+      res.status(200).json(updatedUser);
+    }
+  );
 };
 
 exports.donations = (req, res) => {

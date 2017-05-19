@@ -1,9 +1,9 @@
-<div class="demo-card-event mdl-card mdl-shadow--2dp">
+<div class="demo-card-event col-sm-3">
   <div class="mdl-card__title mdl-card--expand">
-    <div id="time" ng-bind="game.time"></div>
+    <div id="time" class="timer__time" ng-bind="game.time"></div>
   </div>
   <div class="mdl-card__actions">
-    <span id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'"> Time Remaining</span>
+    <span id="timer-status-round" class="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'"> Time Remaining</span>
     <span id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'"> Next Round In</span>
     <span id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</span>
   </div>

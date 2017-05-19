@@ -1,14 +1,28 @@
 angular.module('mean.system')
-.controller('IndexController', ['$scope', '$location', '$window', '$http', 'Global', 'socket', 'game', 'AvatarService', function ($scope, $location, $window, $http, Global, socket, game, AvatarService) {
+.controller('IndexController', ['$scope', '$location', '$window', '$http', 'Global', 'socket', 'game', 'AvatarService',
+function ($scope, $location, $window, $http, Global, socket, game, AvatarService) {
   $scope.global = Global;
   $scope.global.signupErr = "";
+
+  if ($window.localStorage.getItem('cfh-user')) {
+    $window.user = JSON.parse($window.localStorage.getItem('cfh-user'));
+    socket.emit('getInvites', { email: $window.user.email }, (res) => {
+      if (res.success) {
+        $scope.invites = res.invites;
+      }
+    });
+  }
+
+  if ($window.user) {
+    socket.emit('loggedIn', $window.user);
+  }
 
   $scope.playAsGuest = function () {
     game.joinGame();
     $location.path('/app');
   };
 
-  $scope.showError = function() {
+  $scope.showError = function () {
     if ($location.search().error) {
       return $location.search().error;
     } else {
@@ -38,15 +52,18 @@ angular.module('mean.system')
         email: $scope.email,
         password: $scope.password,
         name: $scope.name,
-        avatar: 0
+        avatar: $scope.avatars.avatar
       };
 
       // call the api
       $http.post('/api/auth/signup', signupUser).then((res) => {
         if (res.data.success) {
           $window.localStorage.setItem('token', res.data.token);
+          console.log(res.data.user);
+          $window.user = res.data.user;
+          $window.localStorage.setItem('cfh-user', JSON.stringify($window.user));
           $scope.showOptions = false;
-          $location.path('/');
+          $window.location.href = '/';
         } else {
           $scope.signupErr = 'Cannot be authenticated';
           $scope.showError = () => 'invalid';
@@ -60,6 +77,7 @@ angular.module('mean.system')
 
   $scope.signout = () => {
     $window.localStorage.removeItem('token');
+    $window.localStorage.removeItem('cfh-user');
     $scope.showOptions = true;
     $scope.global.authenticated = false;
     $window.user = null;
@@ -73,6 +91,9 @@ angular.module('mean.system')
     $http.post('/api/auth/login', user).then((response) => {
       if (response.data.success) {
         $window.localStorage.setItem('token', response.data.token);
+        $window.user = response.data.user;
+        socket.emit('loggedIn', user);
+        $window.localStorage.setItem('cfh-user', JSON.stringify($window.user));
         $window.location.href = '/';
       } else {
         $scope.showError = () => 'invalid';
@@ -83,4 +104,26 @@ angular.module('mean.system')
       $scope.loginError = err.data.message;
     });
   };
+
+  socket.on('newInvite', (data) => {
+    console.log('Number of invites:', data.length);
+    $scope.invites = data;
+  });
+  
+  $scope.acceptInvite = (index) => {
+    socket.emit(
+      'acceptedInvite',
+      {
+        email: $window.user.email,
+        index
+      },
+      (res) => {
+        if (res.success) {
+          $scope.invites = res.invites;
+        }
+      }
+    );
+  };
+
+  $scope.isNewUser = () => ($window.user && $window.user.isNewUser);
 }]);

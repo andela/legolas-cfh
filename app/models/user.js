@@ -24,7 +24,12 @@ var UserSchema = new Schema({
     twitter: {},
     github: {},
     google: {},
-    gameWins: { type: Number, default: 0 }
+    gameWins: { type: Number, default: 0 },
+    friends: {},
+    isNewUser: {
+        type: Boolean,
+        default: true
+    }
 });
 
 /**

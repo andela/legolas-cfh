@@ -1,8 +1,8 @@
 angular.module('mean.system')
 // MOVED THE FUNCTION TO A NEW LINE.
 // ADD SOME $SCOPE VARIABLES
-.controller('GameController', ['$scope', '$rootScope', 'game', 'region', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
-  ($scope, $rootScope, game, region, $http, $timeout, $location, MakeAWishFactsService, $dialog) => {
+.controller('GameController', ['$scope', '$window', '$rootScope', 'game', 'region', '$http', '$timeout', '$location', 'MakeAWishFactsService', '$dialog',
+  ($scope, $window, $rootScope, game, region, $http, $timeout, $location, MakeAWishFactsService, $dialog) => {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -16,6 +16,10 @@ angular.module('mean.system')
     $scope.invitedUsersList = [];
     $scope.region = region;
     $scope.startNewGame = false;
+
+    if (localStorage.getItem('cfh-user')) {
+      window.user = JSON.parse(localStorage.getItem('cfh-user'));
+    }
 
     $scope.pickCard = (card) => {
       if (!$scope.hasPickedCards) {
@@ -146,7 +150,8 @@ angular.module('mean.system')
 
     $scope.abandonGame = () => {
       game.leaveGame();
-      $location.path('/');
+      $window.location.href = '/';
+      // $window.location.path('/');
     };
 
     $scope.getValidId = str => (str.replace(/[^\w-]/g, '-'));
@@ -269,7 +274,7 @@ angular.module('mean.system')
 
     $scope.shuffleCards = () => {
       // $('#cardModal').modal('show');
-      const card = $('#card');
+      const card = $(`#${event.target.id}`);
       card.addClass('animated flipOutX');
       $timeout(() => {
         // console.log('move to $scope.startNextRound()');

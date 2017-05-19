@@ -1,24 +1,25 @@
 <!-- List items with avatar and action -->
-<div class="mdl-list">
-  <div id="player-container" ng-repeat="player in game.players" class="mdl-list__item mdl-list__item--two-line player-container mdl-button--raised">
+<div class="col-sm-3 player-section">
+  <div id="player-container" ng-repeat="player in game.players" class="player-container">
     <div id="above-czar-container" class="mdl-list__item-primary-content ">
-      <div id="avatar_" class=d-avatar>
+      <div id="avatar_" class="d-avatar superstar">
         <span ng-show="isPremium($index)">
           <img ng-src="img/king.png" id="king">
         </span>
         <img ng-src="{{player.avatar}}" />
       </div>
       <div id="player-container-inner">
-        <div id="player-name"><span>{{player.username | upperFirstLetter}}</span></div>
+        <div id="player-name" class="player-name"><span>{{player.username | upperFirstLetter}}</span></div>
         <div id="player-score" class="mdl-list__item-sub-title"><span>{{player.points}}/{{game.pointLimit}}</span></div>
         <!--<div class="czar-star">-->
-        <div ng-show="isPlayer($index)" id="player-star">
+        <div ng-show="isPlayer($index)" id="player-star" class="player-star">
           <a class="mdl-list__item-secondary-action" href="#"><i class="material-icons player-star">star</i></a>
+          <span ng-if="!isPlayerSet && isPlayer($index)">{{setPlayer(player.avatar, player.username)}}</span>
+        </div>
+        <div id="czar-container" ng-show="currentCzar($index)" class="mdl-list__item-secondary-content">
+          <span id='the-czar' class="mdl-list__item-secondary-info the-czar">CZAR</span>
         </div>
       </div>
-    </div>
-    <div id="czar-container" ng-show="currentCzar($index)" class="mdl-list__item-secondary-content">
-      <span id='the-czar' class="mdl-list__item-secondary-info">CZAR</span>
     </div>
   </div>
 </div>

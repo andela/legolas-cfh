@@ -3,37 +3,56 @@
 		<!-- =========================
 				NAVIGATION LINKS     
 		============================== -->
-		<div class="navbar navbar-fixed-top top-nav-collapse custom-navbar" role="navigation">
-			<div class="container">
-
-				<!-- navbar header -->
-				<div class="navbar-header">
-					<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="icon icon-bar"></span>
-						<span class="icon icon-bar"></span>
-						<span class="icon icon-bar"></span>
-					</button>
-					<a href="#!" class="navbar-brand"><img src="img/logo.png" width="320" height="105" ></a>
+			<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+				<header class="mdl-layout__header">
+					<div class="mdl-layout__header-row">
+						<!-- Title -->
+						<span class="mdl-layout-title"><a href="#!"><img src="img/logo.png" width="240" height="78" ></a></span>
+						<!-- Add spacer, to align navigation to the right -->
+						<div class="mdl-layout-spacer"></div>
+						<!-- Navigation. We hide it in small screens. -->
+						<nav class="mdl-navigation mdl-layout--large-screen-only">
+							<a class="mdl-navigation__link" onClick="scroll(0,0);">Home</a>
+							<a class="mdl-navigation__link" onClick="scroll(0,650);">About</a>
+							<a class="mdl-navigation__link" onClick="scroll(0,1150);">How to Play</a>
+							<a class="mdl-navigation__link" onClick="scroll(0,2391);">Charity</a>
+							<a class="mdl-navigation__link" href="#!/dashboard" ng-hide="showOptions">Dashboard</a>
+							<a class="mdl-navigation__link" ng-show="showOptions" href="#!/signin">Login</a>
+							<a class="mdl-navigation__link" ng-show="showOptions" href="#!/signup">Signup</a>
+							<a class="mdl-navigation__link" href="/signout" ng-hide="showOptions" ng-click="signout()">Sign Out</a>
+              <li ng-hide="showOptions" class="dropdown notification-container">
+                <a class="dropdown-toggle" data-toggle="dropdown" ng-click="readInvites()">
+                  <i class="fa fa-bell fa-2x"></i><span class="badge" ng-show="invites && invites.length > 0">{{ invites.length }}</span>
+                </a>
+                <ul class="notification-list dropdown-menu dropdown-menu-right">
+                  <div ng-hide="invites && invites.length > 0">
+                    <li><a>You have no notifications</a></li>
+                  </div>
+                  <div ng-show="invites && invites.length > 0" ng-repeat="invite in invites">
+                    <li id="finding-players" ng-click="acceptInvite($index)">
+                      <a href="{{ invite.gameUrl }}">You've been invited to play a game with {{ invite.gameOwner }}!</a>
+                    </li>
+                  </div>
+                </ul>
+              </li>
+							<a class="mdl-navigation__link btn btn-donate" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">Donate Now</a>
+						</nav>
+					</div>
+				</header>
+				<div class="mdl-layout__drawer mdl-layout--small-screen-only">
+					<nav class="mdl-navigation">
+						<a class="mdl-navigation__link" onClick="scroll(0,0);">Home</a>
+						<a class="mdl-navigation__link" onClick="scroll(0,700);">About</a>
+						<a class="mdl-navigation__link" onClick="scroll(0,1350);">How to Play</a>
+						<a class="mdl-navigation__link" onClick="scroll(0,2891);">Charity</a>
+						<a class="mdl-navigation__link" href="#!/dashboard" ng-hide="showOptions">Dashboard</a>
+						<a class="mdl-navigation__link" ng-show="showOptions" href="#!/signin">Login</a>
+						<a class="mdl-navigation__link" ng-show="showOptions" href="#!/signup">Signup</a>
+						<a class="mdl-navigation__link" href="/signout" ng-hide="showOptions" ng-click="signout()">Sign Out</a>
+						<a class="mdl-navigation__link btn btn-donate" href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true">Donate Now</a>  
+					</nav>
 				</div>
-
-				<div class="collapse navbar-collapse">
-
-					<ul class="nav navbar-nav navbar-right">
-						<li><a onClick="scroll(0,0);">Home</a></li>
-						<li><a onClick="scroll(0,700);">About</a></li>
-						<li><a onClick="scroll(0,1350);">How to Play</a></li>
-						<li><a onClick="scroll(0,2891);">Charity</a></li>
-						<li><a href="#!/dashboard" ng-hide="showOptions">Dashboard</a></li>
-						<li ng-show="showOptions"><a href="#!/signin">Login</a></li>
-						<li ng-show="showOptions"><a href="#!/signup">Signup</a></li>
-						<li ng-hide="showOptions"><a href="/signout" ng-click="signout()">Sign Out</a></li>
-						<li><a href="https://www.crowdrise.com/donate/project/cfhio/cards4humanity/?widget=true" class="btn btn-donate">Donate Now</a></li>
-					</ul>
-
-				</div>
-
 			</div>
-		</div>
 
 		<!-- =========================
 		HOME SECTION   
@@ -51,8 +70,14 @@
 							<a href="#!/signup" class="btn btn-lg btn-white smoothScroll" id ="sign-up-test">Sign Up</a>
 						</span>
 						<span ng-hide="showOptions">
-							<a href="/play" class="btn btn-lg btn-secondary smoothScroll">Play With Strangers</a>
-							<a href="/play?custom" class="btn btn-lg btn-white smoothScroll">Play With Friends</a>
+							<div ng-show="isNewUser()">
+								<a href="#!/gametour" class="btn btn-lg btn-secondary smoothScroll">Play With Strangers</a>
+								<a href="#!/gametour?custom" class="btn btn-lg btn-white smoothScroll">Play With Friends</a>
+							</div>
+							<div ng-hide="isNewUser()">
+								<a href="/play" class="btn btn-lg btn-secondary smoothScroll">Play With Strangers</a>
+								<a href="/play?custom" class="btn btn-lg btn-white smoothScroll">Play With Friends</a>
+							</div>
 						</span>
 					</div>
 
@@ -137,17 +162,11 @@
 			<div class="container">
 				<div class="row">
 
-					<div class="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+					<div class="col-md-offset-3 col-md-6 col-sm-offset-3 col-sm-6">
 						<div>
 							<h2 class="text-center text-secondary">Leaderboard</h2>
-							<ol>
-								<li>The Boss Player <span>2800</span></li>
-								<li>Awesome Player <span>1800</span></li>
-								<li>Good Player <span>1540</span></li>
-								<li>Great Boy <span>1270</span></li>
-								<li>Nigga Ninja <span>990</span></li>
-								<li>Sweetness <span>980</span></li>
-							</ol>
+							<div  homeleader>
+							</div>
 						</div>
 					</div>
 

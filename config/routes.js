@@ -96,6 +96,7 @@ module.exports = function (app, passport, auth) {
   app.get('/api/search/users/:inviteeSearch?', users.findUsers);
 
   app.post('/api/invite/user', users.sendInvite);
+  app.post('/api/appinvite/user', users.inAppInvite);
 
   // api end point for game gameRecords
   app.post('/api/games/:id/start', users.gameRecords);
@@ -108,11 +109,17 @@ module.exports = function (app, passport, auth) {
   // api endpoint for donations
   app.get('/api/donations', users.donations);
 
+  // api endpoint for friends
+  app.post('/api/addfriend', users.addFriend);
+  app.post('/api/removefriend', users.removeFriend);
+
   // Home route
   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
-  app.get('/gametour', index.gameTour);
   // api end point for view game history
+
+  // api endpoint to mark tour takers
+  app.post('/api/tooktour', users.tookTour);
 };
 
