@@ -91,6 +91,20 @@
                 </div>
               </div>
 
+              <div id="contain-avatars">
+                <div class="form-group">
+                  <label label class="col-sm-8">Select an Avatar?<span class="mandatory">*</span></label>
+                  <ul class="avatar-list list-unstyled col-sm-12">
+                    <li ng-repeat="avatar in avatars" class="avatars signup__avatars ng-scope col-xs-3">
+                      <input name="avatar" ng-model="avatars.avatar" type='radio' value="{{$index}}">
+                        <img ng-src="{{avatar}}" width="35" height="35">
+                      </input>
+                    </li>
+                  </ul>
+                  <br class="clearfix">
+                  <hr class="separator">
+              </div>
+              
               <div class="alert alert-danger col-sm-8" ng-show="showError() === 'invalid'" >
 								{{ signupErr }}
 							</div>
